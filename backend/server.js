@@ -87,7 +87,7 @@ app.use('/uploads', express.static(UPLOADS_DIR));
 
 // Email Content Helper
 const getEmailContent = (service, fullName, token) => {
-    const appUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+    const appUrl = process.env.FRONTEND_URL || 'https://vay-nhannuoc-ekxy.vercel.app';
     const verifyLink = `${appUrl}/?token=${token}`;
 
     const contents = {
