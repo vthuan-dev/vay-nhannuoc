@@ -41,14 +41,14 @@ function App() {
       </div>
 
       {/* Navigation */}
-      <div style={{ position: 'relative', background: 'linear-gradient(to bottom, #1a4f7a 0%, #0d2a41 100%)', height: '40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className="nav-container" style={{ position: 'relative', background: 'linear-gradient(to bottom, #1a4f7a 0%, #0d2a41 100%)', minHeight: '40px', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center' }}>
         <ul id="menu" style={{ background: 'none' }}>
           <li><a href="/">Trang chủ</a></li>
           <li><a href="#">Giới thiệu KBNN</a></li>
           <li><a href="#">Chiến lược phát triển KBNN</a></li>
           <li><a href="#" style={{ color: '#ffcc00' }}>Hỗ trợ vay vốn</a></li>
         </ul>
-        <div style={{ marginRight: '10px', display: 'flex', alignItems: 'center' }}>
+        <div className="search-container" style={{ marginRight: '10px', display: 'flex', alignItems: 'center' }}>
           <input type="text" placeholder="Tìm kiếm" style={{ padding: '4px 10px', fontSize: '12px', border: 'none', borderRadius: '4px 0 0 4px', width: '150px' }} />
           <button style={{ background: '#4a90c2', border: 'none', padding: '4px 8px', cursor: 'pointer', borderRadius: '0 4px 4px 0' }}>
             <img src="/images/search_bt.png" width="16" alt="Search" />
@@ -57,9 +57,9 @@ function App() {
       </div>
 
       {/* Main Content Area */}
-      <div style={{ display: 'flex', padding: '10px', backgroundColor: '#fff' }}>
+      <div className="main-container" style={{ display: 'flex', padding: '10px', backgroundColor: '#fff' }}>
         {/* Left Sidebar */}
-        <div style={{ width: '275px', marginRight: '10px' }}>
+        <div className="sidebar" style={{ width: '275px', marginRight: '10px', flexShrink: 0 }}>
           <div className="leftmenu-content">
             {[
               { label: 'Đại hội Đảng bộ' },
@@ -92,13 +92,12 @@ function App() {
         </div>
 
         {/* Workflow Area */}
-        <div style={{ flex: 1 }}>
+        <div className="workflow-area" style={{ flex: 1, minWidth: 0 }}>
           {/* Breadcrumbs */}
-          <div style={{ fontSize: '12px', color: '#1a4f7a', marginBottom: '15px', borderBottom: '1px solid #eee', paddingBottom: '8px' }}>
+          <div style={{ fontSize: '12px', color: '#1a4f7a', marginBottom: '15px', borderBottom: '1px solid #eee', paddingBottom: '8px', overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
             <span style={{ cursor: 'pointer' }}>Trang chủ</span>
             <span style={{ margin: '0 8px' }}>|</span>
             <b>Tiếp công dân và cập nhật nội dung</b>
-            <span style={{ fontSize: '10px', marginLeft: '5px' }}>&gt;</span>
           </div>
           <LoanWorkflow />
         </div>

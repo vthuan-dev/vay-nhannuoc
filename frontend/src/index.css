@@ -7,7 +7,8 @@ body {
 }
 
 #T_pt_root {
-    width: 1002px;
+    width: 100%;
+    max-width: 1002px;
     margin: 0 auto;
     position: relative;
     background-image: url('/images/bg_banner.jpg');
@@ -15,6 +16,60 @@ body {
     background-position: right top;
     background-color: white;
     min-height: 100vh;
+}
+
+/* ... existing styles ... */
+
+@media (max-width: 768px) {
+    #T_pt_root {
+        background-size: contain;
+    }
+
+    #menu {
+        flex-direction: column;
+        height: auto;
+    }
+
+    #menu li a {
+        padding: 10px 20px;
+        line-height: normal;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .main-container {
+        flex-direction: column !important;
+    }
+
+    .sidebar {
+        width: 100% !important;
+        margin-right: 0 !important;
+        margin-bottom: 20px;
+    }
+
+    .workflow-area {
+        padding: 0 10px;
+    }
+
+    .header-right {
+        display: none;
+    }
+
+    .banner-date {
+        position: static;
+        text-align: right;
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .search-container {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .search-container input {
+        flex: 1;
+    }
 }
 
 .header-right {
@@ -84,6 +139,32 @@ body {
 
 .leftmenu-content .x2bz:hover {
     background: #3a80b2;
+}
+
+@media (max-width: 768px) {
+    .loan-form-container {
+        padding: 10px 0;
+    }
+
+    .form-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .form-group label {
+        width: 100%;
+        text-align: left;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+    }
+
+    .pakn_cover h2 {
+        font-size: 18px;
+    }
 }
 
 .leftmenu-content img {
