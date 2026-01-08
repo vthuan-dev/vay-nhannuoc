@@ -1,0 +1,14 @@
+{
+    "name": "loan-project-refactored",
+    "version": "1.0.0",
+    "scripts": {
+        "install-all": "npm install && cd frontend && npm install && cd ../backend && npm install",
+        "dev": "concurrently \"npm run server\" \"npm run client\"",
+        "server": "cd backend && npm run dev",
+        "client": "cd frontend && npm run dev",
+        "build": "cd frontend && npm run build && cp -r frontend/dist/* backend/public/"
+    },
+    "dependencies": {
+        "concurrently": "^8.2.2"
+    }
+}
