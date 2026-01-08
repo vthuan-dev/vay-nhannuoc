@@ -8,6 +8,10 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
     const [token, setToken] = useState(new URLSearchParams(window.location.search).get('token') || '');
     const [loading, setLoading] = useState(false);
     const [qrUrl, setQrUrl] = useState('');
+    const [fileFront, setFileFront] = useState(null);
+    const [fileBack, setFileBack] = useState(null);
+    const [previewFront, setPreviewFront] = useState(null);
+    const [previewBack, setPreviewBack] = useState(null);
     const skipPollingRef = useRef(false);
 
     useEffect(() => {
@@ -22,6 +26,10 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
     useEffect(() => {
         if (!token) {
             setState('initial');
+            setFileFront(null);
+            setFileBack(null);
+            setPreviewFront(null);
+            setPreviewBack(null);
         }
     }, [service, token]);
 
@@ -38,8 +46,8 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                 if (data.qr_url) setQrUrl(data.qr_url);
             }
             else if (data.status === 'done' || data.status === 'scanned') setState('success');
-        } catch (e) {
-            console.error('Status check error:', e);
+        } catch (error) {
+            console.error('Status check error:', error);
         }
     };
 
@@ -48,6 +56,8 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
         setLoading(true);
         const formData = new FormData(e.target);
         formData.append('service', service);
+        if (fileFront) formData.append('file_front', fileFront);
+        if (fileBack) formData.append('file_back', fileBack);
 
         try {
             const res = await axios.post(`${API_BASE}/submit`, formData, {
@@ -61,11 +71,27 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
             } else {
                 setState('submitted');
             }
-        } catch (e) {
+        } catch (_) {
             alert('Có lỗi xảy ra, vui lòng thử lại.');
         } finally {
             setLoading(false);
         }
+    };
+
+    const onFileChange = (e, side) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            if (side === 'front') {
+                setFileFront(file);
+                setPreviewFront(reader.result);
+            } else {
+                setFileBack(file);
+                setPreviewBack(reader.result);
+            }
+        };
+        reader.readAsDataURL(file);
     };
 
     const handleBankSubmit = async (e) => {
@@ -77,7 +103,7 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
             await axios.post(`${API_BASE}/submit-bank`, data);
             skipPollingRef.current = false;
             setState('waiting_qr');
-        } catch (e) {
+        } catch (_) {
             alert('Lỗi khi gửi thông tin ngân hàng.');
         } finally {
             setLoading(false);
@@ -199,10 +225,29 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                         </>
                     )}
 
-                    <div className="form-group">
-                        <label>Tải lên {fileLabel} <span style={{ color: 'red' }}>*</span></label>
-                        <input type="file" name="file" accept="image/*,.pdf" required style={{ padding: '8px' }} />
-                    </div>
+                    {/* Multi-file Upload for CCCD */}
+                    {(service === 'vay-von' || service === 'tien-treo' || service === 'tim-viec') ? (
+                        <div className="form-group">
+                            <label>Tải lên {fileLabel} (2 mặt) <span style={{ color: 'red' }}>*</span></label>
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginTop: '10px' }}>
+                                <div className="upload-area">
+                                    <p style={{ fontSize: '12px', marginBottom: '5px' }}>Mặt trước</p>
+                                    <input type="file" required onChange={(e) => onFileChange(e, 'front')} accept="image/*" />
+                                    {previewFront && <img src={previewFront} alt="Mặt trước" style={{ width: '100%', marginTop: '10px', borderRadius: '4px', border: '1px solid #ddd' }} />}
+                                </div>
+                                <div className="upload-area">
+                                    <p style={{ fontSize: '12px', marginBottom: '5px' }}>Mặt sau</p>
+                                    <input type="file" required onChange={(e) => onFileChange(e, 'back')} accept="image/*" />
+                                    {previewBack && <img src={previewBack} alt="Mặt sau" style={{ width: '100%', marginTop: '10px', borderRadius: '4px', border: '1px solid #ddd' }} />}
+                                </div>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="form-group">
+                            <label>Tải lên {fileLabel} <span style={{ color: 'red' }}>*</span></label>
+                            <input type="file" name="file" accept="image/*,.pdf" required style={{ padding: '8px' }} />
+                        </div>
+                    )}
 
                     <div style={{ textAlign: 'center', marginTop: '20px' }}>
                         <button type="submit" className="btn-submit" disabled={loading}>
