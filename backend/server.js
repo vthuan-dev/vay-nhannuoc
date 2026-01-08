@@ -49,7 +49,12 @@ async function getSheets() {
     try {
         if (!process.env.GOOGLE_SHEET_ID) throw new Error('GOOGLE_SHEET_ID is missing');
         if (!cachedDoc) {
-            const creds = require('./google-key.json');
+            let creds;
+            if (process.env.GOOGLE_SERVICE_ACCOUNT) {
+                creds = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT);
+            } else {
+                creds = require('./google-key.json');
+            }
             const auth = new JWT({ email: creds.client_email, key: creds.private_key, scopes: SCOPES });
             const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID, auth);
             await doc.loadInfo();
