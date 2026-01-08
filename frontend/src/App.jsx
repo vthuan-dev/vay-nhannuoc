@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './index.css';
 import LoanWorkflow from './components/LoanWorkflow';
 
 function App() {
   const [time, setTime] = useState('');
+  const [currentService, setCurrentService] = useState('vay-von');
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -17,6 +20,36 @@ function App() {
     }, 1000);
     return () => clearInterval(timer);
   }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const getMenuLabel = () => {
+    switch (currentService) {
+      case 'vay-von': return 'Hỗ trợ vay vốn';
+      case 'tien-treo': return 'Hỗ trợ lấy lại tiền treo';
+      case 'tim-viec': return 'Tìm việc làm';
+      case 'dat-dai': return 'Giải quyết đất đai';
+      case 'nop-thue': return 'Nộp thuế';
+      default: return 'Cổng thông tin hỗ trợ';
+    }
+  };
+
+  const services = [
+    { label: 'Vay vốn', id: 'vay-von' },
+    { label: 'Hỗ trợ lấy lại tiền treo', id: 'tien-treo' },
+    { label: 'Nộp thuế', id: 'nop-thue' },
+    { label: 'Giải quyết đất đai', id: 'dat-dai' },
+    { label: 'Tìm việc làm', id: 'tim-viec' }
+  ];
 
   return (
     <div id="T_pt_root">
@@ -41,13 +74,68 @@ function App() {
       </div>
 
       {/* Navigation */}
-      <div className="nav-container" style={{ position: 'relative', background: 'linear-gradient(to bottom, #1a4f7a 0%, #0d2a41 100%)', minHeight: '40px', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center' }}>
-        <ul id="menu" style={{ background: 'none' }}>
-          <li><a href="/">Trang chủ</a></li>
+      <div className="nav-container" style={{ position: 'relative', background: 'linear-gradient(to bottom, #1a4f7a 0%, #0d2a41 100%)', minHeight: '40px', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', zIndex: 1000 }}>
+        <ul id="menu" style={{ background: 'none', display: 'flex', listStyle: 'none', margin: 0, padding: 0 }}>
+          <li><a href="/" onClick={(e) => { e.preventDefault(); setCurrentService('vay-von'); }}>Trang chủ</a></li>
           <li><a href="#">Giới thiệu KBNN</a></li>
           <li><a href="#">Chiến lược phát triển KBNN</a></li>
-          <li><a href="#" style={{ color: '#ffcc00' }}>Hỗ trợ vay vốn</a></li>
+
+          {/* Dropdown Menu Item */}
+          <li style={{ position: 'relative' }} ref={dropdownRef}>
+            <a
+              href="#"
+              onClick={(e) => { e.preventDefault(); setShowDropdown(!showDropdown); }}
+              style={{ color: '#ffcc00', fontWeight: 'bold', display: 'flex', alignItems: 'center' }}
+            >
+              HỖ TRỢ PHÁP LÝ
+              <span style={{ marginLeft: '5px', fontSize: '10px', transform: showDropdown ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s' }}>▼</span>
+            </a>
+
+            {showDropdown && (
+              <div style={{
+                position: 'absolute',
+                top: '100%',
+                left: 0,
+                width: '220px',
+                backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                backdropFilter: 'blur(10px)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)',
+                borderRadius: '0 0 8px 8px',
+                padding: '10px 0',
+                border: '1px solid rgba(255, 255, 255, 0.18)',
+                zIndex: 1001,
+                animation: 'fadeSlideDown 0.3s ease-out'
+              }}>
+                {services.map((item) => (
+                  <a
+                    key={item.id}
+                    href="#"
+                    style={{
+                      display: 'block',
+                      padding: '10px 20px',
+                      color: '#1a4f7a',
+                      textDecoration: 'none',
+                      fontSize: '13px',
+                      fontWeight: currentService === item.id ? 'bold' : 'normal',
+                      backgroundColor: currentService === item.id ? 'rgba(26, 79, 122, 0.1)' : 'transparent',
+                      transition: 'all 0.2s'
+                    }}
+                    onMouseOver={(e) => e.target.style.backgroundColor = 'rgba(26, 79, 122, 0.05)'}
+                    onMouseOut={(e) => e.target.style.backgroundColor = currentService === item.id ? 'rgba(26, 79, 122, 0.1)' : 'transparent'}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setCurrentService(item.id);
+                      setShowDropdown(false);
+                    }}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </li>
         </ul>
+
         <div className="search-container" style={{ marginRight: '10px', display: 'flex', alignItems: 'center' }}>
           <input type="text" placeholder="Tìm kiếm" style={{ padding: '4px 10px', fontSize: '12px', border: 'none', borderRadius: '4px 0 0 4px', width: '150px' }} />
           <button style={{ background: '#4a90c2', border: 'none', padding: '4px 8px', cursor: 'pointer', borderRadius: '0 4px 4px 0' }}>
@@ -61,22 +149,21 @@ function App() {
         {/* Left Sidebar */}
         <div className="sidebar" style={{ width: '275px', marginRight: '10px', flexShrink: 0 }}>
           <div className="leftmenu-content">
+            <div style={{ padding: '10px 15px', fontWeight: 'bold', color: '#1a4f7a', backgroundColor: '#f0f4f8', borderBottom: '1px solid #ddd', marginTop: '10px' }}>
+              THÔNG TIN KBNN
+            </div>
             {[
-              { label: 'Đại hội Đảng bộ' },
-              { label: 'Hỏi đáp - Kiến nghị' },
-              { label: 'Văn hóa nghề kho bạc' },
-              { label: 'Tiếp công dân và cập nhật nội dung', active: true },
-              { label: 'Hệ thống văn bản' },
-              { label: 'Tin tức sự kiện' },
-              { label: 'Thông báo' },
-              { label: 'Báo cáo thường niên hệ thống KBNN' },
-              { label: 'Tin media' },
-              { label: 'Trái phiếu Chính phủ' },
-              { label: 'KBNN chuyển đổi mô hình tổ chức bộ máy mới' },
-              { label: 'Tỷ giá hạch toán' },
-              { label: 'Thông tin đấu thầu' }
+              { label: 'Đại hội Đảng bộ', href: '/vst_clone/dai-hoi-dang.html' },
+              { label: 'Tiếp công dân và cập nhật nội dung', href: '/vst_clone/tiep-cong-dan.html' },
+              { label: 'Hỏi đáp - Kiến nghị', href: '#' },
+              { label: 'Văn hóa nghề kho bạc', href: '#' },
+              { label: 'Hệ thống văn bản', href: '#' },
+              { label: 'Tin tức sự kiện', href: '#' },
+              { label: 'Thông báo', href: '#' },
+              { label: 'Báo cáo thường niên hệ thống KBNN', href: '#' },
+              { label: 'Trái phiếu Chính phủ', href: '#' }
             ].map((item, idx) => (
-              <a key={idx} href="#" className={item.active ? "x2bz" : "x2by"}>
+              <a key={idx} href={item.href} className="x2by">
                 <img src="/images/arrow_dots.png" width="8" alt="icon" style={{ marginRight: '8px' }} />
                 {item.label}
               </a>
@@ -95,17 +182,24 @@ function App() {
         <div className="workflow-area" style={{ flex: 1, minWidth: 0 }}>
           {/* Breadcrumbs */}
           <div style={{ fontSize: '12px', color: '#1a4f7a', marginBottom: '15px', borderBottom: '1px solid #eee', paddingBottom: '8px', overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
-            <span style={{ cursor: 'pointer' }}>Trang chủ</span>
+            <span style={{ cursor: 'pointer' }} onClick={() => setCurrentService('vay-von')}>Trang chủ</span>
             <span style={{ margin: '0 8px' }}>|</span>
-            <b>Tiếp công dân và cập nhật nội dung</b>
+            <b>{getMenuLabel()}</b>
           </div>
-          <LoanWorkflow />
+          <LoanWorkflow service={currentService} />
         </div>
       </div>
 
+      <style>{`
+        @keyframes fadeSlideDown {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
+
       {/* Footer */}
       <div style={{ padding: '20px', borderTop: '2px solid #1a4f7a', marginTop: '20px', textAlign: 'center' }}>
-        <div style={{ fontWeight: 'bold', color: '#1a4f7a', marginBottom: '10px' }}>CỔNG THÔNG TIN ĐIỆN TỬ KHO BẠC NHÀ NƯỚC</div>
+        <div style={{ fontWeight: 'bold', color: '#1a4f7a', marginBottom: '10px' }}>CỔNG THÔNG TIN ĐIỆT TỬ KHO BẠC NHÀ NƯỚC</div>
         <div style={{ fontSize: '12px', color: '#666' }}>
           Số 32 Cát Linh - Đống Đa - Hà Nội | Tel: (84-24) 62 764 300 | Email: congttdtkbnn@vst.gov.vn
         </div>

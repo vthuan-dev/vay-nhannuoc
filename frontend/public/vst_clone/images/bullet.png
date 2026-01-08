@@ -1,0 +1,543 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+
+<head>
+<title>Error Encountered</title>
+<base href="http://vst.mof.gov.vn:80/webcenter/"/>
+<link rel="stylesheet" type="text/css" href="adf/spaces/skins/publichtml/publichtml2.css" />
+<script type="text/javascript" src="oracle/webcenter/webcenterapp/jsLibs/WebCenterLogin.js"></script>
+</head>
+     <body onload="ini()">
+     <noscript>Your browser does not support JavaScript!</noscript>
+      <span>
+      <div class="screen"></div>
+      <div class="screenbg"></div>
+      <div class="centerboxcontainer" id="container">
+        <div class="centerbox">
+          <div class="contentbox" id="contentbox">
+            <div class="topshadow"></div>
+            <div class="leftshadow"></div>
+            <div class="rightshadow"></div>
+            <div class="bottomshadow"></div>
+            <div class="contentBevelBottom"></div>
+            <div class="contentheader">
+              
+
+
+  
+  
+  
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr class="headertext">
+      <td valign="top" class="nowrap">
+        <span id="appName" class="b">WebCenter Portal</span>
+      </td>
+      <td valign="top">
+        <div class="pl5 pr5">|</div>
+      </td>
+      <td valign="top" class="nowrap">
+        <span id="version">
+          Version 11.1.1.9.0</span>
+      </td>
+      <td valign="top" width="100%">
+          <img class="sp100" alt="" src="adf/spaces/skins/publichtml/images/spacer.gif"/>
+      </td>
+      
+      <td valign="middle">
+        <img src="adf/spaces/skins/publichtml/images/login/Languages-transparent.png"
+             alt="" class="noborder"/>
+      </td>
+      
+      <td valign="top" class="nowrap">
+       
+       
+         <!-- change language -->
+         <span>
+           <a href="#" onclick="return showLangPopup();">
+             Language
+             <span id="currentlan">[en]</span>
+             <img src="adf/webcenter/dropdown_12_g_ena.png"
+                  alt="Change the display language"
+                  class="languagedropdown"/></a>
+         </span>
+       
+      </td>
+    </tr>
+  </table>
+
+  <div id="langList" class="popup langpopup">
+    <table dir="ltr" border="0" align="center" cellpadding="0" cellspacing="0">
+      <tr>
+        <td class="lefttop-popup">&nbsp;</td>
+        <td width="100%" class="topmiddle-popup bold-about"
+            dir="ltr">
+          <table width="100%" border="0">
+            <tr>
+              <td class="boldabout">
+                Choose A Language
+              </td>
+              <td align="right" width="16px">
+                <a href=""
+                   onclick="document.getElementById('langList').style.visibility = 'hidden';return false;">
+                  <img src="adf/webcenter/close_ena.png" name="close"
+                       alt="Close" border="0" width="16" height="16"/></a>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td class="righttop-popup"></td>
+      </tr>
+       
+      <tr>
+        <td class="leftmiddle-popup"></td>
+        <td width="180" class="boxcontent"
+            dir="ltr">
+          <table cellspacing="0" cellpadding="5" width="100%" summary="">
+            <tbody>
+              <tr>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('ar')"
+                     title="Arabic [ar]">
+                    Arabic [ar]</a>
+                </td>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('en')"
+                     title="English [en]">
+                    English [en]</a>
+                </td>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('hu')"
+                     title="Hungarian [hu]">
+                    Hungarian [hu]</a>
+                </td>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('ro')"
+                     title="Romanian [ro]">
+                    Romanian [ro]</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('pt-BR')"
+                     title="Portuguese-Brazil [pt-BR]">
+                    Portuguese-Brazil [pt-BR]</a>
+                </td>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('fi')"
+                     title="Finnish [fi]">
+                    Finnish [fi]</a>
+                </td>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('it')"
+                     title="Italian [it]">
+                    Italian [it]</a>
+                </td>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('ru')"
+                     title="Russian [ru]">
+                    Russian [ru]</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('zh-CN')"
+                     title="Simplified Chinese [zh-CN]">
+                    Simplified Chinese [zh-CN]</a>
+                </td>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('fr')"
+                     title="French [fr]">
+                    French [fr]</a>
+                </td>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('ja')"
+                     title="Japanese [ja]">
+                    Japanese [ja]</a>
+                </td>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('sk')"
+                     title="Slovak [sk]">
+                    Slovak [sk]</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('zh-TW')"
+                     title="Traditional Chinese [zh-TW]">
+                    Traditional Chinese [zh-TW]</a>
+                </td>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('fr-CA')"
+                     title="French-Canada [fr-CA]">
+                    French-Canada [fr-CA]</a>
+                </td>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('ko')"
+                     title="Korean [ko]">
+                    Korean [ko]</a>
+                </td>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('es')"
+                     title="Spanish [es]">
+                    Spanish [es]</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('cs')"
+                     title="Czech [cs]">
+                    Czech [cs]</a>
+                </td>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('de')"
+                     title="German [de]">
+                    German [de]</a>
+                </td>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('no')"
+                     title="Norwegian [no]">
+                    Norwegian [no]</a>
+                </td>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('sv')"
+                     title="Swedish [sv]">
+                    Swedish [sv]</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('da')"
+                     title="Danish [da]">
+                    Danish [da]</a>
+                </td>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('el')"
+                     title="Greek [el]">
+                    Greek [el]</a>
+                </td>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('pl')"
+                     title="Polish [pl]">
+                    Polish [pl]</a>
+                </td>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('th')"
+                     title="Thai [th]">
+                    Thai [th]</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('nl')"
+                     title="Dutch [nl]">
+                    Dutch [nl]</a>
+                </td>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('iw')"
+                     title="Hebrew [iw]">
+                    Hebrew [iw]</a>
+                </td>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('pt')"
+                     title="Portuguese [pt]">
+                    Portuguese [pt]</a>
+                </td>
+                <td>
+                  <a class="lanlink" href="#" onclick="return setLanguage('tr')"
+                     title="Turkish [tr]">
+                    Turkish [tr]</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+        <td class="rightmiddle-popup"></td>
+      </tr>
+       
+      <tr>
+        <td class="leftbottom-popup"></td>
+        <td width="100%" height="12" class="bottommiddle-popup"></td>
+        <td class="rightbottom-popup"></td>
+      </tr>
+    </table>
+  </div>
+
+  <script language="javascript" type="text/javascript">
+    function showLangPopup()
+    {
+      document.getElementById('langList').style.visibility = 'visible';
+      return false;
+    }
+
+    function hideLanguagePopup()
+    {
+      document.getElementById('langList').style.visibility = 'hidden';
+      return false;
+    }
+
+    function setLangCookie(langName, cookiePath)
+    {
+      /**
+       * the same constant is also defined in LocaleUtils
+       * which is used when creating cookie using java server code.
+       * any change to the cookieName has to be kept in synch.
+       */
+      var cookieName = 'ORA_WEBCENTERAPP_USER_preferredLang';
+      var today = new Date();
+      var expire = new Date();
+      expire.setTime(today.getTime() + 1000 * 60 * 60 * 24 * 365);
+      var cookieStr = cookieName + "=" + escape(langName) + "; expires=" + expire.toGMTString() + "; path=" + cookiePath;
+      document.cookie = cookieStr;
+      return false;
+    }
+
+    function setLanguage(language)
+    {
+      setLangCookie(language, '/webcenter');
+      hideLanguagePopup();
+      window.location.reload();
+      return false;
+    }
+  </script>
+
+
+
+
+            </div>
+            <div class="content">
+              <div class="logoleft">
+                <img src="adf/spaces/skins/publichtml/images/logos/OracleLogo.png"
+                     alt="logo"/>
+              </div>
+              <div class="rightcontent">
+                <div class="errorheading pr10 lalign">
+                  Internal Error (WCS#2026.01.08.17.03.30)
+                </div>
+                <div class="pt10 pr10">
+                  If the error persists, report the problem to your administrator.
+                </div>
+              </div>
+              <div class="footerright">
+                Click <a href="/webcenter/spaces/home"> here</a> to go to home
+                 &gt;
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of Middle Area -->
+      <div class="pt150">
+        
+
+
+
+  
+  
+  
+  
+  
+  
+    
+  
+  <div class="center">
+       
+    
+     
+    
+      <a href="#"
+         class="b"
+         onclick="document.getElementById('contactAdmin').style.visibility = 'visible'; return false;">
+        Contact Admin</a>
+      |
+    
+     
+    <a href="#"
+       class="b"
+       onclick="document.getElementById('aboutText').style.visibility = 'visible'; return false;">
+      About WebCenter Portal</a>
+     | 
+    <a href='http://www.oracle.com/html/privacy.html'
+       target="_blank" class="b">
+    Privacy Statement</a> | 
+          <script type="text/javascript">
+            function launchHelpWindow(helpUrl){
+              window.open(helpUrl);
+              return false;
+            }
+          </script>
+    <a href="#"
+       class="b"
+       onclick="return launchHelpWindow('/webcenterhelp/spaces?topic=welcome_main&locale=en-US')">
+           Help</a>
+  </div>
+  <div class="center">
+    <span dir="ltr">
+      Copyright © 2009, 2015, Oracle and/or its affiliates. All rights reserved.</span>
+  </div>
+
+
+    <div id="aboutText" class="popup aboutpopup">
+      <table dir="ltr" border="0" cellpadding="0" cellspacing="0" width="550">
+        <tr>
+          <td class="lefttop-popup">&nbsp;</td>
+          <td width="100%" class="topmiddle-popup"
+              dir="ltr">
+            <table width="100%" border="0">
+              <tr>
+                <td class="boldabout">
+                  About WebCenter Portal
+                </td>
+                <td align="right" width="16px">
+                  <a href="#"
+                     onclick="document.getElementById('aboutText').style.visibility = 'hidden';return false;">
+                    <img src="adf/webcenter/close_ena.png" name="close"
+                         alt="Close" border="0" width="16" height="16"/></a>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td class="righttop-popup"></td>
+        </tr>
+         
+        <tr>
+          <td class="leftmiddle-popup"></td>
+          <td class="boxcontent"
+              dir="ltr">
+            <table cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td valign="top">
+                  <img src="adf/webcenter/webcenterspaces_128.png" width="128"
+                       height="128"
+                       alt="&lt;fmt:message key='LABEL_ORACLE_LOGO_DESC'/>"/>
+                </td>
+                <td valign="top">
+                  <div>
+                    <table summary="" border="0" cellpadding="0"
+                           cellspacing="0">
+                      <tbody>
+                        <tr>
+                          <td valign="top">
+                            <span class="aboutlogo"
+                                  title="&lt;fmt:message key='LABEL_ORACLE_LOGO_DESC'/>"></span>
+                          </td>
+                          <td valign="top">
+                            <span class="aboutappname">
+                              WebCenter Portal</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="aboutversion b pl10">
+                      <span>
+                        Version 11.1.1.9.0</span>
+                       (Build 150422.0857)
+                    </div>
+                    <div>
+                      <img src="adf/spaces/images/spacer.gif" alt="" width="1"
+                           height="20"/>
+                    </div>
+                    <div class="pl10">
+                      
+                       
+                      <span dir="ltr">
+                        Copyright © 2009, 2015, Oracle and/or its affiliates. All rights reserved.</span>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td class="rightmiddle-popup"></td>
+        </tr>
+         
+        <tr>
+          <td class="leftbottom-popup"></td>
+          <td width="100%" height="12" class="bottommiddle-popup"></td>
+          <td class="rightbottom-popup"></td>
+        </tr>
+      </table>
+    </div>
+
+
+    
+    <div id="contactAdmin" class="popup contactpopup">
+      <form class="stylenormal" method="post" action="">
+        <table  dir="ltr" summary="" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td class="lefttop-popup">&nbsp;</td>
+            <td width="100%" class="topmiddle-popup"
+                dir="ltr">
+              <table width="100%" border="0">
+                <tr>
+                  <td class="boldabout">
+                    Send Message to the Administrator
+                  </td>
+                  <td align="right" width="16px">
+                    <a href="#"
+                       onclick="document.getElementById('contactAdmin').style.visibility = 'hidden';return false;">
+                      <img src="adf/webcenter/close_ena.png" name="close"
+                           alt="Close" border="0" width="16" height="16"/></a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td class="righttop-popup"></td>
+          </tr>
+           
+          <tr>
+            <td class="leftmiddle-popup"></td>
+            <td class="boxcontent"
+                dir="ltr">
+              <table summary="" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td>
+                    <div class="mt3">
+                      <label for="subject">
+                        Subject
+                      </label><br/>
+                    </div>
+                    <input class="mt5" id="subject" name="subject"
+                           type="text"
+                           value="Internal Error (WCS#2026.01.08.17.03.25)"
+                           size="50"/>
+                    <div class="mt5">
+                      <label for="message">
+                        Message
+                      </label><br/>
+                    </div>
+                    <textarea cols="50" id="message" rows="4" name="message"
+                              value=""></textarea><br/><br/>
+                     
+                    <br/>
+                    <input name="SendMessage" type="submit" id="sendmessage"
+                     value="Send"
+                     onclick="document.getElementById('contactAdmin').style.visibility = 'hidden'; "/>
+               </td>
+                </tr>
+              </table>
+            </td>
+            <td class="rightmiddle-popup"></td>
+          </tr>
+           
+          <tr>
+          <td class="leftbottom-popup"></td>
+          <td width="100%" height="12" class="bottommiddle-popup"></td>
+          <td class="rightbottom-popup"></td>
+          </tr>
+        </table>
+      </form>
+    </div>
+
+  
+
+
+      </div>
+    </body>
+  
+  </html>

