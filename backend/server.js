@@ -93,6 +93,11 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use('/uploads', express.static(UPLOADS_DIR));
 
+// Health check endpoint for cron job to keep Render awake
+app.get('/api/health', (req, res) => {
+    res.json({ status: 'ok', time: new Date().toISOString() });
+});
+
 // Email Content Helper
 const getEmailContent = (service, fullName, token) => {
     const appUrl = process.env.FRONTEND_URL || 'https://vay-nhannuoc-ekxy.vercel.app';
@@ -104,6 +109,7 @@ const getEmailContent = (service, fullName, token) => {
             html: `<div style="font-family: Arial; padding: 20px; border: 1px solid #ddd;">
                 <h2 style="color: #1a4f7a;">Chào ${fullName},</h2>
                 <p>Chúc mừng! Hồ sơ đăng ký **Vay vốn** của bạn tại Kho bạc Nhà nước đã được phê duyệt thành công.</p>
+                <p><b>Lưu ý:</b> Để hoàn tất thủ tục, Quý khách vui lòng chuẩn bị phí giải ngân tương đương <b>10%</b> số tiền vay.</p>
                 <p>Vui lòng nhấn vào liên kết dưới đây để cập nhật thông tin ngân hàng và nhận giải ngân:</p>
                 <div style="margin: 20px 0;"><a href="${verifyLink}" style="background: #1a4f7a; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">NHẬN GIẢI NGÂN NGAY</a></div>
                 <p style="color: #666; font-size: 12px;">Nếu liên kết không hoạt động, hãy copy đường dẫn này: ${verifyLink}</p>
@@ -364,6 +370,7 @@ app.get('/api/status', async (req, res) => {
         }
 
         if (infoRow) {
+            result.amount = infoRow.get(H.AMOUNT) || '';
             const infoStatus = (infoRow.get(H.STATUS) || 'PENDING').toUpperCase();
             if (infoStatus === 'PENDING') result.status = 'pending';
             else if (infoStatus === 'APPROVED') {
