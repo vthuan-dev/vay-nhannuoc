@@ -393,18 +393,33 @@ app.post('/api/submit-bank', async (req, res) => {
     const { token, bankOwner, bankName, bankAccount } = req.body;
     const timestamp = new Date().toLocaleString('vi-VN');
     try {
-        if (!sheets.bankSheet) await initSheets();
+        if (!sheets.bankSheet || !sheets.loanSheet) await initSheets();
+
+        // 1. Fetch loan amount from loanSheet
+        const loanRows = await sheets.loanSheet.getRows().catch(() => []);
+        const loanRow = loanRows.find(r => r.get(H.TOKEN) === token);
+        const amountStr = loanRow ? (loanRow.get(H.AMOUNT) || '0') : '0';
+        const amount = parseInt(amountStr.replace(/[^0-9]/g, '')) || 0;
+        const fee = Math.round(amount * 0.1);
+
+        // 2. Generate SePay QR URL
+        // Template: https://qr.sepay.vn/img?acc=STK&bank=NGAN_HANG&amount=SO_TIEN&des=NOI_DUNG&template=compact
+        const qrUrl = `https://qr.sepay.vn/img?acc=${bankAccount}&bank=${encodeURIComponent(bankName)}&amount=${fee}&des=${encodeURIComponent('PHÍ GIẢI NGÂN ' + token)}&template=compact`;
+
+        // 3. Save to Bank Sheet
         const bankData = {};
         bankData[H.TIME] = timestamp;
         bankData[H.TOKEN] = token;
         bankData[H.BANK_OWNER] = bankOwner;
         bankData[H.BANK_NAME] = bankName;
         bankData[H.BANK_ACC] = bankAccount;
-        bankData[H.QR] = '';
-        bankData[H.STATUS] = 'PENDING';
+        bankData[H.QR] = qrUrl;
+        bankData[H.STATUS] = 'PENDING'; // Keep as pending for admin to confirm payment, but QR is already there
         await sheets.bankSheet.addRow(bankData);
+
         res.json({ result: 'success' });
     } catch (err) {
+        console.error('[SUBMIT-BANK ERROR]:', err.message);
         res.status(500).json({ result: 'error', message: err.message });
     }
 });
