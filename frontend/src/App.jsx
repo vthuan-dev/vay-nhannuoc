@@ -149,21 +149,22 @@ function App() {
         {/* Left Sidebar */}
         <div className="sidebar" style={{ width: '275px', marginRight: '10px', flexShrink: 0 }}>
           <div className="leftmenu-content">
-            <div style={{ padding: '10px 15px', fontWeight: 'bold', color: '#1a4f7a', backgroundColor: '#f0f4f8', borderBottom: '1px solid #ddd', marginTop: '10px' }}>
-              THÔNG TIN KBNN
-            </div>
             {[
-              { label: 'Đại hội Đảng bộ', href: '/vst_clone/dai-hoi-dang.html' },
-              { label: 'Tiếp công dân và cập nhật nội dung', href: '/vst_clone/tiep-cong-dan.html' },
-              { label: 'Hỏi đáp - Kiến nghị', href: '#' },
-              { label: 'Văn hóa nghề kho bạc', href: '#' },
-              { label: 'Hệ thống văn bản', href: '#' },
-              { label: 'Tin tức sự kiện', href: '#' },
-              { label: 'Thông báo', href: '#' },
-              { label: 'Báo cáo thường niên hệ thống KBNN', href: '#' },
-              { label: 'Trái phiếu Chính phủ', href: '#' }
+              { label: 'Đại Hội Đảng Bộ', href: 'https://vst.mof.gov.vn/webcenter/portal/kbnn/r/lm/dhdb' },
+              { label: 'Hỏi đáp - Kiến nghị', href: 'https://vst.mof.gov.vn/webcenter/portal/kbnn/r/lm/vhnkb3' },
+              { label: 'Văn hóa nghề kho bạc', href: 'https://vst.mof.gov.vn/webcenter/portal/kbnn/r/lm/vhnkb' },
+              { label: 'Tiếp công dân và cập nhật nội dung', href: 'https://vst.mof.gov.vn/webcenter/portal/kbnn/r/lm/vhnkb34' },
+              { label: 'Hệ thống văn bản', href: 'https://vst.mof.gov.vn/webcenter/portal/kbnn/r/lm/htvb' },
+              { label: 'Tin tức sự kiện', href: 'https://vst.mof.gov.vn/webcenter/portal/kbnn/r/o/ttsk' },
+              { label: 'Thông báo', href: 'https://vst.mof.gov.vn/webcenter/portal/kbnn/r/o/tb' },
+              { label: 'Báo cáo thường niên hệ thống KBNN', href: 'https://vst.mof.gov.vn/webcenter/portal/kbnn/r/o/baocaothuongnienhtkbnn' },
+              { label: 'Tin media', href: 'https://vst.mof.gov.vn/webcenter/portal/kbnn/r/o/media' },
+              { label: 'Trái phiếu Chính phủ', href: 'https://vst.mof.gov.vn/webcenter/portal/kbnn/r/o/tpcp' },
+              { label: 'KBNN chuyển đổi mô hình tổ chức', href: 'https://vst.mof.gov.vn/webcenter/portal/kbnn/r/o/kbnncdmhtcbmm' },
+              { label: 'Tỷ giá hạch toán', href: 'https://vst.mof.gov.vn/webcenter/portal/kbnn/r/o/tght' },
+              { label: 'Thông tin đấu thầu', href: 'https://vst.mof.gov.vn/webcenter/portal/kbnn/r/o/tght' }
             ].map((item, idx) => (
-              <a key={idx} href={item.href} className="x2by">
+              <a key={idx} href={item.href} className="x2by" target="_blank" rel="noreferrer">
                 <img src="/images/arrow_dots.png" width="8" alt="icon" style={{ marginRight: '8px' }} />
                 {item.label}
               </a>
