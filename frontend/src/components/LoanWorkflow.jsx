@@ -251,7 +251,7 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
 
                     <div style={{ textAlign: 'center', marginTop: '20px' }}>
                         <button type="submit" className="btn-submit" disabled={loading}>
-                            {loading ? 'Đang xử lý...' : 'Gửi đăng ký'}
+                            {loading ? 'Đang xử lý...' : 'Gửi thông tin'}
                         </button>
                     </div>
                 </form>
