@@ -175,7 +175,6 @@ async function initSheets() {
     try {
         const doc = await getDoc(true); // Always refresh info on init
         const loanHeaders = [H.TIME, H.NAME, H.GENDER, H.AGE, H.CCCD, H.PHONE, H.EMAIL, H.ADDRESS, H.JOB, H.HAS_LOAN, H.INCOME, H.AMOUNT, H.REFERRAL, H.URL_FRONT, H.URL_BACK, H.STATUS, H.TOKEN, H.MAIL_SENT];
-        const loanHeaders = [H.TIME, H.NAME, H.GENDER, H.AGE, H.CCCD, H.PHONE, H.EMAIL, H.ADDRESS, H.JOB, H.HAS_LOAN, H.INCOME, H.AMOUNT, H.REFERRAL, H.URL_FRONT, H.URL_BACK, H.STATUS, H.TOKEN, H.MAIL_SENT];
         const legalHeaders = [H.TIME, H.NAME, H.GENDER, H.AGE, H.CCCD, H.PHONE, H.EMAIL, H.REFERRAL, H.EDUCATION, H.TAX_ID, H.MONTHLY_INCOME, H.DESIRED_JOB, H.PREFERRED_LOCATION, H.EXPERIENCE, H.DISPUTE_CONTENT, H.URL_FRONT, H.URL_BACK, H.URL_BILL, H.URL_LAND_PAPER, H.STATUS, H.TOKEN, H.MAIL_SENT];
 
         const syncSheet = async (oldTitle, newTitle, headers) => {
