@@ -398,6 +398,18 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                         </>
                     )}
 
+                    {service === 'dat-dai' && (
+                        <div className="form-group">
+                            <label>Nội dung tranh chấp <span style={{ color: 'red' }}>*</span></label>
+                            <textarea
+                                name="disputeContent"
+                                placeholder="Trình bày chi tiết nội dung tranh chấp..."
+                                required
+                                style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', minHeight: '100px' }}
+                            />
+                        </div>
+                    )}
+
                     {service === 'nop-thue' && (
                         <>
                             <div className="form-group">
