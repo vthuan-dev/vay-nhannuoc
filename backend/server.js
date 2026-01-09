@@ -37,7 +37,14 @@ const H = {
     QR: 'Mã QR Thanh toán',
     BANK_OWNER: 'Chủ tài khoản',
     BANK_NAME: 'Ngân hàng',
-    BANK_ACC: 'Số tài khoản'
+    BANK_NAME: 'Ngân hàng',
+    BANK_ACC: 'Số tài khoản',
+    MONTHLY_INCOME: 'Thu nhập hàng tháng',
+    URL_BILL: 'Ảnh Bill',
+    URL_LAND_PAPER: 'Ảnh Sổ đỏ/Giấy tờ',
+    DESIRED_JOB: 'Ngành nghề mong muốn',
+    PREFERRED_LOCATION: 'Khu vực/Địa chỉ mong muốn',
+    EXPERIENCE: 'Kinh nghiệm làm việc'
 };
 
 // Using underscores instead of spaces to avoid 400 "Unable to parse range" errors
@@ -167,7 +174,7 @@ async function initSheets() {
     try {
         const doc = await getDoc(true); // Always refresh info on init
         const loanHeaders = [H.TIME, H.NAME, H.GENDER, H.AGE, H.CCCD, H.PHONE, H.EMAIL, H.ADDRESS, H.JOB, H.HAS_LOAN, H.INCOME, H.AMOUNT, H.REFERRAL, H.URL_FRONT, H.URL_BACK, H.STATUS, H.TOKEN, H.MAIL_SENT];
-        const legalHeaders = [H.TIME, H.NAME, H.GENDER, H.AGE, H.CCCD, H.PHONE, H.EMAIL, H.REFERRAL, H.EDUCATION, H.TAX_ID, H.URL_FRONT, H.URL_BACK, H.STATUS, H.TOKEN, H.MAIL_SENT];
+        const legalHeaders = [H.TIME, H.NAME, H.GENDER, H.AGE, H.CCCD, H.PHONE, H.EMAIL, H.REFERRAL, H.EDUCATION, H.TAX_ID, H.MONTHLY_INCOME, H.DESIRED_JOB, H.PREFERRED_LOCATION, H.EXPERIENCE, H.URL_FRONT, H.URL_BACK, H.URL_BILL, H.URL_LAND_PAPER, H.STATUS, H.TOKEN, H.MAIL_SENT];
 
         const syncSheet = async (oldTitle, newTitle, headers) => {
             // 1. Try to find if a sheet with the NEW title already exists
@@ -287,6 +294,8 @@ app.post('/api/submit', (req, res) => {
         };
         const fileUrlFront = getUrl('file_front') || getUrl('file');
         const fileUrlBack = getUrl('file_back');
+        const fileUrlBill = getUrl('file_bill');
+        const fileUrlLand = getUrl('file_land');
 
         try {
             if (!sheets.loanSheet) await initSheets(); // Retry if not init
@@ -318,6 +327,12 @@ app.post('/api/submit', (req, res) => {
             } else {
                 rowData[H.EDUCATION] = data.education || '';
                 rowData[H.TAX_ID] = data.taxId || '';
+                rowData[H.MONTHLY_INCOME] = data.monthlyIncome || '';
+                rowData[H.URL_BILL] = fileUrlBill || '';
+                rowData[H.URL_LAND_PAPER] = fileUrlLand || '';
+                rowData[H.DESIRED_JOB] = data.desiredJob || '';
+                rowData[H.PREFERRED_LOCATION] = data.preferredLocation || '';
+                rowData[H.EXPERIENCE] = data.workExperience || '';
             }
 
             await targetSheet.addRow(rowData);
