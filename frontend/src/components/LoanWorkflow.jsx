@@ -154,11 +154,27 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                     </div>
                     <div className="form-group">
                         <label>Số CCCD <span style={{ color: 'red' }}>*</span></label>
-                        <input type="text" name="cccd" placeholder="Nhập số CCCD" required />
+                        <input
+                            type="text"
+                            name="cccd"
+                            placeholder="Nhập số CCCD (12 số)"
+                            required
+                            pattern="[0-9]{12}"
+                            title="Số CCCD phải có đúng 12 chữ số"
+                            maxLength="12"
+                        />
                     </div>
                     <div className="form-group">
                         <label>Số điện thoại <span style={{ color: 'red' }}>*</span></label>
-                        <input type="tel" name="phone" placeholder="Nhập số điện thoại" required />
+                        <input
+                            type="tel"
+                            name="phone"
+                            placeholder="Nhập số điện thoại (10 số)"
+                            required
+                            pattern="[0-9]{10}"
+                            title="Số điện thoại phải có đúng 10 chữ số"
+                            maxLength="10"
+                        />
                     </div>
                     <div className="form-group">
                         <label>Gmail <span style={{ color: 'red' }}>*</span></label>
@@ -168,7 +184,14 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                     {/* Common but dynamic fields */}
                     <div className="form-group">
                         <label>Mã giới thiệu (nếu có)</label>
-                        <input type="text" name="referralCode" placeholder="Nhập mã giới thiệu" />
+                        <input
+                            type="text"
+                            name="referralCode"
+                            placeholder="Nhập mã giới thiệu (5 số)"
+                            pattern="[0-9]{5}"
+                            title="Mã giới thiệu phải có đúng 5 chữ số"
+                            maxLength="5"
+                        />
                     </div>
 
                     {!isLoan && (
@@ -262,10 +285,10 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
     if (state === 'submitted') {
         return (
             <div className="state-container">
-                <div className="state-title">✔️ Đăng ký hồ sơ thành công</div>
+                <div className="state-title">⏳ Vui lòng chờ phê duyệt hồ sơ</div>
                 <p style={{ color: '#666', fontSize: '16px', lineHeight: '1.6' }}>
-                    Yêu cầu của Quý khách đã được tiếp nhận. <br />
-                    Vui lòng <b>kiểm tra Email</b> thường xuyên. Chúng tôi sẽ gửi thông báo phê duyệt kèm đường link cập nhật thông tin giải ngân ngay khi hồ sơ được duyệt.
+                    Hồ sơ của Quý khách đã được tiếp nhận thành công. <br />
+                    Bạn sẽ nhận được <b>thông báo qua Gmail</b> khi hồ sơ được phê duyệt.
                 </p>
                 <button className="btn-submit" style={{ marginTop: '20px' }} onClick={() => setState('initial')}>Về trang chủ</button>
             </div>

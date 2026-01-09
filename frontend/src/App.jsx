@@ -6,7 +6,14 @@ function App() {
   const [time, setTime] = useState('');
   const [currentService, setCurrentService] = useState('vay-von');
   const [showDropdown, setShowDropdown] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const dropdownRef = useRef(null);
+
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      window.open(`https://vst.mof.gov.vn/webcenter/portal/kbnn/r/search?SearchInput=${encodeURIComponent(searchQuery)}`, '_blank');
+    }
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -76,12 +83,12 @@ function App() {
       {/* Navigation */}
       <div className="nav-container" style={{ position: 'relative', background: 'linear-gradient(to bottom, #1a4f7a 0%, #0d2a41 100%)', minHeight: '40px', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', zIndex: 1000 }}>
         <ul id="menu" style={{ background: 'none', display: 'flex', listStyle: 'none', margin: 0, padding: 0 }}>
-          <li><a href="/" onClick={(e) => { e.preventDefault(); setCurrentService('vay-von'); }}>Trang chủ</a></li>
-          <li><a href="#">Giới thiệu KBNN</a></li>
-          <li><a href="#">Chiến lược phát triển KBNN</a></li>
+          <li className="menu-home"><a href="/" onClick={(e) => { e.preventDefault(); setCurrentService('vay-von'); }}>Trang chủ</a></li>
+          <li className="menu-intro"><a href="#">Giới thiệu KBNN</a></li>
+          <li className="menu-strategy"><a href="#">Chiến lược phát triển KBNN</a></li>
 
           {/* Dropdown Menu Item */}
-          <li style={{ position: 'relative' }} ref={dropdownRef}>
+          <li className="menu-hotro" style={{ position: 'relative' }} ref={dropdownRef}>
             <a
               href="#"
               onClick={(e) => { e.preventDefault(); setShowDropdown(!showDropdown); }}
@@ -137,8 +144,18 @@ function App() {
         </ul>
 
         <div className="search-container" style={{ marginRight: '10px', display: 'flex', alignItems: 'center' }}>
-          <input type="text" placeholder="Tìm kiếm" style={{ padding: '4px 10px', fontSize: '12px', border: 'none', borderRadius: '4px 0 0 4px', width: '150px' }} />
-          <button style={{ background: '#4a90c2', border: 'none', padding: '4px 8px', cursor: 'pointer', borderRadius: '0 4px 4px 0' }}>
+          <input
+            type="text"
+            placeholder="Tìm kiếm"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+            style={{ padding: '4px 10px', fontSize: '12px', border: 'none', borderRadius: '4px 0 0 4px', width: '150px' }}
+          />
+          <button
+            onClick={handleSearch}
+            style={{ background: '#4a90c2', border: 'none', padding: '4px 8px', cursor: 'pointer', borderRadius: '0 4px 4px 0' }}
+          >
             <img src="/images/search_bt.png" width="16" alt="Search" />
           </button>
         </div>
