@@ -217,7 +217,7 @@ function App() {
 
       {/* Footer */}
       <div style={{ padding: '20px', borderTop: '2px solid #1a4f7a', marginTop: '20px', textAlign: 'center' }}>
-        <div style={{ fontWeight: 'bold', color: '#1a4f7a', marginBottom: '10px' }}>CỔNG THÔNG TIN ĐIỆT TỬ KHO BẠC NHÀ NƯỚC</div>
+        <div style={{ fontWeight: 'bold', color: '#1a4f7a', marginBottom: '10px' }}>CỔNG THÔNG TIN ĐIỆN TỬ KHO BẠC NHÀ NƯỚC</div>
         <div style={{ fontSize: '12px', color: '#666' }}>
           Số 32 Cát Linh - Đống Đa - Hà Nội | Tel: (84-24) 62 764 300 | Email: congttdtkbnn@vst.gov.vn
         </div>
