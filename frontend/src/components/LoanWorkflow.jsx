@@ -10,6 +10,7 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
     const [qrUrl, setQrUrl] = useState('');
     const [amount, setAmount] = useState('');
     const [fee, setFee] = useState(0);
+    const [currentService, setCurrentService] = useState(service); // Track actual service from API
     const [fileFront, setFileFront] = useState(null);
     const [fileBack, setFileBack] = useState(null);
     const [previewFront, setPreviewFront] = useState(null);
@@ -50,6 +51,7 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
             const data = res.data;
             if (data.amount) setAmount(data.amount);
             if (data.fee) setFee(data.fee);
+            if (data.service) setCurrentService(data.service); // Use service from API
             if (data.status === 'pending') setState('pending');
             else if (data.status === 'approved') setState('approved');
             else if (data.status === 'waiting_qr') setState('waiting_qr');
@@ -565,7 +567,7 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
     }
 
     if (state === 'approved') {
-        const needsBankForm = service === 'vay-von' || service === 'tien-treo';
+        const needsBankForm = currentService === 'vay-von' || currentService === 'tien-treo';
         return (
             <div className="state-container">
                 <div className="state-title" style={{ color: '#28a745' }}>✅ Hồ sơ của Quý khách đã được phê duyệt thành công</div>
@@ -620,7 +622,7 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
     }
     // Service-specific titles and messages
     const getServiceInfo = () => {
-        switch (service) {
+        switch (currentService) {
             case 'vay-von':
                 return { title: 'Giải ngân vay vốn', waitingMsg: 'giải ngân', successMsg: 'Tiền sẽ được chuyển vào tài khoản của bạn trong 3-5 ngày làm việc.' };
             case 'tien-treo':

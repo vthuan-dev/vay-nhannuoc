@@ -430,10 +430,23 @@ app.get('/api/status', async (req, res) => {
         if (!sheets.loanSheet) await initSheets();
         const allRegSheets = [sheets.loanSheet, ...Object.values(sheets.legalSheets)].filter(s => !!s);
         let infoRow = null;
+        let foundSheet = null;
         for (const s of allRegSheets) {
             const rows = await s.getRows().catch(() => []);
             infoRow = rows.find(r => r.get(H.TOKEN) === token);
-            if (infoRow) break;
+            if (infoRow) {
+                foundSheet = s;
+                break;
+            }
+        }
+
+        // Determine service type from sheet
+        if (foundSheet) {
+            if (foundSheet.title === T.LOAN) result.service = 'vay-von';
+            else if (foundSheet.title === T.STUCK_MONEY) result.service = 'tien-treo';
+            else if (foundSheet.title === T.JOB_SEARCH) result.service = 'tim-viec';
+            else if (foundSheet.title === T.LAND_LEGAL) result.service = 'dat-dai';
+            else if (foundSheet.title === T.TAX_SUPPORT) result.service = 'nop-thue';
         }
 
         if (infoRow) {
