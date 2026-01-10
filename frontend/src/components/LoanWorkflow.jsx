@@ -609,7 +609,7 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                         <input type="text" name="bankAccount" placeholder="Nhập số tài khoản" required />
                     </div>
                     <div style={{ marginTop: '15px', padding: '15px', background: '#fff5f5', borderRadius: '8px', border: '1px solid #fed7d7', color: '#c53030', fontSize: '14px' }}>
-                        <b>Lưu ý:</b> Theo quy định của KBNN, Quý khách vui lòng chuẩn bị phí xử lý hồ sơ {fee > 0 ? <><b>{fee.toLocaleString('vi-VN')} VNĐ</b></> : ''} để hoàn tất thủ tục.
+                        <b>Lưu ý:</b> Theo quy định của KBNN, Quý khách vui lòng chuẩn bị phí xử lý hồ sơ {fee > 0 ? <><b>{Number(fee).toLocaleString('vi-VN')} VNĐ</b></> : ''} để hoàn tất thủ tục.
                     </div>
                     <div style={{ textAlign: 'center', marginTop: '30px' }}>
                         <button type="submit" className="btn-submit" disabled={loading}>
@@ -651,7 +651,7 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                     <div style={{ marginTop: '20px', padding: '15px', background: '#f8faff', borderRadius: '8px', border: '1px solid #e1e4e8' }}>
                         <p style={{ margin: 0, color: '#2c3e50', fontSize: '15px' }}>
                             Phí {serviceInfo.title.toLowerCase()}: <br />
-                            <b style={{ color: '#d32f2f', fontSize: '18px' }}>{fee.toLocaleString('vi-VN')} VNĐ</b>
+                            <b style={{ color: '#d32f2f', fontSize: '18px' }}>{Number(fee).toLocaleString('vi-VN')} VNĐ</b>
                         </p>
                     </div>
                 )}
@@ -668,7 +668,7 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                         <img src={qrUrl} alt="QR Code" style={{ maxWidth: '280px', border: '1px solid #ddd', padding: '10px', borderRadius: '8px' }} />
                         {fee > 0 && (
                             <div style={{ marginTop: '15px', color: '#d32f2f', fontWeight: 'bold', fontSize: '18px' }}>
-                                Phí {serviceInfo.title.toLowerCase()}: {fee.toLocaleString('vi-VN')} VNĐ
+                                Phí {serviceInfo.title.toLowerCase()}: {Number(fee).toLocaleString('vi-VN')} VNĐ
                             </div>
                         )}
                         <p style={{ fontSize: '14px', marginTop: '10px', fontWeight: 'bold', color: '#ff4d4f' }}>

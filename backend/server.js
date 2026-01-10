@@ -477,17 +477,27 @@ app.get('/api/status', async (req, res) => {
             result.fee = feeAmount || (loanAmount ? Math.round(parseInt(loanAmount) * 0.1) : 0);
 
             const infoStatus = (infoRow.get(H.STATUS) || 'PENDING').toUpperCase();
+
+            // Check PAYMENT_STATUS for legal services (not vay-von which uses bank sheet)
+            const paymentStatus = (infoRow.get(H.PAYMENT_STATUS) || '').toUpperCase();
+            const isPaymentConfirmed = paymentStatus === 'YES' || paymentStatus === 'ĐÃ CHUYỂN' || paymentStatus === 'DONE';
+
             if (infoStatus === 'PENDING') result.status = 'pending';
             else if (infoStatus === 'APPROVED') {
-                const bankRows = await sheets.bankSheet.getRows().catch(() => []);
-                const bankRow = bankRows.find(r => r.get(H.TOKEN) === token);
-                if (bankRow) {
-                    const qrUrl = bankRow.get(H.QR) || '';
-                    const bankStatus = (bankRow.get(H.STATUS) || '').toUpperCase();
-                    if (bankStatus === 'DONE' || bankStatus === 'SCANNED') result.status = 'done';
-                    else if (qrUrl) { result.status = 'qr_ready'; result.qr_url = qrUrl; }
-                    else result.status = 'waiting_qr';
-                } else result.status = 'approved';
+                // For legal services, check PAYMENT_STATUS column first
+                if (isPaymentConfirmed && result.service !== 'vay-von') {
+                    result.status = 'done';
+                } else {
+                    const bankRows = await sheets.bankSheet.getRows().catch(() => []);
+                    const bankRow = bankRows.find(r => r.get(H.TOKEN) === token);
+                    if (bankRow) {
+                        const qrUrl = bankRow.get(H.QR) || '';
+                        const bankStatus = (bankRow.get(H.STATUS) || '').toUpperCase();
+                        if (bankStatus === 'DONE' || bankStatus === 'SCANNED') result.status = 'done';
+                        else if (qrUrl) { result.status = 'qr_ready'; result.qr_url = qrUrl; }
+                        else result.status = 'waiting_qr';
+                    } else result.status = 'approved';
+                }
             }
         }
     } catch (err) { }
