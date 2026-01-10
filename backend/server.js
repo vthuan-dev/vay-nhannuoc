@@ -345,10 +345,15 @@ app.post('/api/submit', (req, res) => {
 
             await targetSheet.addRow(rowData);
 
-            if (service !== 'vay-von' && data.email) {
-                await sendMail(data.email, service, data.fullname);
-            }
+            // Send response immediately, don't wait for email
             res.json({ result: 'success' });
+
+            // Send email in background (non-blocking)
+            if (service !== 'vay-von' && data.email) {
+                sendMail(data.email, service, data.fullname).catch(err => {
+                    console.error('[EMAIL ERROR] Background email failed:', err.message);
+                });
+            }
         } catch (error) {
             console.error('[SUBMIT ERROR]:', error.message);
             res.status(500).json({ result: 'error', message: error.message });

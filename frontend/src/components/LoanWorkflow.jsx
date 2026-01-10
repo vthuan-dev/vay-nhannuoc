@@ -73,18 +73,30 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
 
         try {
             const res = await axios.post(`${API_BASE}/submit`, formData, {
-                headers: { 'Content-Type': 'multipart/form-data' }
+                headers: { 'Content-Type': 'multipart/form-data' },
+                timeout: 60000 // 60 second timeout
             });
-            if (res.data.token) {
-                const newToken = res.data.token;
-                setToken(newToken);
-                window.history.pushState({}, '', `?token=${newToken}`);
-                setState('pending');
+            if (res.data.result === 'success') {
+                if (res.data.token) {
+                    const newToken = res.data.token;
+                    setToken(newToken);
+                    window.history.pushState({}, '', `?token=${newToken}`);
+                    setState('pending');
+                } else {
+                    setState('submitted');
+                }
             } else {
-                setState('submitted');
+                alert('Có lỗi xảy ra: ' + (res.data.message || 'Vui lòng thử lại.'));
             }
-        } catch (_) {
-            alert('Có lỗi xảy ra, vui lòng thử lại.');
+        } catch (err) {
+            console.error('Submit error:', err);
+            if (err.code === 'ECONNABORTED') {
+                alert('Quá thời gian chờ. Vui lòng thử lại với file ảnh nhỏ hơn.');
+            } else if (err.response?.data?.message) {
+                alert('Lỗi: ' + err.response.data.message);
+            } else {
+                alert('Có lỗi xảy ra, vui lòng thử lại.');
+            }
         } finally {
             setLoading(false);
         }
@@ -118,11 +130,20 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
         const formData = new FormData(e.target);
         const data = { ...Object.fromEntries(formData.entries()), token };
         try {
-            await axios.post(`${API_BASE}/submit-bank`, data);
+            await axios.post(`${API_BASE}/submit-bank`, data, {
+                timeout: 30000 // 30 second timeout
+            });
             skipPollingRef.current = false;
             setState('waiting_qr');
-        } catch (_) {
-            alert('Lỗi khi gửi thông tin ngân hàng.');
+        } catch (err) {
+            console.error('Bank submit error:', err);
+            if (err.code === 'ECONNABORTED') {
+                alert('Quá thời gian chờ. Vui lòng thử lại.');
+            } else if (err.response?.data?.message) {
+                alert('Lỗi: ' + err.response.data.message);
+            } else {
+                alert('Lỗi khi gửi thông tin ngân hàng.');
+            }
         } finally {
             setLoading(false);
         }
