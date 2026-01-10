@@ -314,7 +314,8 @@ async function checkAndSendEmails() {
                     else if (sheet.title === T.TAX_SUPPORT) serviceType = 'nop-thue';
 
                     // Generate token with service-specific prefix
-                    if (!token) {
+                    // Make sure token is valid (not empty or whitespace)
+                    if (!token || (typeof token === 'string' && token.trim() === '')) {
                         const prefixMap = {
                             'vay-von': 'vv',
                             'tien-treo': 'tt',
@@ -324,14 +325,23 @@ async function checkAndSendEmails() {
                         };
                         const prefix = prefixMap[serviceType] || 'tk';
                         token = prefix + '-' + Math.random().toString(36).substr(2, 9);
+                        console.log(`[EMAIL] Generated new token: ${token} for ${serviceType}`);
                         row.set(H.TOKEN, token);
                         await row.save(); // Save token FIRST before sending email
                     }
 
+                    // Double-check token exists before sending email
+                    if (!token || token.trim() === '') {
+                        console.error('[EMAIL ERROR] Token is still empty after generation!');
+                        continue;
+                    }
+
+                    console.log(`[EMAIL] Sending email to ${userEmail} with token: ${token}`);
                     const sent = await sendMail(userEmail, serviceType, fullName, token);
                     if (sent) {
                         row.set(H.MAIL_SENT, 'YES');
                         await row.save();
+                        console.log(`[EMAIL] Email sent successfully for ${serviceType}`);
                     }
                 }
             }
