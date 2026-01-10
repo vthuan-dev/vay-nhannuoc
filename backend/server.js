@@ -108,7 +108,7 @@ const getEmailContent = (service, fullName, token) => {
             subject: 'Hồ sơ vay vốn của bạn đã được phê duyệt',
             html: `<div style="font-family: Arial; padding: 20px; border: 1px solid #ddd;">
                 <h2 style="color: #1a4f7a;">Chào ${fullName},</h2>
-                <p>Chúc mừng! Hồ sơ đăng ký **Vay vốn** của bạn tại Kho bạc Nhà nước đã được phê duyệt thành công.</p>
+                <p>Chúc mừng! Hồ sơ đăng ký <b>Vay vốn</b> của bạn tại Kho bạc Nhà nước đã được phê duyệt thành công.</p>
                 <p><b>Lưu ý:</b> Để hoàn tất thủ tục, Quý khách vui lòng chuẩn bị phí giải ngân tương đương <b>10%</b> số tiền vay.</p>
                 <p>Vui lòng nhấn vào liên kết dưới đây để cập nhật thông tin ngân hàng và nhận giải ngân:</p>
                 <div style="margin: 20px 0;"><a href="${verifyLink}" style="background: #1a4f7a; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">NHẬN GIẢI NGÂN NGAY</a></div>
@@ -116,20 +116,47 @@ const getEmailContent = (service, fullName, token) => {
             </div>`
         },
         'tien-treo': {
-            subject: 'Xác nhận tiếp nhận hồ sơ Hỗ trợ lấy lại tiền treo',
+            subject: 'Hồ sơ Hỗ trợ lấy lại tiền treo đã được phê duyệt',
             html: `<div style="font-family: Arial; padding: 20px; border: 1px solid #ddd;">
                 <h2 style="color: #1a4f7a;">Chào ${fullName},</h2>
-                <p>Chúng tôi đã tiếp nhận yêu cầu **Hỗ trợ lấy lại tiền treo** của bạn thành công.</p>
-                <p>Hồ sơ của bạn đang được bộ phận Pháp lý thẩm định. Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất qua số điện thoại hoặc email này.</p>
+                <p>Chúc mừng! Hồ sơ <b>Hỗ trợ lấy lại tiền treo</b> của bạn đã được phê duyệt thành công.</p>
+                <p>Bộ phận Pháp lý sẽ liên hệ với bạn trong thời gian sớm nhất qua số điện thoại hoặc email để hướng dẫn các bước tiếp theo.</p>
                 <p>Cảm ơn bạn đã tin tưởng dịch vụ của Kho bạc Nhà nước.</p>
             </div>`
         },
-        'default': {
-            subject: 'Xác nhận đăng ký dịch vụ Pháp lý thành công',
+        'tim-viec': {
+            subject: 'Hồ sơ Tìm việc làm đã được phê duyệt',
             html: `<div style="font-family: Arial; padding: 20px; border: 1px solid #ddd;">
                 <h2 style="color: #1a4f7a;">Chào ${fullName},</h2>
-                <p>Cảm ơn bạn đã đăng ký dịch vụ tại cổng thông tin Kho bạc Nhà nước.</p>
-                <p>Hồ sơ của bạn đã được lưu trữ trong hệ thống. Chúng tôi sẽ xem xét và phản hồi kết quả cho bạn trong vòng 24h làm việc.</p>
+                <p>Chúc mừng! Hồ sơ <b>Tìm việc làm</b> của bạn đã được xét duyệt thành công.</p>
+                <p>Chúng tôi sẽ liên hệ với bạn qua số điện thoại hoặc email để giới thiệu các cơ hội việc làm phù hợp.</p>
+                <p>Cảm ơn bạn đã tin tưởng dịch vụ của chúng tôi.</p>
+            </div>`
+        },
+        'dat-dai': {
+            subject: 'Hồ sơ Giải quyết đất đai đã được phê duyệt',
+            html: `<div style="font-family: Arial; padding: 20px; border: 1px solid #ddd;">
+                <h2 style="color: #1a4f7a;">Chào ${fullName},</h2>
+                <p>Hồ sơ <b>Giải quyết đất đai</b> của bạn đã được tiếp nhận và xét duyệt thành công.</p>
+                <p>Bộ phận Pháp lý sẽ liên hệ với bạn trong thời gian sớm nhất để hướng dẫn các bước giải quyết tranh chấp.</p>
+                <p>Trân trọng!</p>
+            </div>`
+        },
+        'nop-thue': {
+            subject: 'Hồ sơ Kê khai thuế đã được phê duyệt',
+            html: `<div style="font-family: Arial; padding: 20px; border: 1px solid #ddd;">
+                <h2 style="color: #1a4f7a;">Chào ${fullName},</h2>
+                <p>Hồ sơ <b>Kê khai thuế</b> của bạn đã được xét duyệt thành công.</p>
+                <p>Chúng tôi sẽ liên hệ với bạn để hướng dẫn nộp thuế điện tử.</p>
+                <p>Cảm ơn bạn đã sử dụng dịch vụ của Kho bạc Nhà nước.</p>
+            </div>`
+        },
+        'default': {
+            subject: 'Hồ sơ của bạn đã được phê duyệt thành công',
+            html: `<div style="font-family: Arial; padding: 20px; border: 1px solid #ddd;">
+                <h2 style="color: #1a4f7a;">Chào ${fullName},</h2>
+                <p>Hồ sơ của bạn tại cổng thông tin Kho bạc Nhà nước đã được xét duyệt thành công.</p>
+                <p>Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.</p>
                 <p>Trân trọng!</p>
             </div>`
         }
@@ -266,12 +293,23 @@ async function checkAndSendEmails() {
                 const fullName = row.get(H.NAME);
                 let token = row.get(H.TOKEN);
 
-                if (sheet.title === T.LOAN && status === 'APPROVED' && emailSent !== 'YES' && userEmail) {
-                    if (!token) {
+                // Send email for ANY sheet when status is APPROVED
+                if (status === 'APPROVED' && emailSent !== 'YES' && userEmail) {
+                    // Determine service type based on sheet title
+                    let serviceType = 'default';
+                    if (sheet.title === T.LOAN) serviceType = 'vay-von';
+                    else if (sheet.title === T.STUCK_MONEY) serviceType = 'tien-treo';
+                    else if (sheet.title === T.JOB_SEARCH) serviceType = 'tim-viec';
+                    else if (sheet.title === T.LAND_LEGAL) serviceType = 'dat-dai';
+                    else if (sheet.title === T.TAX_SUPPORT) serviceType = 'nop-thue';
+
+                    // Generate token if needed (mainly for vay-von disbursement flow)
+                    if (serviceType === 'vay-von' && !token) {
                         token = 'tk-' + Math.random().toString(36).substr(2, 9);
                         row.set(H.TOKEN, token);
                     }
-                    const sent = await sendMail(userEmail, 'vay-von', fullName, token);
+
+                    const sent = await sendMail(userEmail, serviceType, fullName, token || '');
                     if (sent) {
                         row.set(H.MAIL_SENT, 'YES');
                         await row.save();
