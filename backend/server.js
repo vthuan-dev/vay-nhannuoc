@@ -50,7 +50,8 @@ const H = {
     DISPUTE_CONTENT: 'Nội dung tranh chấp',
     SCAMMED_AMOUNT: 'Số tiền bị lừa',
     DISPUTED_ASSET_VALUE: 'Giá trị tài sản tranh chấp',
-    FEE_AMOUNT: 'Phí xử lý'
+    FEE_AMOUNT: 'Phí xử lý',
+    PAYMENT_STATUS: 'Đã chuyển khoản'
 };
 
 // Using underscores instead of spaces to avoid 400 "Unable to parse range" errors
@@ -217,7 +218,7 @@ async function initSheets() {
     try {
         const doc = await getDoc(true); // Always refresh info on init
         const loanHeaders = [H.TIME, H.NAME, H.GENDER, H.AGE, H.CCCD, H.PHONE, H.EMAIL, H.ADDRESS, H.JOB, H.HAS_LOAN, H.INCOME, H.AMOUNT, H.REFERRAL, H.URL_FRONT, H.URL_BACK, H.STATUS, H.TOKEN, H.MAIL_SENT];
-        const legalHeaders = [H.TIME, H.NAME, H.GENDER, H.AGE, H.CCCD, H.PHONE, H.EMAIL, H.REFERRAL, H.EDUCATION, H.TAX_ID, H.MONTHLY_INCOME, H.SCAMMED_AMOUNT, H.DISPUTED_ASSET_VALUE, H.FEE_AMOUNT, H.DESIRED_JOB, H.PREFERRED_LOCATION, H.EXPERIENCE, H.DISPUTE_CONTENT, H.URL_FRONT, H.URL_BACK, H.URL_BILL, H.URL_LAND_PAPER, H.STATUS, H.TOKEN, H.MAIL_SENT];
+        const legalHeaders = [H.TIME, H.NAME, H.GENDER, H.AGE, H.CCCD, H.PHONE, H.EMAIL, H.REFERRAL, H.EDUCATION, H.TAX_ID, H.MONTHLY_INCOME, H.SCAMMED_AMOUNT, H.DISPUTED_ASSET_VALUE, H.FEE_AMOUNT, H.DESIRED_JOB, H.PREFERRED_LOCATION, H.EXPERIENCE, H.DISPUTE_CONTENT, H.URL_FRONT, H.URL_BACK, H.URL_BILL, H.URL_LAND_PAPER, H.STATUS, H.TOKEN, H.MAIL_SENT, H.PAYMENT_STATUS];
 
         const syncSheet = async (oldTitle, newTitle, headers) => {
             // 1. Try to find if a sheet with the NEW title already exists
@@ -312,9 +313,17 @@ async function checkAndSendEmails() {
                     else if (sheet.title === T.LAND_LEGAL) serviceType = 'dat-dai';
                     else if (sheet.title === T.TAX_SUPPORT) serviceType = 'nop-thue';
 
-                    // Generate token for ALL services (needed for bank form link)
+                    // Generate token with service-specific prefix
                     if (!token) {
-                        token = 'tk-' + Math.random().toString(36).substr(2, 9);
+                        const prefixMap = {
+                            'vay-von': 'vv',
+                            'tien-treo': 'tt',
+                            'tim-viec': 'tv',
+                            'dat-dai': 'dd',
+                            'nop-thue': 'nt'
+                        };
+                        const prefix = prefixMap[serviceType] || 'tk';
+                        token = prefix + '-' + Math.random().toString(36).substr(2, 9);
                         row.set(H.TOKEN, token);
                     }
 
