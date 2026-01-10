@@ -21,6 +21,23 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
     const [previewLand, setPreviewLand] = useState(null);
     const skipPollingRef = useRef(false);
 
+    const formatMoney = (val) => {
+        if (!val) return '0';
+        // Remove non-digit characters then format
+        const cleanVal = String(val).replace(/[^0-9.-]+/g, "");
+        const num = Number(cleanVal);
+        return isNaN(num) ? val : num.toLocaleString('vi-VN');
+    };
+
+    const handleMoneyInputChange = (e) => {
+        let value = e.target.value.replace(/[^0-9]/g, '');
+        if (value) {
+            e.target.value = Number(value).toLocaleString('vi-VN');
+        } else {
+            e.target.value = '';
+        }
+    };
+
     useEffect(() => {
         if (token) {
             checkStatus(token);
@@ -69,6 +86,13 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
         e.preventDefault();
         setLoading(true);
         const formData = new FormData(e.target);
+        // Clean money fields (remove dots) before sending
+        ['scammedAmount', 'disputedAssetValue', 'monthlyIncome', 'income'].forEach(key => {
+            if (formData.has(key)) {
+                formData.set(key, formData.get(key).replace(/\./g, ''));
+            }
+        });
+
         formData.append('service', service);
         if (fileFront) formData.append('file_front', fileFront);
         if (fileBack) formData.append('file_back', fileBack);
@@ -406,7 +430,7 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                     {service === 'tien-treo' && (
                         <div className="form-group">
                             <label>Số tiền bị lừa (VND) <span style={{ color: 'red' }}>*</span></label>
-                            <input type="number" name="scammedAmount" placeholder="VD: 50000000" required />
+                            <input type="text" name="scammedAmount" placeholder="VD: 50.000.000" required onChange={handleMoneyInputChange} />
                             <p style={{ fontSize: '12px', color: '#666', marginTop: '5px' }}>Phí xử lý hồ sơ: 10% số tiền bị lừa</p>
                         </div>
                     )}
@@ -431,7 +455,7 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                                 />
                             </div>
                             <p style={{ fontSize: '12px', color: '#666', marginTop: '10px', padding: '10px', background: '#f9f9f9', borderRadius: '4px' }}>
-                                <b>Phí xử lý hồ sơ:</b> 3,000,000 VND (cố định)
+                                <b>Phí xử lý hồ sơ:</b> 3.000.000 VNĐ (cố định)
                             </p>
                         </>
                     )}
@@ -440,7 +464,7 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                         <>
                             <div className="form-group">
                                 <label>Giá trị tài sản tranh chấp (VND) <span style={{ color: 'red' }}>*</span></label>
-                                <input type="number" name="disputedAssetValue" placeholder="VD: 500000000" required />
+                                <input type="text" name="disputedAssetValue" placeholder="VD: 500.000.000" required onChange={handleMoneyInputChange} />
                                 <p style={{ fontSize: '12px', color: '#666', marginTop: '5px' }}>Phí xử lý hồ sơ: 10% giá trị tài sản</p>
                             </div>
                             <div className="form-group">
@@ -463,7 +487,7 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                             </div>
                             <div className="form-group">
                                 <label>Thu nhập hàng tháng (VND) <span style={{ color: 'red' }}>*</span></label>
-                                <input type="number" name="monthlyIncome" placeholder="0" required />
+                                <input type="text" name="monthlyIncome" placeholder="0" required onChange={handleMoneyInputChange} />
                                 <p style={{ fontSize: '12px', color: '#666', marginTop: '5px' }}>Phí xử lý hồ sơ: 10% thu nhập hàng tháng</p>
                             </div>
                         </>
@@ -492,18 +516,18 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                             </div>
                             <div className="form-group">
                                 <label>Thu nhập hàng tháng (VND) <span style={{ color: 'red' }}>*</span></label>
-                                <input type="number" name="income" placeholder="0" required />
+                                <input type="text" name="income" placeholder="0" required onChange={handleMoneyInputChange} />
                             </div>
                             <div className="form-group">
                                 <label>Số tiền cần vay <span style={{ color: 'red' }}>*</span></label>
                                 <select name="loanAmount" required>
                                     <option value="">Chọn số tiền</option>
-                                    <option value="10000000">10.000.000 VND</option>
-                                    <option value="20000000">20.000.000 VND</option>
-                                    <option value="50000000">50.000.000 VND</option>
-                                    <option value="100000000">100.000.000 VND</option>
-                                    <option value="200000000">200.000.000 VND</option>
-                                    <option value="500000000">500.000.000 VND</option>
+                                    <option value="10000000">10.000.000 VNĐ</option>
+                                    <option value="20000000">20.000.000 VNĐ</option>
+                                    <option value="50000000">50.000.000 VNĐ</option>
+                                    <option value="100000000">100.000.000 VNĐ</option>
+                                    <option value="200000000">200.000.000 VNĐ</option>
+                                    <option value="500000000">500.000.000 VNĐ</option>
                                 </select>
                             </div>
                         </>
@@ -609,7 +633,7 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                         <input type="text" name="bankAccount" placeholder="Nhập số tài khoản" required />
                     </div>
                     <div style={{ marginTop: '15px', padding: '15px', background: '#fff5f5', borderRadius: '8px', border: '1px solid #fed7d7', color: '#c53030', fontSize: '14px' }}>
-                        <b>Lưu ý:</b> Theo quy định của KBNN, Quý khách vui lòng chuẩn bị phí xử lý hồ sơ {fee > 0 ? <><b>{Number(fee).toLocaleString('vi-VN')} VNĐ</b></> : ''} để hoàn tất thủ tục.
+                        <b>Lưu ý:</b> Theo quy định của KBNN, Quý khách vui lòng chuẩn bị phí xử lý hồ sơ {fee > 0 ? <><b>{formatMoney(fee)} VNĐ</b></> : ''} để hoàn tất thủ tục.
                     </div>
                     <div style={{ textAlign: 'center', marginTop: '30px' }}>
                         <button type="submit" className="btn-submit" disabled={loading}>
@@ -651,7 +675,7 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                     <div style={{ marginTop: '20px', padding: '15px', background: '#f8faff', borderRadius: '8px', border: '1px solid #e1e4e8' }}>
                         <p style={{ margin: 0, color: '#2c3e50', fontSize: '15px' }}>
                             Phí {serviceInfo.title.toLowerCase()}: <br />
-                            <b style={{ color: '#d32f2f', fontSize: '18px' }}>{Number(fee).toLocaleString('vi-VN')} VNĐ</b>
+                            <b style={{ color: '#d32f2f', fontSize: '18px' }}>{formatMoney(fee)} VNĐ</b>
                         </p>
                     </div>
                 )}
@@ -668,7 +692,7 @@ const LoanWorkflow = ({ service = 'vay-von' }) => {
                         <img src={qrUrl} alt="QR Code" style={{ maxWidth: '280px', border: '1px solid #ddd', padding: '10px', borderRadius: '8px' }} />
                         {fee > 0 && (
                             <div style={{ marginTop: '15px', color: '#d32f2f', fontWeight: 'bold', fontSize: '18px' }}>
-                                Phí {serviceInfo.title.toLowerCase()}: {Number(fee).toLocaleString('vi-VN')} VNĐ
+                                Phí {serviceInfo.title.toLowerCase()}: {formatMoney(fee)} VNĐ
                             </div>
                         )}
                         <p style={{ fontSize: '14px', marginTop: '10px', fontWeight: 'bold', color: '#ff4d4f' }}>

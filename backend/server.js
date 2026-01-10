@@ -124,7 +124,7 @@ const getEmailContent = (service, fullName, token) => {
             html: `<div style="font-family: Arial; padding: 20px; border: 1px solid #ddd;">
                 <h2 style="color: #1a4f7a;">Chào ${fullName},</h2>
                 <p>Chúc mừng! Hồ sơ <b>Tìm việc làm</b> của bạn đã được xét duyệt thành công.</p>
-                <p><b>Phí xử lý hồ sơ:</b> 3,000,000 VND (cố định)</p>
+                <p><b>Phí xử lý hồ sơ:</b> 3.000.000 VNĐ (cố định)</p>
                 <p>Vui lòng nhấn vào liên kết dưới đây để cập nhật thông tin ngân hàng và hoàn tất thủ tục:</p>
                 <div style="margin: 20px 0;"><a href="${verifyLink}" style="background: #1a4f7a; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">HOÀN TẤT THỦ TỤC</a></div>
                 <p style="color: #666; font-size: 12px;">Nếu liên kết không hoạt động, hãy copy đường dẫn này: ${verifyLink}</p>
