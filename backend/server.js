@@ -325,9 +325,10 @@ async function checkAndSendEmails() {
                         const prefix = prefixMap[serviceType] || 'tk';
                         token = prefix + '-' + Math.random().toString(36).substr(2, 9);
                         row.set(H.TOKEN, token);
+                        await row.save(); // Save token FIRST before sending email
                     }
 
-                    const sent = await sendMail(userEmail, serviceType, fullName, token || '');
+                    const sent = await sendMail(userEmail, serviceType, fullName, token);
                     if (sent) {
                         row.set(H.MAIL_SENT, 'YES');
                         await row.save();
