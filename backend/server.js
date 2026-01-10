@@ -173,7 +173,7 @@ async function sendMail(to, service, fullName, token = '') {
     const content = getEmailContent(service, fullName, token);
     try {
         const { data, error } = await resend.emails.send({
-            from: 'Hỗ trợ KBNN <onboarding@resend.dev>',
+            from: 'Hỗ trợ KBNN <support@gaigo1.net>',
             to: [to],
             subject: content.subject,
             html: content.html
