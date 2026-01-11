@@ -544,8 +544,8 @@ app.post('/api/submit-bank', async (req, res) => {
 
         // 3. Generate SePay QR URL with ADMIN's bank account (fixed)
         const ADMIN_BANK = {
-            code: 'STB',  // SACOMBANK
-            account: '070122047995'
+            code: 'ACB',  // Ngân hàng Á Châu
+            account: '23765031'
         };
         const qrUrl = `https://qr.sepay.vn/img?acc=${ADMIN_BANK.account}&bank=${ADMIN_BANK.code}&amount=${fee}&des=${encodeURIComponent(qrDescription + ' ' + token)}&template=compact`;
 
